@@ -62,6 +62,9 @@
 ## Phase 7 — Launch Readiness
 
 - [x] 建立 placeholder、production readiness、trust/legal 與 deployment audits/checklists
+- [x] 建立 centralized Hub `contentReady` indexing gate；所有 thin Hubs目前維持 noindex
+- [x] 建立 production-aware placeholder/fake-content guard並整合build/project validation
+- [x] 建立 Article 1 claim ledger與fictional-data test plan，不變更draft status
 - [x] 預留 Search Console/GA4/AdSense 真實環境設定位置，不安裝 tracking/ad code
 - [ ] 正式 HTTPS 網域與 deployment（人工核准後）
 - [ ] 全站 content／legal／privacy／accessibility review
