@@ -23,6 +23,7 @@ const requiredDocs = [
   '06_收入/數位商品.md',
   '06_收入/ADSENSE_READINESS.md',
   '07_Codex/PROJECT_AUDIT.md',
+  '07_Codex/OVERNIGHT_REPORT.md',
   '11_待辦事項/Roadmap.md',
 ];
 
