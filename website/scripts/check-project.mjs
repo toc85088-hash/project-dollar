@@ -22,8 +22,17 @@ const requiredDocs = [
   '06_收入/Affiliate.md',
   '06_收入/數位商品.md',
   '06_收入/ADSENSE_READINESS.md',
+  '03_網站/GOOGLE_SETUP_GUIDE.md',
+  '03_網站/DEPLOYMENT_CHECKLIST.md',
+  '05_內容/PUBLISHING_WORKFLOW.md',
+  '06_收入/AFFILIATE_IMPLEMENTATION.md',
+  '06_收入/DIGITAL_PRODUCT_ROADMAP.md',
   '07_Codex/PROJECT_AUDIT.md',
   '07_Codex/OVERNIGHT_REPORT.md',
+  '07_Codex/PLACEHOLDER_AUDIT.md',
+  '07_Codex/PRODUCTION_READINESS.md',
+  '07_Codex/TRUST_AND_LEGAL_REVIEW.md',
+  '07_Codex/ROUND2_REPORT.md',
   '11_待辦事項/Roadmap.md',
 ];
 
@@ -65,6 +74,33 @@ for (const brief of briefs) {
   expect(/human publication approval/i.test(body), `${brief} lacks an explicit human publication gate`);
 }
 
+const researchDirectory = join(projectRoot, '05_內容', 'research-checklists');
+const researchChecklists = existsSync(researchDirectory)
+  ? readdirSync(researchDirectory).filter((name) => /^\d{2}-.*\.md$/.test(name)).sort()
+  : [];
+expect(researchChecklists.length === 10, `Expected 10 research checklists, found ${researchChecklists.length}`);
+
+const checklistHeadings = [
+  '## Claims requiring verification',
+  '## Tools requiring testing',
+  '## Pricing requiring verification',
+  '## Screenshots needed',
+  '## Workflow test needed',
+  '## Affiliate opportunity',
+  '## Internal links',
+  '## External evidence required',
+  '## What cannot be claimed without first-hand testing',
+  '## Publication stop gate',
+];
+
+for (const checklist of researchChecklists) {
+  const body = readFileSync(join(researchDirectory, checklist), 'utf8');
+  for (const heading of checklistHeadings) {
+    expect(body.includes(heading), `${checklist} is missing ${heading}`);
+  }
+  expect(/human approval|human publication approval/i.test(body), `${checklist} lacks an explicit human approval gate`);
+}
+
 const keywordPath = join(projectRoot, '04_SEO', 'Keyword.md');
 if (existsSync(keywordPath)) {
   const keyword = readFileSync(keywordPath, 'utf8');
@@ -101,10 +137,62 @@ for (const path of collectSourceFiles(appRoot)) {
 
 expect(existsSync(join(websiteRoot, 'public', 'og.png')), 'Missing social preview image');
 
+const envExamplePath = join(websiteRoot, '.env.example');
+expect(existsSync(envExamplePath), 'Missing website/.env.example');
+if (existsSync(envExamplePath)) {
+  const envExample = readFileSync(envExamplePath, 'utf8');
+  for (const variable of [
+    'NEXT_PUBLIC_SITE_NAME',
+    'NEXT_PUBLIC_SITE_URL',
+    'NEXT_PUBLIC_CONTACT_EMAIL',
+    'GOOGLE_SITE_VERIFICATION',
+    'NEXT_PUBLIC_GA_MEASUREMENT_ID',
+    'NEXT_PUBLIC_ADSENSE_PUBLISHER_ID',
+  ]) {
+    expect(new RegExp(`^${variable}=$`, 'm').test(envExample), `${variable} must remain blank in .env.example`);
+  }
+  for (const gate of ['NEXT_PUBLIC_SHOW_DRAFTS=false', 'SITE_LAUNCH_READY=false', 'CONTENT_LAUNCH_APPROVED=false', 'TRUST_PAGES_APPROVED=false']) {
+    expect(envExample.includes(gate), `.env.example is missing safe default ${gate}`);
+  }
+}
+
+const articleRegistryPath = join(appRoot, 'content', 'articles.ts');
+expect(existsSync(articleRegistryPath), 'Missing centralized article registry');
+if (existsSync(articleRegistryPath)) {
+  const articleRegistry = readFileSync(articleRegistryPath, 'utf8');
+  for (const status of ["'draft'", "'needs_review'", "'published'", "'needs_update'"]) {
+    expect(articleRegistry.includes(status), `Article registry is missing status ${status}`);
+  }
+  for (const gate of ['humanApproved', 'evidenceComplete', 'publishedAt', 'isPublishable']) {
+    expect(articleRegistry.includes(gate), `Article registry is missing publication gate ${gate}`);
+  }
+  expect(/status:\s*'draft'/.test(articleRegistry), 'Foundation article must remain a draft until human approval');
+}
+
+const publicNavigationSources = ['page.tsx', 'page-content.ts', join('components', 'site-shell.tsx')];
+for (const relative of publicNavigationSources) {
+  const body = readFileSync(join(appRoot, relative), 'utf8');
+  expect(!body.includes('/blog/ai-automation-for-small-business'), `Draft article is linked from public source: ${relative}`);
+}
+
+const sitemapSource = readFileSync(join(appRoot, 'sitemap.ts'), 'utf8');
+expect(sitemapSource.includes('getPublishedArticles'), 'Sitemap does not use the publishable article registry');
+expect(!sitemapSource.includes('blog/ai-automation-for-small-business'), 'Draft article is hard-coded into sitemap');
+
+const websiteTextFiles = [
+  ...collectSourceFiles(appRoot),
+  join(websiteRoot, '.env.example'),
+];
+for (const path of websiteTextFiles) {
+  const body = readFileSync(path, 'utf8');
+  expect(!/\bG-[A-Z0-9]{6,}\b/.test(body), `Possible hard-coded GA Measurement ID in ${path}`);
+  expect(!/\bca-pub-\d+\b/i.test(body), `Possible hard-coded AdSense Publisher ID in ${path}`);
+}
+
 if (failures.length) {
   console.error(`Project checks failed (${failures.length}):`);
   failures.forEach((failure) => console.error(`- ${failure}`));
   process.exit(1);
 }
 
-console.log(`Project checks passed: ${requiredDocs.length} core documents, ${briefs.length} briefs, ${legacy.length} preserved legacy files.`);
+console.log(`Project checks passed: ${requiredDocs.length} core documents, ${briefs.length} briefs, ${researchChecklists.length} research checklists, ${legacy.length} preserved legacy files, article and launch safeguards.`);

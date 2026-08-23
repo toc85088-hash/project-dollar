@@ -1,8 +1,8 @@
-# PROJECT DOLLAR Website Prototype
+# Project Dollar website
 
-Local-only Vinext/React prototype for **Simple AI Automation for Small Business**. It is responsive, server-rendered, and contains the required topic hubs, trust/legal pages, one article template in use, metadata, JSON-LD, `robots.txt`, and `sitemap.xml`.
+Local Vinext/React site for **Simple AI Automation for Small Business**. The codebase is responsive, server-rendered, SEO-aware, and intentionally gated against accidental public indexing while the brand, domain, legal text, contact channel, and content remain unapproved.
 
-The temporary brand is configured once in `app/site-config.ts`. Before public launch, replace the brand there, regenerate the social card, and set approved environment values.
+The temporary brand and integration values are centralized in `app/site-config.ts`. Copy `.env.example` to a local `.env` only when real, owner-approved values are available. Blank values are expected during preparation.
 
 ## Local development
 
@@ -13,14 +13,7 @@ pnpm install
 pnpm dev
 ```
 
-Optional environment values:
-
-```text
-NEXT_PUBLIC_SITE_URL=https://approved-production-domain.example
-NEXT_PUBLIC_CONTACT_EMAIL=approved-public-address@example.com
-```
-
-Do not use a sample value for a public launch. The URL must be the final HTTPS origin so canonical, sitemap, robots, and structured data agree.
+To review an unpublished article locally, set `NEXT_PUBLIC_SHOW_DRAFTS=true`. Draft preview is automatically disabled when `SITE_LAUNCH_READY=true`.
 
 ## Validation
 
@@ -31,23 +24,36 @@ pnpm test:project
 pnpm test:site
 ```
 
-`test:site` expects the development server at `http://localhost:3000`. Set `SITE_URL` only when testing another explicitly approved local origin.
+`test:site` expects a development server at `http://localhost:3000`. Set `SITE_URL` only when testing another approved local origin. In preparation mode with draft preview disabled, the test expects the article draft to return 404, site-wide `noindex`, a crawl-blocking `robots.txt`, and an empty sitemap.
 
-## Publishing support
+## Article content system
 
-The prototype demonstrates a full article route and shared site shell. A new article should not be added until its brief is approved and evidence is complete.
+Article records live in `app/content/articles.ts` and use one shared semantic renderer. The registry supports `draft`, `needs_review`, `published`, and `needs_update` states. An article becomes publicly renderable only when all publication gates pass:
 
-1. Create the article route under `app/blog/<clean-slug>/page.tsx` using the foundation article as the semantic template.
-2. Add unique metadata, self-canonical, visible author/review/date information, Article JSON-LD, Breadcrumb JSON-LD, and related links.
-3. Add the route to `app/sitemap.ts` only when the article is complete, indexable, and human-approved.
-4. Add the article to the Blog and its topic hub; run link and site checks.
-5. Detail pages must use a truthful item-specific social image or explicitly clear inherited images. Never imply a test or asset exists when it does not.
+1. `status` is `published`.
+2. `humanApproved` and `evidenceComplete` are true.
+3. A real author owner and publication date are assigned.
+4. Metadata, Article schema, topic-hub links, and the sitemap are then generated from the same record.
 
-For a larger publication, migrate article bodies to a validated Markdown/MDX or CMS pipeline before scaling. The P1 requirement includes front-matter schema, draft/verified/published status, previews, and build-time validation; automatic publication remains prohibited.
+The foundation article remains a draft. It has no public navigation link, canonical, Article schema, publication date, or sitemap entry. Future article bodies can be added to the registry; move to validated Markdown/MDX before the volume makes typed records cumbersome.
 
-## Launch blockers
+The full editorial process is documented in `../05_內容/PUBLISHING_WORKFLOW.md`.
 
-- Brand name, domain, public email, authors, and legal/privacy text require human approval.
-- The sample article is a prototype draft and requires editorial/fact review before public publication.
-- No analytics, Search Console, AdSense, affiliate tracking, email provider, contact form, payment, or paid service is connected.
-- Dependency build scripts remain disabled by the workspace security policy; do not approve them without a separate dependency review.
+## Launch gate
+
+Public indexing requires all conditions below:
+
+- A final brand supplied through `NEXT_PUBLIC_SITE_NAME`.
+- A real HTTPS origin supplied through `NEXT_PUBLIC_SITE_URL`.
+- A syntactically valid, non-example public inbox supplied through `NEXT_PUBLIC_CONTACT_EMAIL`.
+- Explicit human content and trust-page approvals through `CONTENT_LAUNCH_APPROVED=true` and `TRUST_PAGES_APPROVED=true`.
+- An explicit `SITE_LAUNCH_READY=true` after the deployment checklist passes.
+
+Until then, global metadata uses `noindex`, `robots.txt` disallows crawling, the sitemap is empty, and Organization structured data is withheld. Google Analytics, AdSense, affiliate tracking, email handling, payment, and deployment are not connected.
+
+## Remaining human blockers
+
+- Final brand, domain, public inbox, author identities, legal/privacy text, and consent choices.
+- Real research, reproducible workflow/tool testing, screenshots, fact check, and article approval.
+- Google property creation, ownership verification, tag installation approval, and AdSense application.
+- Hosting, DNS, HTTPS, production environment, backups, rollback, and final launch review.

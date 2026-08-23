@@ -10,6 +10,12 @@ export const metadata: Metadata = {
   },
   description: siteConfig.description,
   alternates: { canonical: '/' },
+  robots: siteConfig.isLaunchReady
+    ? { index: true, follow: true }
+    : { index: false, follow: false, nocache: true },
+  verification: siteConfig.google.siteVerification
+    ? { google: siteConfig.google.siteVerification }
+    : undefined,
   openGraph: {
     type: 'website',
     locale: 'en_US',
@@ -43,10 +49,12 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           Skip to content
         </a>
         {children}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
-        />
+        {siteConfig.isLaunchReady && (
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+          />
+        )}
       </body>
     </html>
   );

@@ -89,7 +89,7 @@ export default function Home() {
               <p className="eyebrow">FOUNDATION GUIDE</p>
               <h2>AI automation for small business, explained without the theatre.</h2>
               <p>Learn how to find a sensible use case, map the manual process, protect customer information, and define a human approval point.</p>
-              <Link className="text-link" href="/blog/ai-automation-for-small-business">Read the guide <span aria-hidden="true">→</span></Link>
+              <Link className="text-link" href="/ai-automation">Explore the foundation hub <span aria-hidden="true">→</span></Link>
             </div>
             <div className="checklist" aria-label="What the guide covers">
               <p>Before you automate</p>

@@ -6,16 +6,28 @@ export function Header() {
     <header className="site-header">
       <div className="shell nav-wrap">
         <Link className="brand" href="/" aria-label={`${siteConfig.name} home`}>
-          <span className="brand-mark" aria-hidden="true">PD</span>
+          <span className="brand-mark" aria-hidden="true">{siteConfig.mark}</span>
           <span>{siteConfig.name}</span>
         </Link>
-        <nav aria-label="Primary navigation">
+        <nav className="desktop-navigation" aria-label="Primary navigation">
           <Link href="/workflows">Workflows</Link>
           <Link href="/ai-tools">AI Tools</Link>
           <Link href="/tutorials">Tutorials</Link>
           <Link href="/templates">Templates</Link>
           <Link className="nav-cta" href="/blog">Browse guides</Link>
         </nav>
+        <details className="mobile-navigation">
+          <summary>Menu</summary>
+          <nav aria-label="Mobile navigation">
+            <Link href="/ai-automation">AI Automation</Link>
+            <Link href="/workflows">Workflows</Link>
+            <Link href="/ai-tools">AI Tools</Link>
+            <Link href="/tutorials">Tutorials</Link>
+            <Link href="/comparisons">Comparisons</Link>
+            <Link href="/templates">Templates</Link>
+            <Link href="/blog">Blog</Link>
+          </nav>
+        </details>
       </div>
     </header>
   );

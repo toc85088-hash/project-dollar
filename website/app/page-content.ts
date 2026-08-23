@@ -35,7 +35,7 @@ export const pageContent: Record<string, PageContent> = {
       },
     ],
     related: [
-      { label: 'Read the foundation guide', href: '/blog/ai-automation-for-small-business', description: 'A complete starting framework with risks and a first action.' },
+      { label: 'Review the foundation hub', href: '/ai-automation', description: 'A starting framework for selecting a low-risk workflow.' },
       { label: 'Explore workflows', href: '/workflows', description: 'See how the method applies to recurring business tasks.' },
       { label: 'Use a template', href: '/templates', description: 'Map a task before giving any tool access.' },
     ],
@@ -151,7 +151,7 @@ export const pageContent: Record<string, PageContent> = {
       },
     ],
     related: [
-      { label: 'Start with the foundation', href: '/blog/ai-automation-for-small-business', description: 'Use the guide before mapping a task.' },
+      { label: 'Start with the foundation', href: '/ai-automation', description: 'Use the decision framework before mapping a task.' },
       { label: 'Explore workflow examples', href: '/workflows', description: 'See what a complete workflow needs.' },
       { label: 'Read the product approach', href: '/about', description: 'Understand the editorial and product standard.' },
     ],
@@ -160,11 +160,11 @@ export const pageContent: Record<string, PageContent> = {
     eyebrow: 'BLOG',
     title: 'Practical guides, published with a reason.',
     description: 'Original, evidence-led guides about simple AI automation for small business.',
-    intro: 'This prototype contains one foundation article. The next nine topics have briefs, but they are not presented as published articles until research, testing, editing, and human review are complete.',
+    intro: 'The editorial queue has ten approved briefs and no published articles yet. Drafts stay outside navigation, indexing, and the sitemap until research, testing, fact checking, and human review are complete.',
     sections: [
       {
-        heading: 'Published in the prototype',
-        paragraphs: ['AI Automation for Small Business: Start Small, Stay in Control introduces the site’s decision framework and links readers to the right next step.'],
+        heading: 'Current publishing status',
+        paragraphs: ['A foundation draft exists for editorial preview only. It is not presented as a published article, and its route is unavailable unless local draft preview is explicitly enabled.'],
       },
       {
         heading: 'What is coming after verification',
@@ -172,7 +172,7 @@ export const pageContent: Record<string, PageContent> = {
       },
     ],
     related: [
-      { label: 'Read the foundation article', href: '/blog/ai-automation-for-small-business', description: 'A practical starting guide for one safe first workflow.' },
+      { label: 'Review the foundation topic', href: '/ai-automation', description: 'Start with the public topic framework while articles are researched.' },
       { label: 'Browse topic hubs', href: '/ai-automation', description: 'Explore the planned content architecture.' },
       { label: 'About our standards', href: '/about', description: 'See what must happen before a guide is published.' },
     ],
@@ -198,7 +198,7 @@ export const pageContent: Record<string, PageContent> = {
       },
     ],
     related: [
-      { label: 'Read the foundation guide', href: '/blog/ai-automation-for-small-business', description: 'See the editorial method applied.' },
+      { label: 'Review the foundation topic', href: '/ai-automation', description: 'See the intended editorial method and safety boundary.' },
       { label: 'Affiliate disclosure', href: '/affiliate-disclosure', description: 'Understand the commercial boundary.' },
       { label: 'Contact', href: '/contact', description: 'See how corrections and enquiries will be handled.' },
     ],
@@ -207,7 +207,9 @@ export const pageContent: Record<string, PageContent> = {
     eyebrow: 'CONTACT',
     title: 'Questions, corrections, and clear boundaries.',
     description: `How to contact ${siteConfig.name} after the owner approves a public email address.`,
-    intro: 'A verified public email address has not yet been approved. The production site must replace the example address before accepting messages.',
+    intro: siteConfig.contactEmail
+      ? `Email ${siteConfig.name} at ${siteConfig.contactEmail}. Do not include passwords, payment details, customer records, or other sensitive information.`
+      : 'A verified public email address has not yet been approved. The production site must configure and test one before accepting messages.',
     sections: [
       {
         heading: 'What we plan to receive',
@@ -215,8 +217,10 @@ export const pageContent: Record<string, PageContent> = {
         points: ['Do not send passwords, API keys, payment details, customer records, or other sensitive information.', 'Product pitches do not guarantee coverage.', 'Corrections will be checked against evidence before the page is changed.'],
       },
       {
-        heading: 'Prototype contact value',
-        paragraphs: ['The configured example is hello@example.com and is intentionally not presented as an active business inbox. The owner must set NEXT_PUBLIC_CONTACT_EMAIL and review the privacy notice before launch.'],
+        heading: 'Contact configuration status',
+        paragraphs: siteConfig.contactEmail
+          ? [`The approved public address is ${siteConfig.contactEmail}. Inbox ownership, delivery, retention, access, and the privacy notice require final launch review.`]
+          : ['No public address is displayed. The owner must set NEXT_PUBLIC_CONTACT_EMAIL, verify inbox ownership and delivery, and review the privacy notice before launch.'],
       },
     ],
     related: [
