@@ -14,9 +14,10 @@
 
 - [x] 建立本機網站 scaffold 與集中品牌設定
 - [x] 建立英文 Home 與專業響應式設計方向
-- [ ] 完成 required hubs、trust/legal pages 與示例 article
-- [ ] 完成 metadata、structured data、robots、sitemap 與 404
-- [ ] 通過 lint、build、route、link 與 metadata checks
+- [x] 完成 required hubs、trust/legal drafts 與受控 article draft
+- [x] 完成 metadata、structured data gate、robots、sitemap 與 404
+- [x] 建立 article registry、publication status 與 human/evidence launch gates
+- [x] 通過 lint、build、route、link 與 metadata checks
 - [ ] 人工完成 browser、mobile、keyboard、screen reader spot checks
 
 ## Phase 2 — Research Validation
@@ -60,6 +61,8 @@
 
 ## Phase 7 — Launch Readiness
 
+- [x] 建立 placeholder、production readiness、trust/legal 與 deployment audits/checklists
+- [x] 預留 Search Console/GA4/AdSense 真實環境設定位置，不安裝 tracking/ad code
 - [ ] 正式 HTTPS 網域與 deployment（人工核准後）
 - [ ] 全站 content／legal／privacy／accessibility review
 - [ ] Production crawl、broken links、redirects、canonical、schema、sitemap
