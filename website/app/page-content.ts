@@ -31,7 +31,7 @@ export const pageContent: Record<string, PageContent> = {
       },
       {
         heading: 'The five-part method',
-        paragraphs: ['Inventory the task. Map the manual process. Define exceptions and approval. Test with dummy data. Measure the full workload—including review and maintenance—not just the automated step.'],
+        paragraphs: ['Inventory the task. Map the manual process. Define exceptions and approval. Test with fictional, non-sensitive data. Measure the full workload—including review and maintenance—not just the automated step.'],
       },
     ],
     related: [
@@ -92,7 +92,7 @@ export const pageContent: Record<string, PageContent> = {
     sections: [
       {
         heading: 'The tutorial standard',
-        paragraphs: ['Every tutorial states prerequisites, uses dummy data first, shows the exact test scope, includes common failures, and defines a manual fallback. Product screenshots appear only when the interface was actually used.'],
+        paragraphs: ['Every tutorial states prerequisites, uses fictional test data first, shows the exact test scope, includes common failures, and defines a manual fallback. Product screenshots appear only when the interface was actually used.'],
       },
       {
         heading: 'Before following a tool-specific step',
@@ -114,7 +114,7 @@ export const pageContent: Record<string, PageContent> = {
     sections: [
       {
         heading: 'How a comparison earns a verdict',
-        paragraphs: ['Both products must run equivalent workflows with the same dummy data and failure cases. We record setup, permissions, logs, recovery, reviewer corrections, usage model, export, and limitations.'],
+        paragraphs: ['Both products must run equivalent workflows with the same fictional test data and failure cases. We record setup, permissions, logs, recovery, reviewer corrections, usage model, export, and limitations.'],
       },
       {
         heading: 'Planned first comparison',

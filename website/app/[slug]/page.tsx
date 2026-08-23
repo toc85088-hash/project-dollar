@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Breadcrumbs, Footer, Header } from '../components/site-shell';
 import { pageContent } from '../page-content';
+import { isStandardRouteIndexable } from '../route-indexing';
 import { siteConfig } from '../site-config';
 
 type RouteProps = { params: Promise<{ slug: string }> };
@@ -15,16 +16,20 @@ export async function generateMetadata({ params }: RouteProps): Promise<Metadata
   const { slug } = await params;
   const page = pageContent[slug];
   if (!page) return {};
+  const indexable = isStandardRouteIndexable(slug, siteConfig.isLaunchReady);
 
   return {
     title: page.title,
     description: page.description,
-    alternates: { canonical: `/${slug}` },
+    alternates: indexable ? { canonical: `/${slug}` } : { canonical: null },
+    robots: indexable
+      ? { index: true, follow: true }
+      : { index: false, follow: false, nocache: true },
     openGraph: {
       type: 'website',
       title: page.title,
       description: page.description,
-      url: `/${slug}`,
+      url: indexable ? `/${slug}` : undefined,
       siteName: siteConfig.name,
       images: [{ url: '/og.png', width: 1200, height: 630, alt: `${siteConfig.name}: ${siteConfig.tagline}` }],
     },
@@ -36,6 +41,7 @@ export default async function StandardPage({ params }: RouteProps) {
   const { slug } = await params;
   const page = pageContent[slug];
   if (!page) notFound();
+  const indexable = isStandardRouteIndexable(slug, siteConfig.isLaunchReady);
 
   const breadcrumbSchema = {
     '@context': 'https://schema.org',
@@ -81,7 +87,9 @@ export default async function StandardPage({ params }: RouteProps) {
             </aside>
           </div>
         </div>
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+        {indexable && (
+          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+        )}
       </main>
       <Footer />
     </>

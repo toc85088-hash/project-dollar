@@ -20,11 +20,18 @@ To review an unpublished article locally, set `NEXT_PUBLIC_SHOW_DRAFTS=true`. Dr
 ```powershell
 pnpm lint
 pnpm build
+pnpm check:placeholders
 pnpm test:project
 pnpm test:site
 ```
 
-`test:site` expects a development server at `http://localhost:3000`. Set `SITE_URL` only when testing another approved local origin. In preparation mode with draft preview disabled, the test expects the article draft to return 404, site-wide `noindex`, a crawl-blocking `robots.txt`, and an empty sitemap.
+`build` and `test:project` run the production placeholder guard. Approved development-only matches produce explicit launch-blocking warnings; new high-risk matches such as TODO/FIXME, sample addresses, Lorem, unapproved prices, fabricated reviews, or statistical claims fail production validation.
+
+`test:site` expects a development or production server at `http://localhost:3000`. Set `SITE_URL` only when testing another approved local origin. In preparation mode with draft preview disabled, the test expects the article draft to return 404, site-wide `noindex`, Hub-level canonical/schema protection, a crawl-blocking `robots.txt`, and an empty sitemap.
+
+## Hub indexing system
+
+Hub readiness is centralized in `app/route-indexing.ts`. AI Automation, Workflows, AI Tools, Tutorials, Comparisons, Templates, and Blog currently use `contentReady=false`. Until an editor manually changes an approved Hub to true, it has no canonical, no page structured data, and no sitemap entry—even if the site-wide launch gate is later enabled.
 
 ## Article content system
 

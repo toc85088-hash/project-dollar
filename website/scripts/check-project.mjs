@@ -24,7 +24,10 @@ const requiredDocs = [
   '06_收入/ADSENSE_READINESS.md',
   '03_網站/GOOGLE_SETUP_GUIDE.md',
   '03_網站/DEPLOYMENT_CHECKLIST.md',
+  '03_網站/STAGING_QA_CHECKLIST.md',
   '05_內容/PUBLISHING_WORKFLOW.md',
+  '05_內容/research/ARTICLE_01_CLAIM_LEDGER.md',
+  '05_內容/research/ARTICLE_01_TEST_PLAN.md',
   '06_收入/AFFILIATE_IMPLEMENTATION.md',
   '06_收入/DIGITAL_PRODUCT_ROADMAP.md',
   '07_Codex/PROJECT_AUDIT.md',
@@ -32,6 +35,8 @@ const requiredDocs = [
   '07_Codex/PLACEHOLDER_AUDIT.md',
   '07_Codex/PRODUCTION_READINESS.md',
   '07_Codex/TRUST_AND_LEGAL_REVIEW.md',
+  '07_Codex/HUB_INDEXING_AUDIT.md',
+  '07_Codex/PRELAUNCH_FIX_REPORT.md',
   '07_Codex/ROUND2_REPORT.md',
   '11_待辦事項/Roadmap.md',
 ];
@@ -169,6 +174,17 @@ if (existsSync(articleRegistryPath)) {
   expect(/status:\s*'draft'/.test(articleRegistry), 'Foundation article must remain a draft until human approval');
 }
 
+const hubPolicyPath = join(appRoot, 'route-indexing.ts');
+expect(existsSync(hubPolicyPath), 'Missing centralized hub indexing policy');
+if (existsSync(hubPolicyPath)) {
+  const hubPolicy = readFileSync(hubPolicyPath, 'utf8');
+  for (const slug of ['ai-automation', 'workflows', 'ai-tools', 'tutorials', 'comparisons', 'templates', 'blog']) {
+    const escaped = slug.replace('-', '\\-');
+    expect(new RegExp(`['"]?${escaped}['"]?\\s*:\\s*\\{[\\s\\S]{0,120}?contentReady:\\s*false`).test(hubPolicy), `${slug} must remain contentReady=false until human approval`);
+  }
+  expect(hubPolicy.includes('isStandardRouteIndexable'), 'Hub policy is missing a centralized indexability function');
+}
+
 const publicNavigationSources = ['page.tsx', 'page-content.ts', join('components', 'site-shell.tsx')];
 for (const relative of publicNavigationSources) {
   const body = readFileSync(join(appRoot, relative), 'utf8');
@@ -177,7 +193,19 @@ for (const relative of publicNavigationSources) {
 
 const sitemapSource = readFileSync(join(appRoot, 'sitemap.ts'), 'utf8');
 expect(sitemapSource.includes('getPublishedArticles'), 'Sitemap does not use the publishable article registry');
+expect(sitemapSource.includes('isStandardRouteIndexable'), 'Sitemap does not filter standard routes through centralized indexability');
 expect(!sitemapSource.includes('blog/ai-automation-for-small-business'), 'Draft article is hard-coded into sitemap');
+
+const standardRouteSource = readFileSync(join(appRoot, '[slug]', 'page.tsx'), 'utf8');
+expect(standardRouteSource.includes('isStandardRouteIndexable'), 'Standard route metadata does not use centralized indexability');
+expect(standardRouteSource.includes('canonical: null'), 'Unready standard routes do not clear inherited canonical metadata');
+
+const placeholderCheckPath = join(websiteRoot, 'scripts', 'check-placeholders.mjs');
+expect(existsSync(placeholderCheckPath), 'Missing automated placeholder checker');
+const packageJson = JSON.parse(readFileSync(join(websiteRoot, 'package.json'), 'utf8'));
+expect(packageJson.scripts?.['check:placeholders']?.includes('check-placeholders.mjs'), 'package.json is missing check:placeholders integration');
+expect(packageJson.scripts?.build?.includes('check-placeholders.mjs'), 'Production build does not run the placeholder checker');
+expect(packageJson.scripts?.['test:project']?.includes('check-placeholders.mjs'), 'Project validation does not run the placeholder checker');
 
 const websiteTextFiles = [
   ...collectSourceFiles(appRoot),

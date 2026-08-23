@@ -15,6 +15,15 @@ const publicRoutes = [
   '/affiliate-disclosure',
 ];
 const draftRoute = '/blog/ai-automation-for-small-business';
+const hubRoutes = new Set([
+  '/ai-automation',
+  '/workflows',
+  '/ai-tools',
+  '/tutorials',
+  '/comparisons',
+  '/templates',
+  '/blog',
+]);
 const failures = [];
 const discoveredLinks = new Set();
 
@@ -29,12 +38,19 @@ for (const route of publicRoutes) {
   expect(/<html[^>]+lang="en"/i.test(body), `${route} is missing html lang="en"`);
   expect(/<title>[^<]+<\/title>/i.test(body), `${route} is missing a title`);
   expect(/<meta[^>]+name="description"[^>]+content="[^"]+/i.test(body), `${route} is missing a meta description`);
-  expect(/<link[^>]+rel="canonical"[^>]+href="[^"]+/i.test(body), `${route} is missing a canonical URL`);
+  if (route === '/') {
+    expect(/<link[^>]+rel="canonical"[^>]+href="[^"]+/i.test(body), 'Home is missing its preparation canonical URL');
+  } else {
+    expect(!/<link[^>]+rel="canonical"/i.test(body), `${route} must not output a canonical URL before route readiness`);
+  }
   expect(/<meta[^>]+property="og:title"[^>]+content="[^"]+/i.test(body), `${route} is missing og:title`);
   expect(/<meta[^>]+name="robots"[^>]+content="[^"]*noindex/i.test(body), `${route} must remain noindex before launch approval`);
   expect((body.match(/<h1(?:\s|>)/gi) ?? []).length === 1, `${route} should have exactly one h1`);
   expect(!/Your site is taking shape|Building your site|Untitled site/i.test(body), `${route} still contains starter content`);
   expect(!body.includes('"@type":"Article"'), `${route} must not output Article schema without a publishable article`);
+  if (hubRoutes.has(route)) {
+    expect(!body.includes('"@type":"BreadcrumbList"'), `${route} must not output structured data while contentReady=false`);
+  }
 
   for (const match of body.matchAll(/href="(\/[^"]*)"/g)) {
     const href = match[1].split('#')[0].split('?')[0];
@@ -70,4 +86,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log(`Site checks passed: ${publicRoutes.length} public routes, ${discoveredLinks.size} unique internal links, metadata, noindex launch gate, draft isolation, robots, empty sitemap, and 404.`);
+console.log(`Site checks passed: ${publicRoutes.length} public routes, ${discoveredLinks.size} unique internal links, hub noindex/canonical/schema gates, draft isolation, robots, empty sitemap, and 404.`);
