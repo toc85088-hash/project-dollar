@@ -1,0 +1,53 @@
+import type { Metadata } from 'next';
+import './globals.css';
+import { siteConfig } from './site-config';
+
+export const metadata: Metadata = {
+  metadataBase: new URL(siteConfig.url),
+  title: {
+    default: `${siteConfig.tagline} | ${siteConfig.name}`,
+    template: `%s | ${siteConfig.name}`,
+  },
+  description: siteConfig.description,
+  alternates: { canonical: '/' },
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    siteName: siteConfig.name,
+    title: siteConfig.tagline,
+    description: siteConfig.description,
+    url: '/',
+    images: [{ url: '/og.png', width: 1200, height: 630, alt: `${siteConfig.name}: ${siteConfig.tagline}` }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: siteConfig.tagline,
+    description: siteConfig.description,
+    images: ['/og.png'],
+  },
+};
+
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: siteConfig.name,
+  url: siteConfig.url,
+  description: siteConfig.description,
+};
+
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  return (
+    <html lang="en">
+      <body>
+        <a className="skip-link" href="#main-content">
+          Skip to content
+        </a>
+        {children}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
+      </body>
+    </html>
+  );
+}
