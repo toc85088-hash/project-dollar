@@ -1,0 +1,62 @@
+# Project Dollar - 市場分析 V1
+
+## 專案目標
+
+建立一個面向美國、加拿大、英國、澳洲市場的英文網站。
+
+主要收入來源：
+
+- Google AdSense
+- Affiliate Marketing（聯盟行銷）
+- Digital Products（數位商品）
+
+目標不是建立一個網站，而是建立一個可長期經營的海外品牌。
+
+---
+
+## 評估標準
+
+每個市場將依照以下六個面向評分：
+
+1. 搜尋需求（Search Demand）
+2. SEO 難度（SEO Difficulty）
+3. 商業價值（Commercial Intent）
+4. 聯盟佣金（Affiliate Potential）
+5. AdSense 收益（AdSense Potential）
+6. 長期發展（3~5 Years）
+
+總分：60 分
+
+---
+
+## 第一輪候選市場
+
+- AI for Small Business
+- AI Automation
+- Shopify
+- Ecommerce
+- B2B SaaS
+- CRM
+- Marketing Tools
+- Productivity
+- Cybersecurity
+- Finance Software
+
+---
+
+## 專案原則
+
+不追熱門。
+
+只追：
+
+- 有需求
+- 有搜尋
+- 有商業價值
+- 可以長期經營
+
+---
+
+狀態：
+
+Day 1（進行中）
