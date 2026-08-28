@@ -180,8 +180,8 @@ export const pageContent: Record<string, PageContent> = {
   about: {
     eyebrow: 'ABOUT',
     title: 'No coding. No theatre. No invented experience.',
-    description: `About ${siteConfig.name}, its audience, editorial standard, and temporary brand status.`,
-    intro: `${siteConfig.name} is the temporary name for an independent English-language resource about simple AI automation for small business owners.`,
+    description: `About ${siteConfig.name}, its audience, editorial standards, and pre-launch status.`,
+    intro: `${siteConfig.name} is the approved brand for an independent English-language resource about simple AI automation for small business owners. The site remains in pre-launch review.`,
     sections: [
       {
         heading: 'Who this is for',
@@ -193,8 +193,8 @@ export const pageContent: Record<string, PageContent> = {
         points: ['No fake reviews or first-hand claims', 'No invented prices, statistics, or savings', 'Clear limits and human approval points', 'Affiliate relationships disclosed without changing the verdict'],
       },
       {
-        heading: 'What remains temporary',
-        paragraphs: ['The brand name, domain, public email, authors, and legal text require owner approval before launch. This prototype is not an operating publication and does not collect submissions or payments.'],
+        heading: 'What remains pre-launch',
+        paragraphs: ['The public email, author identity, final visual assets, and legal text still require owner approval before launch. The approved domain is not deployed, this prototype is not an operating publication, and it does not collect submissions or payments.'],
       },
     ],
     related: [

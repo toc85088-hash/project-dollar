@@ -1,13 +1,12 @@
-import Link from 'next/link';
 import { siteConfig } from '../site-config';
+import { SiteLink as Link } from './site-link';
 
 export function Header() {
   return (
     <header className="site-header">
       <div className="shell nav-wrap">
         <Link className="brand" href="/" aria-label={`${siteConfig.name} home`}>
-          <span className="brand-mark" aria-hidden="true">{siteConfig.mark}</span>
-          <span>{siteConfig.name}</span>
+          <span className="brand-wordmark">{siteConfig.name}</span>
         </Link>
         <nav className="desktop-navigation" aria-label="Primary navigation">
           <Link href="/workflows">Workflows</Link>

@@ -9,7 +9,7 @@ const excludedFiles = new Set(['pnpm-lock.yaml', 'check-placeholders.mjs']);
 const textExtensions = new Set(['.css', '.env', '.html', '.js', '.json', '.jsx', '.md', '.mdx', '.mjs', '.svg', '.ts', '.tsx', '.txt']);
 
 const rules = [
-  { id: 'temporary-brand', label: 'temporary brand', pattern: /PROJECT DOLLAR/i, severity: 'review' },
+  { id: 'internal-codename', label: 'internal project codename in website tree', pattern: /PROJECT DOLLAR/i, severity: 'review' },
   { id: 'todo-fixme', label: 'unfinished code marker', pattern: /\b(?:TODO|FIXME)\b/i, severity: 'critical' },
   { id: 'test-email', label: 'test email address', pattern: /test@example\.com/i, severity: 'critical' },
   { id: 'example-domain', label: 'example.com value', pattern: /example\.com/i, severity: 'critical' },
@@ -41,14 +41,11 @@ function normalizePath(path) {
 function allowance(finding) {
   const { id, path, lineText } = finding;
 
-  if (id === 'temporary-brand' && path === 'app/site-config.ts') {
-    return { allowed: true, developmentOnly: true, reason: 'Central temporary brand fallback; site launch gate blocks public launch.' };
+  if (id === 'internal-codename' && path === 'README.md' && /internal (?:project )?codename/i.test(lineText)) {
+    return { allowed: true, developmentOnly: false, reason: 'Local developer documentation identifies the internal codename explicitly.' };
   }
-  if (id === 'temporary-brand' && path === 'README.md') {
-    return { allowed: true, developmentOnly: true, reason: 'Local project documentation uses the explicitly temporary project name.' };
-  }
-  if (id === 'temporary-brand' && path === 'scripts/check-project.mjs') {
-    return { allowed: true, developmentOnly: false, reason: 'Negative hard-coding assertion in project validation.' };
+  if (id === 'internal-codename' && (path === 'scripts/check-project.mjs' || path === 'scripts/check-site.mjs')) {
+    return { allowed: true, developmentOnly: false, reason: 'Negative production-source assertion in project validation.' };
   }
   if (id === 'placeholder' && path === 'vite.config.ts' && lineText.includes('SITE_CREATOR_PLACEHOLDER_DATABASE_ID')) {
     return { allowed: true, developmentOnly: true, reason: 'Internal Sites scaffold fallback; D1 is not configured or user-facing.' };

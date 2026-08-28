@@ -1,7 +1,8 @@
 # Hub Indexing Audit
 
 稽核日期：2026-08-24  
-範圍：Project Dollar 所有內容 Hub／category routes。  
+範圍：Naveliqo 所有內容 Hub／category routes。
+
 決策原則：只有具備獨立讀者價值、實際可用內容、完成事實查核且經人工核准的 Hub，才能把集中式 `contentReady` 改為 `true`。
 
 ## Central control

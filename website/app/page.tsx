@@ -1,6 +1,6 @@
-import Link from 'next/link';
 import { siteConfig } from './site-config';
 import { Footer, Header } from './components/site-shell';
+import { SiteLink as Link } from './components/site-link';
 
 const categories = [
   {

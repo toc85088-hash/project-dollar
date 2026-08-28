@@ -1,8 +1,8 @@
-import Link from 'next/link';
 import type { ArticleRecord } from '../content/articles';
 import { isPublishable } from '../content/articles';
 import { siteConfig } from '../site-config';
 import { Breadcrumbs, Footer, Header } from './site-shell';
+import { SiteLink as Link } from './site-link';
 
 function displayDate(value: string) {
   return new Intl.DateTimeFormat('en-GB', {

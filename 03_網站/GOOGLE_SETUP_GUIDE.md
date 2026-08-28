@@ -1,11 +1,12 @@
 # Google 整合準備指南
 
-更新日期：2026-08-24  
+更新日期：2026-08-29
+
 狀態：**只完成本機設定位置；未登入、未建立 property、未裝 tracking／ad code、未申請 AdSense。**
 
 ## Current implementation boundary
 
-`website/.env.example` 保留空白設定位置，`website/app/site-config.ts` 集中讀取：
+`website/.env.example` 已填入核准的 Naveliqo brand/domain 公開值，並為下列 Google 整合保留空白設定位置；`website/app/site-config.ts` 集中讀取：
 
 - `GOOGLE_SITE_VERIFICATION`
 - `NEXT_PUBLIC_GA_MEASUREMENT_ID`
@@ -19,7 +20,7 @@
 2. 選擇 property 類型：Domain property 涵蓋所有 protocol/subdomain 並需 DNS verification；URL-prefix property 只涵蓋指定前綴，可使用多種 verification 方法。
 3. 由 owner 完成 ownership verification；不要把 token、DNS access 或帳號權限交給未授權人員。
 4. 把真實 verification token 放入 production secret/environment setting，不寫入 Git。
-5. launch gate 打開且 sitemap 含正式 canonical 後，再提交 `https://<final-domain>/sitemap.xml`。
+5. launch gate 打開且 sitemap 含正式 canonical 後，再提交 `https://naveliqo.com/sitemap.xml`；本輪不得提交。
 6. 檢查 Pages、Sitemaps、HTTPS、manual actions 與 security issues；不要用 indexing request 取代網站品質。
 
 官方參考：[Add a Search Console property](https://support.google.com/webmasters/answer/34592?hl=en)、[Verify site ownership](https://support.google.com/webmasters/answer/9008080?hl=en)、[Manage sitemaps](https://support.google.com/webmasters/answer/7451001?hl=en)。
@@ -47,14 +48,14 @@ Google 目前要求先把新網站加入 AdSense sites list，再完成連接步
 
 ## Environment and secret rules
 
-- `.env.example` 永遠保持空值；真實 `.env` 不進 Git。
+- `.env.example` 只保存核准的 public brand/domain 與空白 integration slots；contact、Google IDs/tokens 仍保持空白，真實 `.env` 不進 Git。
 - Measurement ID 與 Publisher ID 雖會出現在前端，仍只能使用 owner property 的真實值；verification tokens 與 account credentials 不應公開。
 - 不在 source code、Markdown、screenshot、issue 或 commit message 貼 API key、password、DNS credential、payment 或 tax data。
 - Production environment 變更、Google login、property creation、consent choice 與 code activation都需要 owner 操作／核准。
 
 ## Verification before activation
 
-- [ ] Final brand/domain/HTTPS/canonical 一致。
+- [x] Approved brand/domain/canonical base 在 source 中一致；live HTTPS 尚未驗證。
 - [ ] Privacy／cookie／consent 已按實際實作人工與必要的專業審查。
 - [ ] Search Console ownership 由 owner 完成。
 - [ ] GA4 property/stream/ID 是真實值，且 tag 不重複。

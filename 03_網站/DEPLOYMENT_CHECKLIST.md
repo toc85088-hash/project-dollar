@@ -1,19 +1,22 @@
 # Deployment Checklist
 
-更新日期：2026-08-24  
+更新日期：2026-08-29
+
 狀態：**準備中；本輪禁止正式部署、購買網域、登入 hosting 或修改 DNS。**
 
-## 1. Final brand — BLOCKED
+## 1. Final brand — PARTIALLY APPROVED / NEEDS HUMAN REVIEW
 
-- [ ] Owner 核准 final brand name、spelling、capitalisation、tagline 使用方式。
-- [ ] 檢查基本 trademark／company-name／domain risk（需適當專業或人工研究）。
-- [ ] 設定真實 `NEXT_PUBLIC_SITE_NAME`，確認 header mark、title、schema、footer、legal pages。
-- [ ] 重新製作 OG image、favicon 與其他 brand assets；現有 `PROJECT DOLLAR` 只作 temporary placeholder。
+- [x] Owner 核准 brand name `Naveliqo`、spelling、positioning 與 tagline。
+- [x] `NEXT_PUBLIC_SITE_NAME`、header text wordmark、title、schema、footer 與 legal-page branding 使用集中設定。
+- [x] 建立 Naveliqo temporary staging OG asset；舊 Project Dollar asset 已移出 public assets 並保留為內部歷史檔。
+- [ ] Owner 核准 final logo、favicon 與 final OG visual；目前 fallback 不得宣稱為 final identity。
+- [ ] 如適用，完成 trademark／company-name risk 確認（需適當專業或人工研究）。
 
-## 2. Domain and DNS — BLOCKED
+## 2. Domain and DNS — DOMAIN APPROVED / DNS BLOCKED
 
-- [ ] Owner 選擇並購買 domain；Codex 不購買或輸入付款資料。
-- [ ] 決定 canonical hostname（apex 或 `www`）與 redirect policy。
+- [x] Owner 核准 primary domain 與 canonical origin：`https://naveliqo.com`（apex）。
+- [ ] Owner 確認 domain registration／ownership／renewal；Codex 不購買或輸入付款資料。
+- [ ] 核准 `www` → apex redirect policy 與實際 provider 設定。
 - [ ] 記錄 registrar、DNS owner、renewal、MFA、recovery 與最小權限。
 - [ ] 在 hosting destination 確認後由 owner 建立 DNS records；不得先猜值。
 
@@ -26,8 +29,9 @@
 ## 4. Production environment — NEEDS HUMAN REVIEW
 
 - [ ] 選擇 hosting/provider、region、access、budget、terms 與 data handling。
-- [ ] 從 `website/.env.example` 建立 production variables；不把真實值提交 Git。
-- [ ] 設定 final `NEXT_PUBLIC_SITE_NAME`、`NEXT_PUBLIC_SITE_URL`、public inbox。
+- [ ] 從 `website/.env.example` 建立 production variables；不把 secrets 提交 Git。
+- [x] 範本已設定核准的 `NEXT_PUBLIC_SITE_NAME=Naveliqo` 與 `NEXT_PUBLIC_SITE_URL=https://naveliqo.com`。
+- [ ] 設定並驗證真實 public inbox。
 - [ ] Google values 保持空白，直到 owner 建立真實 property 且 consent/installation 獲核准。
 - [ ] `NEXT_PUBLIC_SHOW_DRAFTS=false`；任何 draft preview 應是私有且受控。
 - [ ] Editor 與 owner 完成內容核准後才設 `CONTENT_LAUNCH_APPROVED=true`。
@@ -43,12 +47,13 @@
 - [ ] Review build log、bundle、server/runtime compatibility 與 dependency scripts policy。
 - [ ] 產生 immutable release identifier，保存前一個可回復 artifact。
 
-## 6. Sitemap, robots and canonical — PREPARED / BLOCKED BY DOMAIN
+## 6. Sitemap, robots and canonical — BASE APPROVED / LAUNCH GATE CLOSED
 
 - [x] Canonical 與 Organization/Article/Breadcrumb schema 使用集中 site config／article registry。
 - [x] 未 launch 時 global `noindex`、robots disallow、empty sitemap。
 - [x] Draft 不輸出 canonical、Article schema 或 sitemap entry。
-- [ ] 使用 final HTTPS origin 驗證所有 canonical 都是 self-canonical。
+- [x] Canonical、sitemap 與 robots 的集中 base 已更新為 `https://naveliqo.com`。
+- [ ] 在真實 staging／production origin 驗證所有 indexable URL 為 self-canonical；目前不得開啟 indexing。
 - [ ] 確認 launch sitemap 只含 200、indexable、approved URLs，且 robots 宣告同一 sitemap。
 - [ ] 用 validator 與 Search Console 檢查 schema／sitemap；不得在 domain 未確認時開 gate。
 
@@ -84,4 +89,4 @@
 
 ## Final go/no-go
 
-只有 owner、editorial、technical、privacy/legal（按需要）共同確認下列項目，才可部署：final brand/domain、real content、trust pages、production config、staging tests、backups、rollback、indexing gate。現況是 **NO-GO**。
+只有 owner、editorial、technical、privacy/legal（按需要）共同確認下列項目，才可部署：final visual assets、real content、trust pages、production config、staging tests、domain ownership/DNS、backups、rollback、indexing gate。Brand/domain 已核准但 launch gate 仍關閉，現況是 **NO-GO**。

@@ -1,8 +1,8 @@
-# Project Dollar website
+# Naveliqo website
 
-Local Vinext/React site for **Simple AI Automation for Small Business**. The codebase is responsive, server-rendered, SEO-aware, and intentionally gated against accidental public indexing while the brand, domain, legal text, contact channel, and content remain unapproved.
+Local Vinext/React site for **Simple AI Automation for Small Business**. Internal project codename: Project Dollar. The codebase is responsive, server-rendered, SEO-aware, and intentionally gated against accidental public indexing while legal text, contact channel, visual assets, content, and launch approval remain incomplete.
 
-The temporary brand and integration values are centralized in `app/site-config.ts`. Copy `.env.example` to a local `.env` only when real, owner-approved values are available. Blank values are expected during preparation.
+The approved Naveliqo name, positioning, tagline, and `https://naveliqo.com` canonical origin are centralized in `app/site-config.ts`. `.env.example` contains those approved public values; contact and Google integration values remain blank. The header uses a text-only wordmark fallback, and the current OG image is a temporary staging asset—not a final logo or visual identity.
 
 ## Local development
 
@@ -29,6 +29,8 @@ pnpm test:site
 
 `test:site` expects a development or production server at `http://localhost:3000`. Set `SITE_URL` only when testing another approved local origin. In preparation mode with draft preview disabled, the test expects the article draft to return 404, site-wide `noindex`, Hub-level canonical/schema protection, a crawl-blocking `robots.txt`, and an empty sitemap.
 
+Internal links use the centralized `app/components/site-link.tsx` standard-anchor wrapper. This avoids a verified client-navigation/prefetch runtime failure in the pinned Vinext beta while retaining semantic, crawlable links and reliable full-page navigation. Re-test before changing back to framework client links during a future dependency upgrade.
+
 ## Hub indexing system
 
 Hub readiness is centralized in `app/route-indexing.ts`. AI Automation, Workflows, AI Tools, Tutorials, Comparisons, Templates, and Blog currently use `contentReady=false`. Until an editor manually changes an approved Hub to true, it has no canonical, no page structured data, and no sitemap entry—even if the site-wide launch gate is later enabled.
@@ -50,8 +52,8 @@ The full editorial process is documented in `../05_內容/PUBLISHING_WORKFLOW.md
 
 Public indexing requires all conditions below:
 
-- A final brand supplied through `NEXT_PUBLIC_SITE_NAME`.
-- A real HTTPS origin supplied through `NEXT_PUBLIC_SITE_URL`.
+- The approved `Naveliqo` brand supplied through `NEXT_PUBLIC_SITE_NAME`.
+- The approved `https://naveliqo.com` origin supplied through `NEXT_PUBLIC_SITE_URL`.
 - A syntactically valid, non-example public inbox supplied through `NEXT_PUBLIC_CONTACT_EMAIL`.
 - Explicit human content and trust-page approvals through `CONTENT_LAUNCH_APPROVED=true` and `TRUST_PAGES_APPROVED=true`.
 - An explicit `SITE_LAUNCH_READY=true` after the deployment checklist passes.
@@ -60,7 +62,7 @@ Until then, global metadata uses `noindex`, `robots.txt` disallows crawling, the
 
 ## Remaining human blockers
 
-- Final brand, domain, public inbox, author identities, legal/privacy text, and consent choices.
+- Public inbox, author identities, final logo/favicon/OG approval, legal/privacy text, and consent choices.
 - Real research, reproducible workflow/tool testing, screenshots, fact check, and article approval.
 - Google property creation, ownership verification, tag installation approval, and AdSense application.
-- Hosting, DNS, HTTPS, production environment, backups, rollback, and final launch review.
+- Domain ownership/renewal confirmation, hosting, DNS, HTTPS, production environment, backups, rollback, and final launch review.

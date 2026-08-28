@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Breadcrumbs, Footer, Header } from '../components/site-shell';
+import { SiteLink as Link } from '../components/site-link';
 import { pageContent } from '../page-content';
 import { isStandardRouteIndexable } from '../route-indexing';
 import { siteConfig } from '../site-config';

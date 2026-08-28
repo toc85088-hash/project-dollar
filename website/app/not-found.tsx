@@ -1,5 +1,5 @@
-import Link from 'next/link';
 import { Footer, Header } from './components/site-shell';
+import { SiteLink as Link } from './components/site-link';
 
 export default function NotFound() {
   return (

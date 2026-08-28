@@ -15,6 +15,10 @@ const publicRoutes = [
   '/affiliate-disclosure',
 ];
 const draftRoute = '/blog/ai-automation-for-small-business';
+const approvedBrand = 'Naveliqo';
+const approvedOrigin = 'https://naveliqo.com';
+const approvedPositioning = 'Simple AI Automation for Small Business';
+const approvedTagline = 'No coding. No AI hype. Just practical workflows that save time and money.';
 const hubRoutes = new Set([
   '/ai-automation',
   '/workflows',
@@ -47,7 +51,10 @@ for (const route of publicRoutes) {
   expect(/<meta[^>]+name="robots"[^>]+content="[^"]*noindex/i.test(body), `${route} must remain noindex before launch approval`);
   expect((body.match(/<h1(?:\s|>)/gi) ?? []).length === 1, `${route} should have exactly one h1`);
   expect(!/Your site is taking shape|Building your site|Untitled site/i.test(body), `${route} still contains starter content`);
+  expect(body.includes(approvedBrand), `${route} is missing the approved brand name`);
+  expect(!/PROJECT DOLLAR/i.test(body), `${route} exposes the internal project codename`);
   expect(!body.includes('"@type":"Article"'), `${route} must not output Article schema without a publishable article`);
+  expect(!body.includes('"@type":"Organization"'), `${route} must not output Organization schema before launch approval`);
   if (hubRoutes.has(route)) {
     expect(!body.includes('"@type":"BreadcrumbList"'), `${route} must not output structured data while contentReady=false`);
   }
@@ -57,7 +64,13 @@ for (const route of publicRoutes) {
     if (href && !href.startsWith('/_next') && !href.startsWith('/__')) discoveredLinks.add(href);
   }
 
-  if (route === '/') expect(body.includes('/og.png'), 'Home page is missing the site-wide social preview image');
+  if (route === '/') {
+    expect(body.includes(`<title>${approvedPositioning} | ${approvedBrand}</title>`), 'Home title does not use the approved positioning and brand');
+    expect(body.includes(approvedTagline), 'Home is missing the approved tagline');
+    expect(body.includes(`href="${approvedOrigin}"`), 'Home canonical does not use the approved origin');
+    expect(body.includes(`content="${approvedBrand}"`), 'Home metadata is missing the approved brand');
+    expect(body.includes(`${approvedOrigin}/og.png`), 'Home Open Graph image does not use the approved origin');
+  }
 }
 
 expect(!discoveredLinks.has(draftRoute), 'An unpublished draft is linked from a public page');

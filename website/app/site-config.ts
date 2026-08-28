@@ -1,14 +1,19 @@
-const configuredName = process.env.NEXT_PUBLIC_SITE_NAME?.trim();
-const configuredUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim();
-const configuredContactEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL?.trim();
-const fallbackUrl = 'http://localhost:3000';
+const approvedBrand = {
+  name: 'Naveliqo',
+  siteUrl: 'https://naveliqo.com',
+  positioning: 'Simple AI Automation for Small Business',
+  tagline: 'No coding. No AI hype. Just practical workflows that save time and money.',
+} as const;
 
-function normalizedUrl(value?: string) {
-  if (!value) return fallbackUrl;
+const configuredName = process.env.NEXT_PUBLIC_SITE_NAME?.trim() || approvedBrand.name;
+const configuredUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim() || approvedBrand.siteUrl;
+const configuredContactEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL?.trim();
+
+function normalizedUrl(value: string) {
   try {
     return new URL(value).origin;
   } catch {
-    return fallbackUrl;
+    return approvedBrand.siteUrl;
   }
 }
 
@@ -24,9 +29,10 @@ function isPublicHttpsUrl(value?: string) {
   }
 }
 
-const name = configuredName || 'PROJECT DOLLAR';
-const isTemporaryBrand = !configuredName || name === 'PROJECT DOLLAR';
-const hasProductionUrl = isPublicHttpsUrl(configuredUrl);
+const name = configuredName;
+const url = normalizedUrl(configuredUrl);
+const isApprovedBrand = name === approvedBrand.name;
+const hasProductionUrl = isPublicHttpsUrl(configuredUrl) && url === approvedBrand.siteUrl;
 const hasConfiguredContact = Boolean(
   configuredContactEmail &&
     /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(configuredContactEmail) &&
@@ -37,7 +43,7 @@ const trustPagesApproved = process.env.TRUST_PAGES_APPROVED === 'true';
 const isLaunchReady = Boolean(
   process.env.SITE_LAUNCH_READY === 'true' &&
     hasProductionUrl &&
-    !isTemporaryBrand &&
+    isApprovedBrand &&
     hasConfiguredContact &&
     contentLaunchApproved &&
     trustPagesApproved,
@@ -45,14 +51,14 @@ const isLaunchReady = Boolean(
 
 export const siteConfig = {
   name,
-  mark: name.split(/\s+/).map((word) => word[0]).join('').slice(0, 2).toUpperCase(),
-  status: isTemporaryBrand ? 'TEMPORARY BRAND NAME' : 'INDEPENDENT PUBLICATION',
-  isTemporaryBrand,
-  tagline: 'Simple AI Automation for Small Business',
-  promise: 'No coding. No AI hype. Just practical workflows that save time and money.',
+  status: isLaunchReady ? 'INDEPENDENT PUBLICATION' : 'PRE-LAUNCH',
+  isApprovedBrand,
+  positioning: approvedBrand.positioning,
+  tagline: approvedBrand.tagline,
+  promise: approvedBrand.tagline,
   description:
-    'Practical, evidence-led AI automation guides, workflows, tool comparisons, and templates for non-technical small business owners.',
-  url: normalizedUrl(configuredUrl),
+    `${name} provides practical, evidence-led guides to simple AI automation for non-technical small business owners. ${approvedBrand.tagline}`,
+  url,
   hasProductionUrl,
   hasConfiguredContact,
   contentLaunchApproved,

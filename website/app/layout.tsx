@@ -5,7 +5,7 @@ import { siteConfig } from './site-config';
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: `${siteConfig.tagline} | ${siteConfig.name}`,
+    default: `${siteConfig.positioning} | ${siteConfig.name}`,
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
@@ -20,14 +20,14 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     siteName: siteConfig.name,
-    title: siteConfig.tagline,
+    title: siteConfig.positioning,
     description: siteConfig.description,
     url: '/',
-    images: [{ url: '/og.png', width: 1200, height: 630, alt: `${siteConfig.name}: ${siteConfig.tagline}` }],
+    images: [{ url: '/og.png', width: 1731, height: 909, alt: `${siteConfig.name}: ${siteConfig.positioning}` }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: siteConfig.tagline,
+    title: siteConfig.positioning,
     description: siteConfig.description,
     images: ['/og.png'],
   },

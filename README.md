@@ -1,10 +1,10 @@
-# Project Dollar
+# Naveliqo
 
-Project Dollar 是一個面向美國、英國、加拿大與澳洲英語市場的內容網站專案，定位為 **Simple AI Automation for Small Business**。
+Naveliqo 是一個面向美國、英國、加拿大與澳洲英語市場的內容網站，定位為 **Simple AI Automation for Small Business**。`Project Dollar` 僅保留為內部 project codename，不用於 production-facing branding。
 
 > **No coding. No AI hype. Just practical workflows that save time and money.**
 
-目前品牌名稱 `PROJECT DOLLAR` 是暫用名稱。任何正式發布、網域購買、商標決策或付費服務均需人工核准。
+正式品牌 `Naveliqo` 與 primary domain `https://naveliqo.com` 已由 owner 核准。這項核准不等於 launch approval；部署、DNS、公開索引、外部帳號與付費服務仍需另外人工核准。
 
 ## 服務對象
 
@@ -34,7 +34,7 @@ Project Dollar 是一個面向美國、英國、加拿大與澳洲英語市場�
 - `09_財務`：成本、收入與 ROI 紀錄
 - `10_學習`：研究筆記與案例
 - `11_待辦事項`：Roadmap 與工作清單
-- `website`：本機可執行的英文網站 prototype
+- `website`：本機可執行的 Naveliqo pre-launch 英文網站
 
 原始資料夾內的 `.md.txt` 檔案為既有檔案，本次工作不刪除或覆寫；正式可維護文件使用 `.md` 副檔名。
 
@@ -48,15 +48,14 @@ pnpm install
 pnpm dev
 ```
 
-預設本機網址為 `http://localhost:3000`。正式上線前需設定：
+正式品牌與 canonical origin 已集中設定。正式上線前仍需設定：
 
-- `NEXT_PUBLIC_SITE_URL`：核准的 HTTPS 正式網址
 - `NEXT_PUBLIC_CONTACT_EMAIL`：可公開的聯絡信箱
 
-品牌名稱集中於 `website/app/site-config.ts`，正式命名確定後可單點替換。
+品牌名稱、positioning、tagline 與 canonical origin 集中於 `website/app/site-config.ts`。Global launch gate 仍為關閉。
 
 ## 目前狀態
 
 - V1 Keyword Map 與前 10 篇發布順序已建立，但搜尋量、競爭度與 SERP 必須人工使用可靠資料來源驗證。
 - 文件、內容 briefs 與網站 prototype 正在依 Roadmap 驗收。
-- 尚未申請 AdSense、登入 Google 帳號、購買網域或部署付費服務。
+- 尚未申請 AdSense、登入 Google 帳號、執行網域／DNS 操作或部署服務。

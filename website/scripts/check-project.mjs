@@ -13,6 +13,7 @@ function expect(condition, message) {
 const requiredDocs = [
   'README.md',
   '02_品牌/品牌定位.md',
+  '02_品牌/BRAND_STATUS.md',
   '03_網站/網站架構.md',
   '03_網站/功能需求.md',
   '04_SEO/Keyword.md',
@@ -37,6 +38,7 @@ const requiredDocs = [
   '07_Codex/TRUST_AND_LEGAL_REVIEW.md',
   '07_Codex/HUB_INDEXING_AUDIT.md',
   '07_Codex/PRELAUNCH_FIX_REPORT.md',
+  '07_Codex/BRAND_INTEGRATION_REPORT.md',
   '07_Codex/ROUND2_REPORT.md',
   '11_待辦事項/Roadmap.md',
 ];
@@ -136,19 +138,44 @@ function collectSourceFiles(directory) {
   });
 }
 for (const path of collectSourceFiles(appRoot)) {
-  if (path.endsWith('site-config.ts')) continue;
-  expect(!readFileSync(path, 'utf8').includes('PROJECT DOLLAR'), `Brand name is hard-coded outside site-config.ts: ${path}`);
+  const body = readFileSync(path, 'utf8');
+  expect(!/PROJECT DOLLAR/i.test(body), `Internal codename appears in production-facing source: ${path}`);
+  if (!path.endsWith('site-config.ts')) {
+    expect(!/\bNaveliqo\b/.test(body), `Approved brand name is hard-coded outside site-config.ts: ${path}`);
+  }
+}
+
+const siteLinkPath = join(appRoot, 'components', 'site-link.tsx');
+expect(existsSync(siteLinkPath), 'Missing centralized internal-link component');
+if (existsSync(siteLinkPath)) {
+  const siteLinkSource = readFileSync(siteLinkPath, 'utf8');
+  expect(!siteLinkSource.includes('next/link'), 'Internal links still use the failing Vinext client-link runtime');
+  expect(siteLinkSource.includes('<a href={href}'), 'Internal-link component does not render a standard navigable anchor');
 }
 
 expect(existsSync(join(websiteRoot, 'public', 'og.png')), 'Missing social preview image');
+expect(existsSync(join(projectRoot, '07_Codex', 'assets', 'og-project-dollar-legacy.png')), 'Legacy Project Dollar OG asset was not preserved');
+
+const siteConfigPath = join(appRoot, 'site-config.ts');
+const siteConfigSource = readFileSync(siteConfigPath, 'utf8');
+for (const approvedValue of [
+  "name: 'Naveliqo'",
+  "siteUrl: 'https://naveliqo.com'",
+  "positioning: 'Simple AI Automation for Small Business'",
+  "tagline: 'No coding. No AI hype. Just practical workflows that save time and money.'",
+]) {
+  expect(siteConfigSource.includes(approvedValue), `Central site config is missing approved value: ${approvedValue}`);
+}
+expect(siteConfigSource.includes("status: isLaunchReady ? 'INDEPENDENT PUBLICATION' : 'PRE-LAUNCH'"), 'Pre-launch status is not controlled by the global launch gate');
+expect(siteConfigSource.includes("process.env.SITE_LAUNCH_READY === 'true'"), 'Global launch gate is missing from site config');
 
 const envExamplePath = join(websiteRoot, '.env.example');
 expect(existsSync(envExamplePath), 'Missing website/.env.example');
 if (existsSync(envExamplePath)) {
   const envExample = readFileSync(envExamplePath, 'utf8');
+  expect(/^NEXT_PUBLIC_SITE_NAME=Naveliqo$/m.test(envExample), 'Approved brand is missing from .env.example');
+  expect(/^NEXT_PUBLIC_SITE_URL=https:\/\/naveliqo\.com$/m.test(envExample), 'Approved canonical origin is missing from .env.example');
   for (const variable of [
-    'NEXT_PUBLIC_SITE_NAME',
-    'NEXT_PUBLIC_SITE_URL',
     'NEXT_PUBLIC_CONTACT_EMAIL',
     'GOOGLE_SITE_VERIFICATION',
     'NEXT_PUBLIC_GA_MEASUREMENT_ID',
@@ -194,7 +221,12 @@ for (const relative of publicNavigationSources) {
 const sitemapSource = readFileSync(join(appRoot, 'sitemap.ts'), 'utf8');
 expect(sitemapSource.includes('getPublishedArticles'), 'Sitemap does not use the publishable article registry');
 expect(sitemapSource.includes('isStandardRouteIndexable'), 'Sitemap does not filter standard routes through centralized indexability');
+expect(sitemapSource.includes('siteConfig.url'), 'Sitemap URLs do not use the centralized approved origin');
 expect(!sitemapSource.includes('blog/ai-automation-for-small-business'), 'Draft article is hard-coded into sitemap');
+
+const robotsSource = readFileSync(join(appRoot, 'robots.ts'), 'utf8');
+expect(robotsSource.includes('siteConfig.isLaunchReady'), 'robots.txt is not controlled by the global launch gate');
+expect(robotsSource.includes('siteConfig.url'), 'robots sitemap URL does not use the centralized approved origin');
 
 const standardRouteSource = readFileSync(join(appRoot, '[slug]', 'page.tsx'), 'utf8');
 expect(standardRouteSource.includes('isStandardRouteIndexable'), 'Standard route metadata does not use centralized indexability');
@@ -206,6 +238,9 @@ const packageJson = JSON.parse(readFileSync(join(websiteRoot, 'package.json'), '
 expect(packageJson.scripts?.['check:placeholders']?.includes('check-placeholders.mjs'), 'package.json is missing check:placeholders integration');
 expect(packageJson.scripts?.build?.includes('check-placeholders.mjs'), 'Production build does not run the placeholder checker');
 expect(packageJson.scripts?.['test:project']?.includes('check-placeholders.mjs'), 'Project validation does not run the placeholder checker');
+
+const tsconfig = JSON.parse(readFileSync(join(websiteRoot, 'tsconfig.json'), 'utf8'));
+expect(tsconfig.compilerOptions?.strict === true, 'TypeScript strict mode must remain enabled');
 
 const websiteTextFiles = [
   ...collectSourceFiles(appRoot),
