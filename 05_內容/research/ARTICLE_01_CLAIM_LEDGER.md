@@ -1,40 +1,79 @@
 # Article 01 Claim Ledger
 
-文章：**AI Automation for Small Business: Start Small, Stay in Control**  
-更新日期：2026-08-24  
-Article status：`draft`  
-Ledger status：Research not completed；沒有 claim 可視為正式 verified。
+Article：**What Should a Small Business Automate First?**
 
-Status values：`EDITORIAL FRAMEWORK`、`NEEDS OFFICIAL SOURCE`、`NEEDS INDEPENDENT SOURCE`、`NEEDS FIRST-HAND TEST`、`REMOVE OR REWRITE`、`VERIFIED`。只有完成來源／測試／fact check後才能使用 `VERIFIED`。
+Updated：2026-08-30
+
+Article status：`draft`
+
+Evidence complete：**NO**
+
+First-hand test complete：**NO**
+
+Allowed status values：`VERIFIED`、`NEEDS TESTING`、`NEEDS SOURCE`、`EDITORIAL / GENERAL GUIDANCE`、`REMOVE`。
+
+`VERIFIED`只表示列出的來源在指定日期直接支持該項有限 claim；不代表產品已由 Naveliqo 測試、適合每個企業、符合每個地區法規，或能產生任何 savings/result。
 
 | Claim | Claim type | Needs source? | Official source | Independent source | First-hand test required? | Screenshot required? | Last verified date | Status | Notes |
 |---|---|---:|---|---|---:|---:|---|---|---|
-| AI automation here means an AI-assisted step inside a workflow with a clear owner, rules, exceptions, review, and fallback. | Definition / editorial scope | YES | Not selected | Not selected | NO | NO | Not verified | EDITORIAL FRAMEWORK | Define this as the publication’s framework, not a universal industry definition. Compare with authoritative terminology before publication. |
-| AI can assist with classification, extraction, drafting, or summarisation. | Capability category | YES | Relevant vendor-neutral or official technical documentation not selected | Independent source not selected | YES, if presented as working examples | YES, if a product is shown | Not verified | NEEDS OFFICIAL SOURCE | Keep generic unless a representative workflow is actually tested. |
-| A sensible first task is frequent, describable, low-risk, measurable, and cheap to correct before external action. | Editorial recommendation | YES | Not selected | Workflow/risk source not selected | YES | Optional workflow diagram | Not verified | NEEDS INDEPENDENT SOURCE | Present as a decision framework; do not claim universal performance. |
-| Draft-for-review is generally a safer starting pattern than automatic external action. | Risk / recommendation | YES | Relevant authoritative risk guidance not selected | Independent expert/research source not selected | YES | Workflow diagram required | Not verified | NEEDS INDEPENDENT SOURCE | “Safer” needs a defined comparison and limitations; rewrite if evidence is insufficient. |
-| Sorting routine enquiries into a review queue is a better first candidate than deciding a refund automatically. | Example / risk comparison | YES | Not selected | Not selected | YES | Decision table already drafted; test evidence needed | Not verified | NEEDS FIRST-HAND TEST | Fictional example only; no claim that it fits every business or jurisdiction. |
-| A contact-form submission can be validated, categorised, and used to prepare a reply draft for owner review. | Workflow capability | YES | Actual tested tool documentation not selected | Independent source optional | YES | YES | Not verified | NEEDS FIRST-HAND TEST | Tool remains unselected. Do not imply integration or reliability before test completion. |
-| The workflow can prevent external sending until a human verifies recipient, facts, tone, availability, price language, and next step. | Control / workflow claim | YES | Actual tool control/permission documentation not selected | Not selected | YES | YES | Not verified | NEEDS FIRST-HAND TEST | Success requires evidence that no automatic-send path or retry bypass exists. |
-| Angry, sensitive, unusual, or incomplete enquiries should bypass drafting and move to manual handling. | Safety recommendation | YES | Applicable authoritative guidance not selected | Independent risk source not selected | YES | Test log screenshot required | Not verified | EDITORIAL FRAMEWORK | Test whether routing works; legal/privacy suitability still requires human review. |
-| The example pattern is intended to reduce blank-page work while keeping decisions accountable. | Intended benefit | YES | Not applicable | Independent evidence not selected | YES | Test timing/correction record optional | Not verified | NEEDS FIRST-HAND TEST | Do not change “intended to” into a savings claim without measured evidence. |
-| High-stakes payment, legal, safety, employment, or sensitive-data decisions should remain manual without appropriate controls and qualified review. | Risk / legal boundary | YES | Market/sector authoritative guidance not selected | Qualified independent review not selected | NO for principle; YES for any example workflow | NO | Not verified | NEEDS OFFICIAL SOURCE | Scope by market and sector. This article is not legal advice. |
-| Privacy, recording, consumer, employment, and industry rules vary by workflow and location. | Legal / compliance context | YES | Relevant US/UK/Canada/Australia sources not selected | Qualified legal review not selected | NO | NO | Not verified | NEEDS OFFICIAL SOURCE | Avoid listing legal conclusions until applicability is confirmed. |
-| Measuring only the automated step can miss review, correction, maintenance, failure, and tool-cost work. | Measurement recommendation | YES | Not selected | Independent operations/research source not selected | YES | Test log/measurement sheet required | Not verified | NEEDS FIRST-HAND TEST | The Article 1 test should record full workflow effort; do not invent baseline savings. |
-| A manual fallback and named owner are necessary parts of this publication’s recommended workflow. | Editorial standard | NO, if clearly labelled as our standard | Not applicable | Not applicable | YES, to demonstrate the example | Workflow diagram required | Not verified | EDITORIAL FRAMEWORK | Phrase as Naveliqo editorial policy, not a legal or universal technical requirement. |
+| A good first automation candidate is frequent, has writable instructions, is reversible, is safe to review, and has a trackable result. | Naveliqo decision framework | NO, when attributed to Naveliqo | Not applicable | SERP review shows overlapping criteria but is not the basis of authority | NO | Optional framework graphic | 2026-08-30 | EDITORIAL / GENERAL GUIDANCE | FIRST is Naveliqo’s editorial framework, not an industry standard or validated scoring instrument. |
+| A zero for Reversible or Safe to review should veto a first project even when the total score is high. | Naveliqo risk rule | NO, when attributed to Naveliqo | NIST AI RMF supports risk management generally, not this exact rule | Not required | NO | NO | 2026-08-30 | EDITORIAL / GENERAL GUIDANCE | Present as a conservative house rule, not a legal requirement. |
+| A small business should automate one bounded handoff before attempting a broad autonomous process. | Editorial recommendation | Helpful, not mandatory if clearly framed as advice | Make beginner guidance says to start simple; NIST supports contextual risk management | SERP sources consistently favour bounded, repeatable work | YES for the demonstration | Workflow diagram | 2026-08-30 | EDITORIAL / GENERAL GUIDANCE | Avoid “always” or universal performance claims. |
+| The first useful automation may not need AI; deterministic trigger-and-action rules can handle structured handoffs. | Definition / guidance | YES | Make describes scenarios using triggers, actions, modules and filters; Zapier describes task/workflow automation | Not required | YES for selected build | YES | 2026-08-30 | VERIFIED | Verified only as a supported workflow pattern. Naveliqo has not tested the selected implementation. |
+| Google Forms responses can be stored in a linked Google Sheet. | Product functionality | YES | https://support.google.com/docs/answer/2917686?hl=en | Not required | YES | YES | 2026-08-30 | VERIFIED | Google warns that form and Sheet collaborator permissions must be managed separately. |
+| Google Forms can notify a form owner of new responses and can send responders a copy of their response when configured. | Product functionality | YES | https://support.google.com/docs/answer/139706?hl=en | Not required | YES | YES | 2026-08-30 | VERIFIED | A response receipt is not the custom acknowledgement used in the proposed demo. Delivery can be affected by spam/counter-abuse controls. |
+| Make supports a visual scenario connected to Google Sheets and requires access/permissions for the connected apps. | Product functionality / setup | YES | https://help.make.com/step-1-plan-your-scenario | Not required | YES | YES | 2026-08-30 | VERIFIED | Capability evidence only; the account connections were not created. |
+| Make currently lists a Gmail `Create a Draft` action. | Product functionality | YES | https://www.make.com/en/integrations/make/google-email | Not required | YES | YES | 2026-08-30 | VERIFIED | Integration page evidence; the module, OAuth permissions and actual draft output still require testing. |
+| Make currently lists Google Tasks task-creation capability in its integration catalogue. | Product functionality | YES | https://www.make.com/en/integrations/google-tasks/todoist | Not required | YES | YES | 2026-08-30 | VERIFIED | Only catalogue availability is verified. Selected field mapping, permissions and reliability are untested. |
+| Make’s Free plan currently shows no time limit, up to 1,000 credits/month, a visual builder, routers/filters, and a 15-minute minimum scheduled interval. | Changing plan/limit | YES | https://www.make.com/en/pricing | Not required | YES | Screenshot of plan page before publication | 2026-08-30 | VERIFIED | Must retain `[VERIFY CURRENT PLAN]` until publication-day check. Do not imply all selected modules consume a fixed amount without verification. |
+| Make can run the exact proposed flow: new Form row → validation → Gmail draft → Google Task → status record, with no unintended external action. | End-to-end workflow | YES | Individual capabilities documented above | Not applicable until tested | YES | YES | Not tested | NEEDS TESTING | Do not use “works,” “reliable,” “easy,” or a step count before the controlled test. |
+| The workflow can prevent all external sends while still creating a reviewable acknowledgement draft. | Control / safety | YES | Gmail Create a Draft module exists | Not required | YES, including retry/failure paths | YES | Not tested | NEEDS TESTING | Verify no Send module, auto-forward, retry path, or account rule can send externally. |
+| The workflow can create one and only one follow-up task per accepted fictional lead. | Reliability / idempotency | YES | Module capability source is insufficient for this claim | Not required | YES | YES | Not tested | NEEDS TESTING | Test duplicates, edits, retries, timeouts and re-runs. |
+| The selected workflow saves time, reduces errors, improves response speed, increases conversions, or earns revenue. | Outcome / performance | YES | None | A valid study would still not prove this implementation | YES | Measurement evidence | Not verified | REMOVE | Exclude until a real baseline and repeated test support a carefully bounded statement. No projected result belongs in the draft. |
+| The selected workflow is free. | Price / availability | YES | Make Free plan exists; Google account access may be available | Not required | YES | Plan/account screenshots | Not verified end to end | NEEDS TESTING | Phrase only as “may be possible to test without a paid Make plan” and retain `[VERIFY CURRENT PLAN]`; no account or billing review occurred. |
+| The proposed setup is easy for every non-technical owner. | Usability claim | YES | None | A representative usability method would be needed | YES | Session evidence | Not verified | REMOVE | Use neutral setup instructions; do not promise ease before a human beginner test. |
+| Use fictional, non-sensitive data until permissions, retention, access and failure handling have been reviewed. | Safety guidance | YES | OAIC commercial AI guidance; Canada OPC principles; NIST AI RMF/AIRC | Not required | NO | NO | 2026-08-30 | VERIFIED | Authorities support due diligence/testing and privacy risk management; applicability varies. This is not legal advice. |
+| Human oversight should be embedded when a workflow uses commercially available AI with personal information. | Government guidance summary | YES | https://www.oaic.gov.au/privacy/privacy-guidance-for-organisations-and-government-agencies/guidance-on-privacy-and-the-use-of-commercially-available-ai-products | Not required | NO | NO | 2026-08-30 | VERIFIED | This supports a general guardrail, not a finding that the demo complies with Australian law. |
+| Canadian privacy obligations for generative AI vary with the organization and activity; legal authority and appropriate purpose must be assessed. | Government guidance summary | YES | https://www.priv.gc.ca/en/privacy-topics/technology/artificial-intelligence/gd_principles_ai | Not required | NO | NO | 2026-08-30 | VERIFIED | Do not generalize this into US/UK/Australia legal conclusions. |
+| NIST AI RMF is voluntary, non-sector-specific and intended for organizations of different sizes; NIST AIRC includes testing/evaluation/verification/validation resources. | Framework description | YES | https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-ai-rmf-10 and https://airc.nist.gov/ | Not required | NO | NO | 2026-08-30 | VERIFIED | AI RMF 1.0 is being revised; verify current status before publication. |
+| The workflow is secure, private, compliant, or safe for real lead data. | Security / legal conclusion | YES | Product and jurisdiction-specific sources required | Qualified review required | YES | Security/permission evidence | Not verified | REMOVE | Never make a blanket claim. Human review of market, sector, notices, permissions, retention and vendor terms is required. |
+| Form collaborators may also access the linked response Sheet, and later permission changes may need to be made in both places. | Product permission warning | YES | https://support.google.com/docs/answer/2917686?hl=en and https://support.google.com/docs/answer/139706?hl=en | Not required | YES | YES | 2026-08-30 | VERIFIED | Include in test plan because fictional data does not remove the need to validate access controls. |
+| Enabling Google Forms response summaries can expose full-text responses or charts to people who can respond. | Product privacy warning | YES | https://support.google.com/docs/answer/2839588 | Not required | YES | YES | 2026-08-30 | VERIFIED | The test plan should confirm response-summary sharing is off unless intentionally required. |
+| Review time, corrections, failures, maintenance and tool usage should be measured alongside any automated processing time. | Measurement method | NO, when framed as Naveliqo method | NIST TEVV resources support documented evaluation generally | Not required | YES | Test log summary | 2026-08-30 | EDITORIAL / GENERAL GUIDANCE | Do not invent a baseline or threshold; human owner defines acceptable result. |
+| Invoice reminders, appointment reminders, CRM entry and email triage are universally the best first automations. | Universal recommendation | YES | None | None | Would vary by business | NO | Not verified | REMOVE | Keep as examples to score, never a universal ranking. |
+
+## Accepted source register
+
+| Source | Type | What it supports | Accessed |
+|---|---|---|---|
+| https://www.make.com/en/pricing | Official product/plan | Current Free-plan availability and displayed limits | 2026-08-30 |
+| https://help.make.com/step-1-plan-your-scenario | Official help | Scenario planning, app access and permission requirements | 2026-08-30 |
+| https://www.make.com/en/integrations/make/google-email | Official integration catalogue | Gmail `Create a Draft` module availability | 2026-08-30 |
+| https://www.make.com/en/integrations/google-tasks/todoist | Official integration catalogue | Google Tasks create-task capability listing | 2026-08-30 |
+| https://support.google.com/docs/answer/2917686?hl=en | Official help | Forms-to-Sheets response storage and collaborator warning | 2026-08-30 |
+| https://support.google.com/docs/answer/139706?hl=en | Official help | Response notifications, receipts and permissions | 2026-08-30 |
+| https://support.google.com/docs/answer/2839588 | Official help | Forms publishing/access and response-summary exposure warning | 2026-08-30 |
+| https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-ai-rmf-10 | US government | Scope and voluntary nature of AI RMF | 2026-08-30 |
+| https://airc.nist.gov/ | US government | TEVV resources and current RMF revision notice | 2026-08-30 |
+| https://www.oaic.gov.au/privacy/privacy-guidance-for-organisations-and-government-agencies/guidance-on-privacy-and-the-use-of-commercially-available-ai-products | Australian regulator | Due diligence, testing, human oversight and privacy considerations | 2026-08-30 |
+| https://www.priv.gc.ca/en/privacy-topics/technology/artificial-intelligence/gd_principles_ai | Canadian regulators | Context-dependent privacy obligations and responsible-use principles | 2026-08-30 |
+| https://help.zapier.com/hc/en-us/articles/32337438839565-What-s-included-in-Zapier-s-Free-plan | Official help, comparison only | Current Zapier Free-plan constraints; not used as selected-stack evidence | 2026-08-30 |
 
 ## Source acceptance rules
 
-- Official source應直接支持 product/feature/permission/privacy/security/plan claim，並記錄 URL、title、plan/region與access date。
-- Independent source應有清楚作者、方法、日期與限制；competitor copy或vendor affiliate post不能當獨立證據。
-- Statistics必須追到original study與methodology；找不到就刪除，不留「industry says」。
-- First-hand result只代表記錄的workflow、tool、plan、date與test data；不能外推成普遍accuracy、time saving或ROI。
-- `Last verified date`只有在reviewer實際開啟來源或完成test後填寫，不能使用文件建立日代替。
+- Changing product claim需有official source與verification date；publication day仍需重新檢查。
+- Vendor page可以證明「vendor documents a capability」，不能證明real-world reliability、fit、security、outcome或Naveliqo testing。
+- Competitor content不是independent evidence，不用於支撐statistics、ROI或product verdict。
+- Statistics必須追到original study與methodology；Article 1目前不需要任何外部 statistic。
+- First-hand result只代表實際記錄的workflow、tool、plan、date、region、settings與fictional test cases，不能外推。
+- Privacy/legal guidance只支撐general guardrails；正式使用real data前仍需market/sector-specific human review。
 
 ## Approval record
 
-- Research owner: Not assigned
-- Test owner: Not assigned
-- Fact checker: Not assigned
-- Human approver: Not assigned
-- Publication approval: **NO**
+- Research owner：Codex research pass；human owner not assigned
+- Test owner：Not assigned
+- Fact checker：Not assigned
+- Human approver：Not assigned
+- Real test：**NOT RUN**
+- Screenshots：**0**
+- Publication approval：**NO**

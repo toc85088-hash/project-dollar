@@ -14,7 +14,8 @@ const publicRoutes = [
   '/terms',
   '/affiliate-disclosure',
 ];
-const draftRoute = '/blog/ai-automation-for-small-business';
+const draftRoute = '/blog/what-should-small-business-automate-first';
+const retiredDraftRoute = '/blog/ai-automation-for-small-business';
 const approvedBrand = 'Naveliqo';
 const approvedOrigin = 'https://naveliqo.com';
 const approvedPositioning = 'Simple AI Automation for Small Business';
@@ -82,6 +83,9 @@ for (const href of [...discoveredLinks].sort()) {
 
 const draft = await fetch(new URL(draftRoute, baseUrl));
 expect(draft.status === 404, `Draft route must return 404 with SHOW_DRAFTS disabled, received ${draft.status}`);
+
+const retiredDraft = await fetch(new URL(retiredDraftRoute, baseUrl));
+expect(retiredDraft.status === 404, `Retired draft route must remain unavailable, received ${retiredDraft.status}`);
 
 const missing = await fetch(new URL('/this-page-should-not-exist', baseUrl));
 expect(missing.status === 404, `Unknown route should return 404, received ${missing.status}`);

@@ -28,7 +28,10 @@ const requiredDocs = [
   '03_網站/STAGING_QA_CHECKLIST.md',
   '05_內容/PUBLISHING_WORKFLOW.md',
   '05_內容/research/ARTICLE_01_CLAIM_LEDGER.md',
+  '05_內容/research/ARTICLE_01_SERP_RESEARCH.md',
   '05_內容/research/ARTICLE_01_TEST_PLAN.md',
+  '05_內容/research/ARTICLE_01_QUALITY_AUDIT.md',
+  '05_內容/drafts/ARTICLE_01_DRAFT.md',
   '06_收入/AFFILIATE_IMPLEMENTATION.md',
   '06_收入/DIGITAL_PRODUCT_ROADMAP.md',
   '07_Codex/PROJECT_AUDIT.md',
@@ -39,6 +42,7 @@ const requiredDocs = [
   '07_Codex/HUB_INDEXING_AUDIT.md',
   '07_Codex/PRELAUNCH_FIX_REPORT.md',
   '07_Codex/BRAND_INTEGRATION_REPORT.md',
+  '07_Codex/ARTICLE_01_RESEARCH_REPORT.md',
   '07_Codex/ROUND2_REPORT.md',
   '11_待辦事項/Roadmap.md',
 ];
@@ -195,7 +199,7 @@ if (existsSync(articleRegistryPath)) {
   for (const status of ["'draft'", "'needs_review'", "'published'", "'needs_update'"]) {
     expect(articleRegistry.includes(status), `Article registry is missing status ${status}`);
   }
-  for (const gate of ['humanApproved', 'evidenceComplete', 'publishedAt', 'isPublishable']) {
+  for (const gate of ['humanApproved', 'evidenceComplete', 'screenshotsComplete', 'publishedAt', 'isPublishable', 'getUnresolvedEditorialMarkers']) {
     expect(articleRegistry.includes(gate), `Article registry is missing publication gate ${gate}`);
   }
   expect(/status:\s*'draft'/.test(articleRegistry), 'Foundation article must remain a draft until human approval');
@@ -215,14 +219,14 @@ if (existsSync(hubPolicyPath)) {
 const publicNavigationSources = ['page.tsx', 'page-content.ts', join('components', 'site-shell.tsx')];
 for (const relative of publicNavigationSources) {
   const body = readFileSync(join(appRoot, relative), 'utf8');
-  expect(!body.includes('/blog/ai-automation-for-small-business'), `Draft article is linked from public source: ${relative}`);
+  expect(!body.includes('/blog/what-should-small-business-automate-first'), `Draft article is linked from public source: ${relative}`);
 }
 
 const sitemapSource = readFileSync(join(appRoot, 'sitemap.ts'), 'utf8');
 expect(sitemapSource.includes('getPublishedArticles'), 'Sitemap does not use the publishable article registry');
 expect(sitemapSource.includes('isStandardRouteIndexable'), 'Sitemap does not filter standard routes through centralized indexability');
 expect(sitemapSource.includes('siteConfig.url'), 'Sitemap URLs do not use the centralized approved origin');
-expect(!sitemapSource.includes('blog/ai-automation-for-small-business'), 'Draft article is hard-coded into sitemap');
+expect(!sitemapSource.includes('blog/what-should-small-business-automate-first'), 'Draft article is hard-coded into sitemap');
 
 const robotsSource = readFileSync(join(appRoot, 'robots.ts'), 'utf8');
 expect(robotsSource.includes('siteConfig.isLaunchReady'), 'robots.txt is not controlled by the global launch gate');
@@ -234,10 +238,15 @@ expect(standardRouteSource.includes('canonical: null'), 'Unready standard routes
 
 const placeholderCheckPath = join(websiteRoot, 'scripts', 'check-placeholders.mjs');
 expect(existsSync(placeholderCheckPath), 'Missing automated placeholder checker');
+const editorialMarkerCheckPath = join(websiteRoot, 'scripts', 'check-editorial-markers.mjs');
+expect(existsSync(editorialMarkerCheckPath), 'Missing automated editorial marker checker');
 const packageJson = JSON.parse(readFileSync(join(websiteRoot, 'package.json'), 'utf8'));
 expect(packageJson.scripts?.['check:placeholders']?.includes('check-placeholders.mjs'), 'package.json is missing check:placeholders integration');
 expect(packageJson.scripts?.build?.includes('check-placeholders.mjs'), 'Production build does not run the placeholder checker');
 expect(packageJson.scripts?.['test:project']?.includes('check-placeholders.mjs'), 'Project validation does not run the placeholder checker');
+expect(packageJson.scripts?.['check:editorial-markers']?.includes('check-editorial-markers.mjs'), 'package.json is missing check:editorial-markers integration');
+expect(packageJson.scripts?.build?.includes('check-editorial-markers.mjs'), 'Production build does not run the editorial marker checker');
+expect(packageJson.scripts?.['test:project']?.includes('check-editorial-markers.mjs'), 'Project validation does not run the editorial marker checker');
 
 const tsconfig = JSON.parse(readFileSync(join(websiteRoot, 'tsconfig.json'), 'utf8'));
 expect(tsconfig.compilerOptions?.strict === true, 'TypeScript strict mode must remain enabled');

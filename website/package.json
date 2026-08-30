@@ -7,11 +7,12 @@
   },
   "scripts": {
     "dev": "vinext dev",
-    "build": "node scripts/check-placeholders.mjs --production && vinext build",
+    "build": "node scripts/check-placeholders.mjs --production && node scripts/check-editorial-markers.mjs --production && vinext build",
     "start": "vinext start",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
     "check:placeholders": "node scripts/check-placeholders.mjs --production",
-    "test:project": "node scripts/check-project.mjs && node scripts/check-placeholders.mjs --production",
+    "check:editorial-markers": "node scripts/check-editorial-markers.mjs --production",
+    "test:project": "node scripts/check-project.mjs && node scripts/check-placeholders.mjs --production && node scripts/check-editorial-markers.mjs --production",
     "test:site": "node scripts/check-site.mjs"
   },
   "dependencies": {

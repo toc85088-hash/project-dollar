@@ -1,18 +1,18 @@
-# Content Brief 01 — AI Automation for Small Business
+# Content Brief 01 — What Should a Small Business Automate First?
 
-Status: Needs keyword/SERP validation, research, editorial review, and human publication approval.
+Status: SERP/source research complete; draft, real test, screenshots, fact check, editorial review, and human publication approval remain incomplete.
 
 ## Primary keyword
 
-`ai automation for small business`
+`what should a small business automate first`
 
 ## Search intent
 
-Informational / early solution awareness. The reader wants a plain-English definition, realistic use cases, a safe starting method, and help deciding whether automation fits their business.
+Informational / beginner decision support. The reader wants to choose one useful first automation without buying the wrong tool or creating unnecessary risk.
 
 ## Article purpose
 
-Create the foundation page for the entire topic cluster. Define AI automation without hype, distinguish it from simple rule-based automation, and give the reader a risk-aware process for choosing one first workflow.
+Answer the question immediately, provide the original Naveliqo FIRST decision framework, show what not to automate, and prepare one bounded lead-capture demonstration without implying that it has already been tested.
 
 ## Target reader
 
@@ -20,28 +20,36 @@ An owner or manager with 1–50 staff in the US, UK, Canada, or Australia who us
 
 ## Suggested title
 
-AI Automation for Small Business: A Practical Starting Guide
+What Should a Small Business Automate First?
 
 ## Suggested URL
 
-`/blog/ai-automation-for-small-business`
+`/blog/what-should-small-business-automate-first`
 
 ## H1
 
-AI Automation for Small Business: Start Small, Stay in Control
+What Should a Small Business Automate First?
 
 ## Suggested outline
 
-### H2: The short answer: what AI automation means for a small business
+### H2: The short answer
 
-- H3: Rule-based automation vs AI-assisted steps
-- H3: Where a person should stay in the loop
+- Start with one frequent, rule-based, low-risk, reversible, trackable workflow
+- The first useful automation may not need AI
 
-### H2: Signs a task may be ready to automate
+### H2: Start with the process, not the tool
 
-- H3: Repetitive, frequent, and easy to describe
-- H3: Low consequence when a draft is wrong
-- H3: A clear owner and review point
+- Map trigger, inputs, rules, judgement, result, exception and fallback
+- Separate dependable handoffs from sensitive judgement
+
+### H2: Use the Naveliqo FIRST framework
+
+- H3: Frequent
+- H3: Instructions are clear
+- H3: Reversible
+- H3: Safe to review
+- H3: Trackable
+- A zero for Reversible or Safe to review vetoes the first project
 
 ### H2: What not to automate first
 
@@ -49,50 +57,59 @@ AI Automation for Small Business: Start Small, Stay in Control
 - H3: Broken or undocumented processes
 - H3: Rare tasks with too many exceptions
 
-### H2: A five-step starting framework
+### H2: Good processes to consider first
 
-- H3: Choose one task
-- H3: Map the current process
-- H3: Define inputs, output, exceptions, and approval
-- H3: Test with non-sensitive examples
-- H3: Measure, document, and maintain
+- Lead capture/internal follow-up, internal notifications, approved-system data entry, reminders, and email triage
+- Present as candidates to score, never a universal ranking
 
-### H2: Practical small-business use cases
+### H2: One concrete workflow example
 
-- Email drafting, customer-service triage, lead follow-up drafts, meeting notes, and internal admin
-- Link each use case to its dedicated workflow guide only after that page is published
+- Fictional Google Form → linked Sheet → Make filter → Gmail draft → Google Task → human review
+- Include unresolved test/plan/screenshot markers until evidence exists
 
-### H2: How to evaluate tools without getting distracted
+### H2: How much complexity to start with
 
-- Ease of setup, reliability, control, data handling, exit options, and total ongoing work
+- One trigger, few actions, one exception route, one owner
 
-### H2: Your next 30 minutes
+### H2: Human review and manual fallback
 
-- Complete a one-task inventory and choose a human approval point
+- Define checks, stop control, exception owner, logging and bypass test
+
+### H2: Measure the whole workflow
+
+- Baseline, review, correction, failures, maintenance and tool usage
+
+### H2: What to automate second
+
+- Choose an adjacent workflow only after the first exposes normal cases and exceptions
+
+### H2: FAQ
+
+- Easiest process, whether AI is required, lead follow-up, risk, test duration and measurement
 
 ## Internal links
 
 - `/ai-automation` — parent pillar / cluster hub
-- `/tutorials/automate-repetitive-tasks-small-business` — next implementation step
-- `/workflows/small-business-automation-ideas` — use-case selection
-- `/templates/small-business-automation-templates` — worksheet CTA when published
+- `/workflows` — practical workflow hub when content-ready
+- `/tutorials` — implementation hub when content-ready
+- `/templates` — FIRST scorecard/workflow-map destination when content-ready
 - `/about` — editorial and evidence approach
 
 ## Potential affiliate opportunities
 
-None required. A later contextual link may point to a verified no-code automation category guide. Do not recommend a named product or add an affiliate link until the tool has been tested and the relationship disclosed.
+None required. Make and Google are evidence/test candidates, not affiliate recommendations. No affiliate link may be added without a real relationship, testing and disclosure.
 
 ## Evidence/testing required
 
 - Confirm definitions against reliable primary documentation and separate generative AI from deterministic automation.
-- Use at least one fully documented, low-risk example built with dummy data.
+- Complete one fully documented, low-risk example with fictional data; the current round includes only the plan.
 - Record the workflow inputs, expected output, failure cases, human review, and measured manual baseline.
 - Obtain qualified review for privacy/legal claims; do not present general guidance as legal advice.
 
 ## Screenshots required
 
-- One original task-to-workflow diagram.
-- Optional product screenshots only if the example is actually built; crop personal information and record test date/version.
+- One original FIRST scorecard/workflow diagram.
+- Product screenshots only after the example is actually built; redact identifiers and record test date/version.
 - Alt text must explain the decision or step shown, not repeat the keyword.
 
 ## Claims requiring verification
@@ -104,7 +121,7 @@ None required. A later contextual link may point to a verified no-code automatio
 
 ## CTA
 
-Download or copy the One-Task Automation Map, then identify one step that still requires human approval.
+Score three recent tasks with FIRST, reject candidates that fail the risk veto, then map one trigger, input, output, exception, owner and fallback.
 
 ## Digital product opportunity
 

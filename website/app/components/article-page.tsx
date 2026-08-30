@@ -92,6 +92,16 @@ export function ArticlePage({ article }: { article: ArticleRecord }) {
                       {section.steps.map((step) => <li key={step.title}><strong>{step.title}</strong> {step.text}</li>)}
                     </ol>
                   )}
+                  {section.faqs && (
+                    <div className="faq-list">
+                      {section.faqs.map((faq) => (
+                        <section key={faq.question}>
+                          <h3>{faq.question}</h3>
+                          <p>{faq.answer}</p>
+                        </section>
+                      ))}
+                    </div>
+                  )}
                   {section.table && (
                     <div className="decision-table" role="region" aria-label={section.table.label} tabIndex={0}>
                       <table>
@@ -106,6 +116,20 @@ export function ArticlePage({ article }: { article: ArticleRecord }) {
                   )}
                 </section>
               ))}
+
+              {article.sources.length > 0 && (
+                <section aria-labelledby="article-sources-heading">
+                  <h2 id="article-sources-heading">Sources checked for this draft</h2>
+                  <p>Official documentation supports the limited product and guidance claims listed here. It is not evidence that the planned workflow has been tested.</p>
+                  <ul>
+                    {article.sources.map((source) => (
+                      <li key={source.href}>
+                        <a href={source.href} rel="noopener noreferrer" target="_blank">{source.label}</a>
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              )}
 
               <section className="article-cta">
                 <p className="eyebrow">{article.cta.eyebrow}</p>

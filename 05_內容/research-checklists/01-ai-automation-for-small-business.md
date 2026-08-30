@@ -1,11 +1,11 @@
-# Research Checklist 01 — AI Automation for Small Business
+# Research Checklist 01 — What Should a Small Business Automate First?
 
 對應 brief：`01-ai-automation-for-small-business.md`  
-狀態：Foundation draft exists；**未發布、未完成 evidence／human review。**
+狀態：SERP/source research與production draft完成；**未發布、未完成real test／screenshots／fact check／human review。**
 
 ## Claims requiring verification
 
-- AI automation、rules-based automation 與 AI-assisted step 的定義是否準確且不誇大。
+- FIRST framework必須標示為Naveliqo editorial framework，不得稱為industry standard。
 - 哪些 small-business tasks 適合／不適合自動化；必須說明是 editorial framework，不是普遍統計。
 - 任何 time、cost、error reduction、productivity 或 market adoption claim；沒有原始證據就刪除。
 - Privacy、recording、consumer、employment 或 industry rule 的地區適用性。
@@ -13,23 +13,24 @@
 
 ## Tools requiring testing
 
-- 本篇概念文章不必推薦具名工具。
-- 若用產品畫面示範，必須先測一個 representative tool 的實際 workflow，記錄 plan、region、date、inputs、failures 與 limitations。
+- Planned stack：Google Forms、Google Sheets、Make、Gmail draft、Google Tasks。
+- 必須先取得外部account/login與OAuth scope的人工作業核准；本輪不得登入或建立帳號。
+- 實際 workflow 需記錄plan、region、date、inputs、failures與limitations。
 
 ## Pricing requiring verification
 
-- 目前不需要價格。
-- 若未來提及工具 cost、free plan 或 usage limits，發布當日從官方 pricing／billing docs 查核並記錄地區、稅與方案；不可從記憶填寫。
+- Make Free plan於2026-08-30從official pricing page查核，但draft保留`[VERIFY CURRENT PLAN]`。
+- 不宣稱整個workflow免費；發布當日仍須核對account、region、module與usage limits。
 
 ## Screenshots needed
 
-- 一張 vendor-neutral workflow map：trigger → AI-assisted step → human review → output／fallback。
-- 一張 task suitability／risk matrix，可用原創圖表。
-- Product screenshots 非必要；只有真實登入與測試後才能加入，並遮蔽敏感資訊。
+- 一張FIRST scorecard與vendor-neutral workflow map。
+- 真實Form/Sheet permissions、Make scenario、Gmail draft、Google Task、failure log與manual fallback screenshots。
+- Product screenshots只有真實登入與測試後才能加入，並遮蔽敏感資訊。
 
 ## Workflow test needed
 
-- 使用 fictional local-service enquiry 測試「submission → required-field check → category/draft → owner review」。
+- 使用 fictional lead測試「Form → Sheet → required-field filter → Gmail draft → Google Task → owner review」。
 - 測 normal、missing field、ambiguous request、angry message、sensitive data、duplicate submission 與 unsafe instruction。
 - 記錄 manual baseline、review/correction、failure handling；不能預先宣稱省下多少時間。
 
@@ -57,4 +58,5 @@
 
 ## Publication stop gate
 
-- Claim ledger、workflow test log、fact check、author ownership、legal wording 與 human publication approval 未完成前保持 `draft`。
+- Claim ledger、workflow test log、screenshots、fact check、author ownership、legal wording與human publication approval未完成前保持`draft`。
+- 任何`[TEST REQUIRED]`、`[SCREENSHOT REQUIRED]`、`[VERIFY CURRENT PLAN]`或`[SOURCE REQUIRED]`存在時，publication guard必須拒絕發布。

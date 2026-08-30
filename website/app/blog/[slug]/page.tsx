@@ -8,7 +8,7 @@ export const dynamicParams = false;
 
 export function generateStaticParams() {
   return articles
-    .filter((article) => article.slug !== 'ai-automation-for-small-business')
+    .filter((article) => article.slug !== 'what-should-small-business-automate-first')
     .map((article) => ({ slug: article.slug }));
 }
 
