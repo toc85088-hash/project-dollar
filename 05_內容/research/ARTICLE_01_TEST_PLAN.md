@@ -4,9 +4,22 @@ Article：**What Should a Small Business Automate First?**
 
 Updated：2026-08-30
 
-Status：Plan approved for editorial preparation only；**no external login、account creation、scenario build、test run or screenshot has occurred**。
+Status：Evidence completion round stopped at external login boundary；**no external login、account creation、OAuth grant、scenario build、test run or screenshot has occurred**。
 
 Safety：只使用完全 fictional、non-sensitive records；不寄信、不建立付款、不承諾價格或服務、不連接 production records。
+
+## Evidence completion round decision
+
+- Selected workflow：unchanged and still usable.
+- Official capability documentation：`VERIFIED` as limited vendor documentation.
+- Exact end-to-end workflow：`UNRESOLVED`.
+- Success case：`UNRESOLVED`.
+- Missing-reply-address failure case：`UNRESOLVED`.
+- Human fallback：`UNRESOLVED`.
+- First-hand workflow claims marked `TESTED`：**0**.
+- Stop reason：Google and Make login plus OAuth approval are required.
+
+No local mock can test Google Forms, Google Sheets, Gmail, Google Tasks, Make modules, OAuth permissions, plan eligibility or execution logs. Simulating those interfaces would not be real-world evidence.
 
 ## Selected demonstration workflow
 
@@ -42,13 +55,13 @@ This selection is an editorial recommendation, not a claim that the workflow is 
 
 ## Recommended tools and evidence status
 
-| Tool | Proposed role | Why selected | Official evidence checked | Test status |
+| Tool | Proposed role | Why selected | Capability status | Workflow test status |
 |---|---|---|---|---|
-| Google Forms | Fictional lead input | Structured fields and a visible submission point | Google documents response storage and access controls | NOT TESTED |
-| Google Sheets | Test record/source row and status log | Human-readable baseline and audit table | Google documents linked response Sheets | NOT TESTED |
-| Make | Visual trigger/filter/actions | Visual scenario is suitable for explaining each handoff | Make documents Sheets planning, Gmail draft capability and a current Free plan | NOT TESTED |
-| Gmail | Acknowledgement draft only | Draft can be reviewed before any external action | Make integration catalogue lists `Create a Draft` | NOT TESTED |
-| Google Tasks | Owner follow-up task | Keeps the final action internal and reviewable | Make integration catalogue lists task creation capability | NOT TESTED |
+| Google Forms | Fictional lead input | Structured fields and a visible submission point | VERIFIED from Google documentation | UNRESOLVED |
+| Google Sheets | Test record/source row and status log | Human-readable baseline and audit table | VERIFIED from Google documentation | UNRESOLVED |
+| Make | Visual trigger/filter/actions | Visual scenario is suitable for explaining each handoff | VERIFIED as documented scenario pattern | UNRESOLVED |
+| Gmail | Acknowledgement draft only | Draft can be reviewed before any external action | VERIFIED catalogue action | UNRESOLVED |
+| Google Tasks | Owner follow-up task | Keeps the final action internal and reviewable | VERIFIED catalogue capability | UNRESOLVED |
 
 ## Required accounts and approval boundary
 
@@ -63,9 +76,14 @@ This selection is an editorial recommendation, not a claim that the workflow is 
 
 Work stops here until the user explicitly approves the accounts, tester and permission scope. No paid plan or paid trial may be started.
 
+- Google account：new account is not necessarily required; an existing or dedicated test account must be explicitly approved.
+- Make account：new account is needed only if no approved non-paid test workspace exists.
+- Personal/business data：not required. Use fictional names, unique test IDs, reserved `.test` addresses and non-sensitive messages only.
+- Payment information：not required and must not be requested.
+
 ## Free-plan verification
 
-Make’s official pricing page displayed a Free plan on 2026-08-30 with no time limit, up to 1,000 credits per month, a visual builder, routers/filters and a 15-minute minimum scheduled interval. `[VERIFY CURRENT PLAN]`
+Make’s official pricing page displayed a Free plan on 2026-08-30 with no time limit, up to 1,000 credits per month, a visual builder, routers/filters and a 15-minute minimum scheduled interval. Documentation status：`VERIFIED`。Complete-workflow/account fit：`UNRESOLVED`。`[VERIFY CURRENT PLAN]`
 
 This does not prove the full selected workflow can be completed at no cost in the approved account, region or future publication date. Google account/workspace licensing, admin restrictions, module availability and credit usage must be checked by the human tester before the build. No price is stated in the article.
 
@@ -203,10 +221,15 @@ Redact tokens, workspace IDs, account email, cookies, billing, API keys, OAuth d
 - Plan / region：Not confirmed
 - Account approval：NO
 - External login performed：NO
+- OAuth permission granted：NO
+- Evidence-round date：2026-08-30
+- Stop reason：External Google/Make login and human approval required
 - Test date：Not run
 - Tester：Not assigned
 - Reviewer：Not assigned
 - Cases passed / failed：Not run
 - Screenshots captured：0
 - Claim Ledger updated from real test：NO
+- Workflow status：UNRESOLVED
+- Claims marked TESTED：0
 - Human publication approval：**NO**

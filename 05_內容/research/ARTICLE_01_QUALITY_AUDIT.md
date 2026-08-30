@@ -2,7 +2,7 @@
 
 Article：**What Should a Small Business Automate First?**  
 Audit date：2026-08-30  
-Version audited：Production-quality draft, not published  
+Version audited：Production-quality draft plus evidence-completion boundary review, not published
 Publication decision：**HOLD**
 
 ## Scorecard
@@ -93,6 +93,20 @@ Publication decision：**HOLD**
 8. Confirm destination internal links are published/content-ready before adding public links.
 9. Complete human legal/privacy wording review for the intended markets and workflow scope.
 10. Approve publication explicitly; until then `status: draft` and `humanApproved: false` remain unchanged.
+
+## Evidence completion round recheck
+
+Recheck date：2026-08-30
+
+- Existing Google/Make workflow selection remains coherent and was not changed.
+- Official documentation remains useful for limited capability statements.
+- The exact workflow could not be run without Google and Make login/OAuth approval.
+- No account was accessed, no paid trial was started, no data was submitted and no screenshot was captured.
+- Claims marked `TESTED`：0.
+- Unresolved marker types remain `[TEST REQUIRED]`、`[SCREENSHOT REQUIRED]` and `[VERIFY CURRENT PLAN]`.
+- Draft content was not changed because no new first-hand result supports a factual improvement.
+
+Score decision：**all scores remain unchanged**. In particular, Evidence quality remains **6/10** and Publication readiness remains **4/10**. Documentation planning alone is not a reason to raise either score.
 
 ## Final quality judgement
 

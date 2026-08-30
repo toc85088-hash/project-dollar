@@ -28,6 +28,7 @@ const requiredDocs = [
   '03_網站/STAGING_QA_CHECKLIST.md',
   '05_內容/PUBLISHING_WORKFLOW.md',
   '05_內容/research/ARTICLE_01_CLAIM_LEDGER.md',
+  '05_內容/research/ARTICLE_01_EVIDENCE_CHECKLIST.md',
   '05_內容/research/ARTICLE_01_SERP_RESEARCH.md',
   '05_內容/research/ARTICLE_01_TEST_PLAN.md',
   '05_內容/research/ARTICLE_01_QUALITY_AUDIT.md',
@@ -43,6 +44,7 @@ const requiredDocs = [
   '07_Codex/PRELAUNCH_FIX_REPORT.md',
   '07_Codex/BRAND_INTEGRATION_REPORT.md',
   '07_Codex/ARTICLE_01_RESEARCH_REPORT.md',
+  '07_Codex/ARTICLE_01_EVIDENCE_REPORT.md',
   '07_Codex/ROUND2_REPORT.md',
   '11_待辦事項/Roadmap.md',
 ];
