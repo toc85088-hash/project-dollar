@@ -2,7 +2,7 @@
 
 Article：**What Should a Small Business Automate First?**
 
-Updated：2026-08-30
+Updated：2026-08-31
 
 Article status：`draft`
 
@@ -14,7 +14,7 @@ Allowed status values for this evidence round：`VERIFIED`、`TESTED`、`UNRESOL
 
 `VERIFIED`表示列出的來源在指定日期直接支持該項有限 factual claim，或該項明確標示為 Naveliqo editorial framework/policy。`TESTED`只可用於實際執行且保留 evidence 的 exact workflow。`UNRESOLVED`表示仍需外部登入、設定、run、screenshot或human review。`REMOVE`表示目前不得出現在可發布文案中。
 
-Evidence completion round result：**0 workflow claims are `TESTED` because Google and Make login/OAuth are required and were not authorized.**
+Evidence completion round result：**0 workflow claims are `TESTED`. The approved Google test account and Make workspace now exist, but no OAuth grant, real scenario build, run or screenshot has occurred.**
 
 | Claim | Claim type | Needs source? | Official source | Independent source | First-hand test required? | Screenshot required? | Last verified date | Status | Notes |
 |---|---|---:|---|---|---:|---:|---|---|---|
@@ -22,17 +22,18 @@ Evidence completion round result：**0 workflow claims are `TESTED` because Goog
 | A zero for Reversible or Safe to review should veto a first project even when the total score is high. | Naveliqo risk rule | NO, when attributed to Naveliqo | NIST AI RMF supports risk management generally, not this exact rule | Not required | NO | NO | 2026-08-30 | VERIFIED | Verified as a conservative Naveliqo editorial policy, not a legal or universal requirement. |
 | A small business should automate one bounded handoff before attempting a broad autonomous process. | Editorial recommendation | Helpful, not mandatory if clearly framed as advice | Make beginner guidance says to start simple; NIST supports contextual risk management | SERP sources consistently favour bounded, repeatable work | YES for the demonstration | Workflow diagram | 2026-08-30 | VERIFIED | Source-supported general guidance; the selected demonstration itself remains untested. Avoid “always” or performance claims. |
 | The first useful automation may not need AI; deterministic trigger-and-action rules can handle structured handoffs. | Definition / guidance | YES | Make describes scenarios using triggers, actions, modules and filters; Zapier describes task/workflow automation | Not required | YES for selected build | YES | 2026-08-30 | VERIFIED | Verified only as a supported workflow pattern. Naveliqo has not tested the selected implementation. |
-| Google Forms responses can be stored in a linked Google Sheet. | Product functionality | YES | https://support.google.com/docs/answer/2917686?hl=en | Not required | YES | YES | 2026-08-30 | VERIFIED | Google warns that form and Sheet collaborator permissions must be managed separately. |
+| Google Forms responses can be stored in a linked Google Sheet. | Product functionality | YES | https://support.google.com/docs/answer/2917686?hl=en | Not required | YES | YES | 2026-08-31 | VERIFIED | Official documentation refreshed; Google warns that Form and Sheet collaborator permissions must be managed separately. |
 | Google Forms can notify a form owner of new responses and can send responders a copy of their response when configured. | Product functionality | YES | https://support.google.com/docs/answer/139706?hl=en | Not required | YES | YES | 2026-08-30 | VERIFIED | A response receipt is not the custom acknowledgement used in the proposed demo. Delivery can be affected by spam/counter-abuse controls. |
 | Make supports a visual scenario connected to Google Sheets and requires access/permissions for the connected apps. | Product functionality / setup | YES | https://help.make.com/step-1-plan-your-scenario | Not required | YES | YES | 2026-08-30 | VERIFIED | Capability evidence only; the account connections were not created. |
-| Make currently lists a Gmail `Create a Draft` action. | Product functionality | YES | https://www.make.com/en/integrations/make/google-email | Not required | YES | YES | 2026-08-30 | VERIFIED | Integration page evidence; the module, OAuth permissions and actual draft output still require testing. |
-| Make currently lists Google Tasks task-creation capability in its integration catalogue. | Product functionality | YES | https://www.make.com/en/integrations/google-tasks/todoist | Not required | YES | YES | 2026-08-30 | VERIFIED | Only catalogue availability is verified. Selected field mapping, permissions and reliability are untested. |
-| Make’s Free plan currently shows no time limit, up to 1,000 credits/month, a visual builder, routers/filters, and a 15-minute minimum scheduled interval. | Changing plan/limit | YES | https://www.make.com/en/pricing | Not required | YES | Screenshot of plan page before publication | 2026-08-30 | VERIFIED | Must retain `[VERIFY CURRENT PLAN]` until publication-day check. Do not imply all selected modules consume a fixed amount without verification. |
-| Make can run the exact proposed flow: new Form row → validation → Gmail draft → Google Task → status record, with no unintended external action. | End-to-end workflow | YES | Individual capabilities documented above | Not applicable until tested | YES | YES | Not tested | UNRESOLVED | External Google/Make login and OAuth are required. Do not use “works,” “reliable,” “easy,” or a step count before the controlled test. |
+| Make currently documents Google Sheets `Watch New Rows` and `Update a Row` modules. | Product functionality | YES | https://apps.make.com/google-sheets-modules | Not required | YES | YES | 2026-08-31 | VERIFIED | Documentation warns that a blank row stops later rows from being processed by `Watch New Rows`; connection, mapping and real output remain untested. |
+| Make currently lists a Gmail `Create a Draft Email` action separately from send actions. | Product functionality | YES | https://apps.make.com/gmail-modules | Not required | YES | YES | 2026-08-31 | VERIFIED | Documentation evidence only. No Gmail connection exists and no draft was created. `Send an Email` and `Send a Draft Email` are forbidden in the test scenario. |
+| Make currently lists Google Tasks `Create a Task` capability. | Product functionality | YES | https://www.make.com/en/integrations/google-tasks | Not required | YES | YES | 2026-08-31 | VERIFIED | Catalogue availability only. Current app documentation may require additional Google setup; exact connection path, scopes and field mapping are unresolved until observed. |
+| Make’s Free plan currently shows no time limit, up to 1,000 credits/month, a visual builder, routers/filters, and a 15-minute minimum scheduled interval. | Changing plan/limit | YES | https://www.make.com/en/pricing | Not required | YES | Screenshot of plan page before publication | 2026-08-31 | VERIFIED | The user says the workspace is intended to remain non-paid, but its visible account/trial state has not been inspected. Retain `[VERIFY CURRENT PLAN]`. |
+| Make can run the exact proposed flow: new Form row → validation → Gmail draft → Google Task → status record, with no unintended external action. | End-to-end workflow | YES | Individual capabilities documented above | Not applicable until tested | YES | YES | Not tested | UNRESOLVED | Accounts are prepared and the local build spec exists, but OAuth and the controlled real run remain outstanding. Do not use “works,” “reliable,” “easy,” or a step count. |
 | The workflow can prevent all external sends while still creating a reviewable acknowledgement draft. | Control / safety | YES | Gmail Create a Draft module exists | Not required | YES, including retry/failure paths | YES | Not tested | UNRESOLVED | Verify no Send module, auto-forward, retry path, or account rule can send externally. |
 | The workflow can create one and only one follow-up task per accepted fictional lead. | Reliability / idempotency | YES | Module capability source is insufficient for this claim | Not required | YES | YES | Not tested | UNRESOLVED | Test duplicates, edits, retries, timeouts and re-runs before retaining one-and-only-one wording. |
 | The selected workflow saves time, reduces errors, improves response speed, increases conversions, or earns revenue. | Outcome / performance | YES | None | A valid study would still not prove this implementation | YES | Measurement evidence | Not verified | REMOVE | Exclude until a real baseline and repeated test support a carefully bounded statement. No projected result belongs in the draft. |
-| The selected workflow is free. | Price / availability | YES | Make Free plan exists; Google account access may be available | Not required | YES | Plan/account screenshots | Not verified end to end | UNRESOLVED | Phrase only as “may be possible to test without a paid Make plan” and retain `[VERIFY CURRENT PLAN]`; no account, region, module or billing-state review occurred. |
+| The selected workflow is free. | Price / availability | YES | Make Free plan exists; the user confirmed a test account/workspace intended to remain non-paid | Not required | YES | Plan/account screenshots | Not verified end to end | UNRESOLVED | Phrase only as “may be possible to test without a paid Make plan” and retain `[VERIFY CURRENT PLAN]`; visible trial/billing state, module fit and credits have not been inspected. |
 | The proposed setup is easy for every non-technical owner. | Usability claim | YES | None | A representative usability method would be needed | YES | Session evidence | Not verified | REMOVE | Use neutral setup instructions; do not promise ease before a human beginner test. |
 | Use fictional, non-sensitive data until permissions, retention, access and failure handling have been reviewed. | Safety guidance | YES | OAIC commercial AI guidance; Canada OPC principles; NIST AI RMF/AIRC | Not required | NO | NO | 2026-08-30 | VERIFIED | Authorities support due diligence/testing and privacy risk management; applicability varies. This is not legal advice. |
 | Human oversight should be embedded when a workflow uses commercially available AI with personal information. | Government guidance summary | YES | https://www.oaic.gov.au/privacy/privacy-guidance-for-organisations-and-government-agencies/guidance-on-privacy-and-the-use-of-commercially-available-ai-products | Not required | NO | NO | 2026-08-30 | VERIFIED | This supports a general guardrail, not a finding that the demo complies with Australian law. |
@@ -48,11 +49,12 @@ Evidence completion round result：**0 workflow claims are `TESTED` because Goog
 
 | Source | Type | What it supports | Accessed |
 |---|---|---|---|
-| https://www.make.com/en/pricing | Official product/plan | Current Free-plan availability and displayed limits | 2026-08-30 |
+| https://www.make.com/en/pricing | Official product/plan | Current Free-plan availability and displayed limits | 2026-08-31 |
 | https://help.make.com/step-1-plan-your-scenario | Official help | Scenario planning, app access and permission requirements | 2026-08-30 |
-| https://www.make.com/en/integrations/make/google-email | Official integration catalogue | Gmail `Create a Draft` module availability | 2026-08-30 |
-| https://www.make.com/en/integrations/google-tasks/todoist | Official integration catalogue | Google Tasks create-task capability listing | 2026-08-30 |
-| https://support.google.com/docs/answer/2917686?hl=en | Official help | Forms-to-Sheets response storage and collaborator warning | 2026-08-30 |
+| https://apps.make.com/google-sheets-modules | Official app documentation | Google Sheets `Watch New Rows` and `Update a Row` fields and blank-row warning | 2026-08-31 |
+| https://apps.make.com/gmail-modules | Official app documentation | Gmail `Create a Draft Email` and separate send-action availability | 2026-08-31 |
+| https://www.make.com/en/integrations/google-tasks | Official integration catalogue | Google Tasks create-task capability listing | 2026-08-31 |
+| https://support.google.com/docs/answer/2917686?hl=en | Official help | Forms-to-Sheets response storage and collaborator warning | 2026-08-31 |
 | https://support.google.com/docs/answer/139706?hl=en | Official help | Response notifications, receipts and permissions | 2026-08-30 |
 | https://support.google.com/docs/answer/2839588 | Official help | Forms publishing/access and response-summary exposure warning | 2026-08-30 |
 | https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-ai-rmf-10 | US government | Scope and voluntary nature of AI RMF | 2026-08-30 |
@@ -73,6 +75,7 @@ Evidence completion round result：**0 workflow claims are `TESTED` because Goog
 ## Approval record
 
 - Research owner：Codex research pass；human owner not assigned
+- Approved test resources：Google test account and Make workspace available; OAuth not granted
 - Test owner：Not assigned
 - Fact checker：Not assigned
 - Human approver：Not assigned

@@ -29,6 +29,8 @@ const requiredDocs = [
   '05_內容/PUBLISHING_WORKFLOW.md',
   '05_內容/research/ARTICLE_01_CLAIM_LEDGER.md',
   '05_內容/research/ARTICLE_01_EVIDENCE_CHECKLIST.md',
+  '05_內容/research/ARTICLE_01_WORKFLOW_BUILD_SPEC.md',
+  '05_內容/research/ARTICLE_01_TEST_DATA.csv',
   '05_內容/research/ARTICLE_01_SERP_RESEARCH.md',
   '05_內容/research/ARTICLE_01_TEST_PLAN.md',
   '05_內容/research/ARTICLE_01_QUALITY_AUDIT.md',
@@ -45,6 +47,7 @@ const requiredDocs = [
   '07_Codex/BRAND_INTEGRATION_REPORT.md',
   '07_Codex/ARTICLE_01_RESEARCH_REPORT.md',
   '07_Codex/ARTICLE_01_EVIDENCE_REPORT.md',
+  '07_Codex/ARTICLE_01_OAUTH_BOUNDARY_REPORT.md',
   '07_Codex/ROUND2_REPORT.md',
   '11_待辦事項/Roadmap.md',
 ];
@@ -223,6 +226,28 @@ for (const relative of publicNavigationSources) {
   const body = readFileSync(join(appRoot, relative), 'utf8');
   expect(!body.includes('/blog/what-should-small-business-automate-first'), `Draft article is linked from public source: ${relative}`);
 }
+
+const workflowSpec = readFileSync(join(projectRoot, '05_內容', 'research', 'ARTICLE_01_WORKFLOW_BUILD_SPEC.md'), 'utf8');
+expect(workflowSpec.includes('NOT BUILT / NOT TESTED / OAUTH NOT GRANTED'), 'Article 1 workflow spec must retain its untested/OAuth hold state');
+expect(workflowSpec.includes('Never add Gmail `Send an Email`, `Send a Draft Email`'), 'Article 1 workflow spec is missing the no-send invariant');
+expect(workflowSpec.includes('NOT OBSERVED — must be copied from the real consent screen'), 'Article 1 workflow spec must not invent OAuth scopes');
+
+const oauthBoundaryReport = readFileSync(join(projectRoot, '07_Codex', 'ARTICLE_01_OAUTH_BOUNDARY_REPORT.md'), 'utf8');
+expect(oauthBoundaryReport.includes('NOT OBSERVED — NO PERMISSION SCREEN WAS OPENED'), 'OAuth boundary report must record that exact scopes were not observed');
+expect(oauthBoundaryReport.includes('Safe to grant OAuth now：**NO'), 'OAuth boundary report must not approve an unreviewed permission grant');
+
+const claimLedger = readFileSync(join(projectRoot, '05_內容', 'research', 'ARTICLE_01_CLAIM_LEDGER.md'), 'utf8');
+expect(!/^\|.*\|\s*TESTED\s*\|/m.test(claimLedger), 'Claim Ledger must not contain TESTED rows before a real workflow run');
+expect(claimLedger.includes('First-hand test complete：**NO**'), 'Claim Ledger must retain first-hand test hold');
+
+const testData = readFileSync(join(projectRoot, '05_內容', 'research', 'ARTICLE_01_TEST_DATA.csv'), 'utf8');
+const testDataLines = testData.trim().split(/\r?\n/);
+expect(testDataLines.length === 3, `Article 1 minimum test data must contain one header and exactly two records, found ${testDataLines.length} line(s)`);
+expect(testData.includes('NAV-A1-20260831-SUCCESS-001'), 'Article 1 success TEST ID is missing');
+expect(testData.includes('NAV-A1-20260831-FAIL-MISSING-REPLY-001'), 'Article 1 missing-reply TEST ID is missing');
+expect(testData.includes('morgan@harborlight-plumbing.test'), 'Article 1 success record must use a reserved .test reply address');
+expect(testData.includes('Riley North,,Maple Lantern'), 'Article 1 failure record must retain a blank reply address');
+expect(!/@(?:gmail|outlook|hotmail|yahoo|icloud)\./i.test(testData), 'Article 1 test data must not contain a common real email provider');
 
 const sitemapSource = readFileSync(join(appRoot, 'sitemap.ts'), 'utf8');
 expect(sitemapSource.includes('getPublishedArticles'), 'Sitemap does not use the publishable article registry');

@@ -2,9 +2,9 @@
 
 Article：**What Should a Small Business Automate First?**
 
-Created：2026-08-30
+Created：2026-08-30；continued：2026-08-31
 
-Status：**BLOCKED AT EXTERNAL LOGIN BOUNDARY**
+Status：**ACCOUNTS PREPARED / STOPPED BEFORE OAUTH PERMISSION**
 
 Selected workflow：
 
@@ -56,7 +56,7 @@ Minimum official source refresh before publication:
 
 ## 3. Free-plan availability
 
-The current Make pricing page was verified on 2026-08-30 as displaying a Free plan and published limits. That does **not** prove the selected account can run this complete workflow without a paid plan.
+The current Make pricing page was verified again on 2026-08-31 as displaying a Free plan and published limits. The user confirmed that an approved Make workspace exists and is intended to remain non-paid. That does **not** prove the selected account can run this complete workflow without a paid plan.
 
 Required before publication:
 
@@ -147,11 +147,12 @@ Current status：`UNRESOLVED`; screenshots captured：**0**.
 
 | Claim | Required source | Refresh point | Current status |
 |---|---|---|---|
-| Forms responses can be stored in a linked Sheet | Google Docs Editors Help | Before final fact check | VERIFIED 2026-08-30 |
-| Form and Sheet collaborator access must be reviewed separately | Google Docs Editors Help | Before final fact check | VERIFIED 2026-08-30 |
+| Forms responses can be stored in a linked Sheet | Google Docs Editors Help | Before final fact check | VERIFIED 2026-08-31 |
+| Form and Sheet collaborator access must be reviewed separately | Google Docs Editors Help | Before final fact check | VERIFIED 2026-08-31 |
 | Response-summary sharing can expose responses | Google Docs Editors Help | Before final fact check | VERIFIED 2026-08-30 |
-| Make lists Gmail `Create a Draft` | Make integration documentation | Before test and before publication | VERIFIED 2026-08-30 |
-| Make lists Google Tasks creation capability | Make integration documentation | Before test and before publication | VERIFIED 2026-08-30 |
+| Make lists Google Sheets `Watch New Rows` and `Update a Row` | Make app documentation | Before test and before publication | VERIFIED 2026-08-31 |
+| Make lists Gmail `Create a Draft Email` | Make app documentation | Before test and before publication | VERIFIED 2026-08-31 |
+| Make lists Google Tasks creation capability | Make integration/app documentation | Before test and before publication | VERIFIED catalogue 2026-08-31 / exact setup unresolved |
 | Make Free-plan availability and limits | Make pricing | Test day and publication-review day | VERIFIED page / UNRESOLVED account fit |
 | Risk/testing/human-oversight wording | NIST, OAIC and Canada OPC guidance | Before final legal/editorial review | VERIFIED sources / human applicability review required |
 
@@ -168,21 +169,23 @@ No external statistic is required for this article. If a statistic is later prop
 
 The official Make page indicates a Free plan that appears suitable for a small test, but complete suitability is `UNRESOLVED` until the approved account is inspected. No plan upgrade, payment method or paid trial is allowed.
 
-### Is a new account required?
+### Account preparation state
 
-- Google：not necessarily; use only an existing or dedicated test account explicitly approved by the user.
-- Make：a new account is required only if the user has no approved non-paid test workspace. Account creation needs explicit approval and must not start a paid trial.
+- Google：approved test account is available; no real data is authorized.
+- Make：approved, onboarded workspace is available and intended to remain non-paid/free.
+- Payment/trial：not authorized; the live workspace must still be checked before any run.
+- OAuth：not approved. Every new Google permission screen is a hard stop.
 
-### Exact actions after explicit approval
+### Exact actions after separate OAuth approval
 
 1. Review the visible plan and confirm no paid trial/payment path is active.
-2. Create a clearly labelled non-production Form and linked Sheet.
-3. Review Form and Sheet access separately.
-4. Connect the minimum Google permissions to a disabled Make test scenario.
-5. Configure the trigger, required-field filter, exception route, Gmail draft, Google Task and status log.
-6. Run one success case and the missing-reply-address failure case with fictional data.
-7. Disable the scenario, execute the manual fallback and capture redacted evidence.
-8. Update the ledger only from observed results.
+2. Follow `ARTICLE_01_WORKFLOW_BUILD_SPEC.md` and use only `ARTICLE_01_TEST_DATA.csv`.
+3. Create the labelled non-production Form/Sheet and review access separately.
+4. At the first Google connection, stop on the real consent screen before Continue/Allow.
+5. Copy the exact scope text, assess whether it is broader than necessary and obtain separate approval.
+6. Only after approval, configure the disabled scenario and run one success plus one missing-reply-address case with **Run once**.
+7. Confirm zero sent emails, draft-only output, task creation, status update, disabled scenario and manual fallback.
+8. Capture redacted evidence and update the ledger only from observed results.
 
 ### Data required
 
@@ -199,4 +202,4 @@ Publication remains blocked until:
 - a real author, fact checker and human approver are assigned;
 - `status: draft` and `humanApproved: false` are changed only by explicit future publication approval.
 
-Current result：**EVIDENCE INCOMPLETE / SAFE TO CONTINUE ONLY AFTER EXPLICIT LOGIN APPROVAL**.
+Current result：**EVIDENCE INCOMPLETE / ACCOUNT SETUP APPROVED / OAUTH APPROVAL STILL REQUIRED**.

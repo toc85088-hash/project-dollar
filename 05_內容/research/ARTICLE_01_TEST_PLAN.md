@@ -2,9 +2,9 @@
 
 Article：**What Should a Small Business Automate First?**
 
-Updated：2026-08-30
+Updated：2026-08-31
 
-Status：Evidence completion round stopped at external login boundary；**no external login、account creation、OAuth grant、scenario build、test run or screenshot has occurred**。
+Status：Approved test accounts/workspace are available；**OAuth remains unapproved and no scenario build、test run or screenshot has occurred**。
 
 Safety：只使用完全 fictional、non-sensitive records；不寄信、不建立付款、不承諾價格或服務、不連接 production records。
 
@@ -17,7 +17,8 @@ Safety：只使用完全 fictional、non-sensitive records；不寄信、不建�
 - Missing-reply-address failure case：`UNRESOLVED`.
 - Human fallback：`UNRESOLVED`.
 - First-hand workflow claims marked `TESTED`：**0**.
-- Stop reason：Google and Make login plus OAuth approval are required.
+- Stop reason：this session has no authenticated browser-control surface, and the first Google connection requires a separately reviewed OAuth grant.
+- Exact build configuration and two minimum fictional test records：prepared in `ARTICLE_01_WORKFLOW_BUILD_SPEC.md` and `ARTICLE_01_TEST_DATA.csv`.
 
 No local mock can test Google Forms, Google Sheets, Gmail, Google Tasks, Make modules, OAuth permissions, plan eligibility or execution logs. Simulating those interfaces would not be real-world evidence.
 
@@ -72,9 +73,11 @@ This selection is an editorial recommendation, not a claim that the workflow is 
 
 **External account/login required：YES.**
 
-**Permission to log in or create accounts in this round：NO.**
+**Approved account/workspace availability：YES, confirmed by the user on 2026-08-31.**
 
-Work stops here until the user explicitly approves the accounts, tester and permission scope. No paid plan or paid trial may be started.
+**OAuth permission approval：NO. Each new permission screen remains a hard stop.**
+
+The Google test account and Make workspace have been prepared by the human user and are approved for this fictional test. The Make workspace is intended to remain on its non-paid/free plan. This does not approve any OAuth scope, paid feature, trial or payment path.
 
 - Google account：new account is not necessarily required; an existing or dedicated test account must be explicitly approved.
 - Make account：new account is needed only if no approved non-paid test workspace exists.
@@ -83,7 +86,7 @@ Work stops here until the user explicitly approves the accounts, tester and perm
 
 ## Free-plan verification
 
-Make’s official pricing page displayed a Free plan on 2026-08-30 with no time limit, up to 1,000 credits per month, a visual builder, routers/filters and a 15-minute minimum scheduled interval. Documentation status：`VERIFIED`。Complete-workflow/account fit：`UNRESOLVED`。`[VERIFY CURRENT PLAN]`
+Make’s official pricing page displayed a Free plan on 2026-08-31 with no time limit, up to 1,000 credits per month, a visual builder, routers/filters and a 15-minute minimum scheduled interval. Documentation status：`VERIFIED`。Complete-workflow/account fit：`UNRESOLVED` until the approved workspace state and modules are observed。`[VERIFY CURRENT PLAN]`
 
 This does not prove the full selected workflow can be completed at no cost in the approved account, region or future publication date. Google account/workspace licensing, admin restrictions, module availability and credit usage must be checked by the human tester before the build. No price is stated in the article.
 
@@ -126,22 +129,14 @@ These project checks do not test Make, Google Forms, Gmail, Google Tasks, OAuth,
 
 ## Fictional test data
 
-Use at least 14 records. Names and companies must be unmistakably fictional. Email addresses must use the reserved `.test` top-level domain, for example `alex@northstar-repairs.test`; never use a real inbox or `test@example.com`.
+The minimum evidence round uses exactly the two prepared records in `ARTICLE_01_TEST_DATA.csv`:
 
-1. Complete routine enquiry.
-2. Missing name.
-3. Missing reply address.
-4. Missing requested service.
-5. Ambiguous request.
-6. Complaint/angry message.
-7. Refund, discount or price request.
-8. Text that resembles sensitive personal information but is entirely fictional.
-9. Prompt-injection style instruction inside the message.
-10. Duplicate submission with the same synthetic identifier.
-11. Edited Sheet row after initial processing.
-12. Unsupported or high-stakes request.
-13. Simulated downstream permission failure or revoked connection.
-14. Simulated timeout/retry after partial completion.
+1. `NAV-A1-20260831-SUCCESS-001` — complete fictional enquiry using a reserved `.test` reply address; expected normal route.
+2. `NAV-A1-20260831-FAIL-MISSING-REPLY-001` — blank reply address; expected exception/manual-review route and no Gmail draft.
+
+Names and companies are unmistakably fictional. No real inbox, `test@example.com`, customer record or sensitive data is permitted.
+
+An expanded reliability round may later cover missing name/service, ambiguous/high-stakes content, duplicates, edits, retries and partial downstream failures. Those cases are **not** part of the minimum evidence completion and remain necessary before any one-and-only-one, retry-safety, broader exception-handling or production-reliability claim.
 
 ## Test steps
 
@@ -152,10 +147,10 @@ Use at least 14 records. Names and companies must be unmistakably fictional. Ema
 5. Run one complete fictional case while supervised. `[TEST REQUIRED]`
 6. Verify the source row, filter result, Gmail draft, Google Task and status row against expected values.
 7. Confirm zero external messages were sent.
-8. Run each missing, ambiguous, complaint, price, sensitive-looking and high-stakes case; verify it stops or routes to manual handling.
-9. Run duplicate/edit/retry/partial-failure cases; record all actual results, including unwanted duplicates.
-10. Disable the scenario and complete one case with the manual fallback.
-11. Measure manual baseline time and post-build preparation, review, correction, failure handling and maintenance time without setting a desired result in advance.
+8. Run the prepared missing-reply-address case; verify it routes to manual handling with no Gmail draft.
+9. Confirm Gmail Sent contains no item for either unique test ID and the success item exists only in Drafts.
+10. Disable the scenario and complete the failure case with the manual fallback.
+11. Capture the required redacted evidence without claiming unrun duplicate/retry behavior.
 12. Export a redacted test log and have a second human review claims against evidence.
 
 ## Success conditions
@@ -219,11 +214,13 @@ Redact tokens, workspace IDs, account email, cookies, billing, API keys, OAuth d
 
 - Tool(s)：Google Forms、Google Sheets、Make、Gmail、Google Tasks (planned only)
 - Plan / region：Not confirmed
-- Account approval：NO
+- Account/workspace availability approval：YES — user confirmed 2026-08-31
 - External login performed：NO
 - OAuth permission granted：NO
-- Evidence-round date：2026-08-30
-- Stop reason：External Google/Make login and human approval required
+- Evidence-round date：2026-08-31
+- Exact workflow specification：PREPARED LOCALLY
+- Minimum fictional test records：2 PREPARED LOCALLY
+- Stop reason：Authenticated browser control unavailable in this session; exact OAuth screen not observed and permission grant not approved
 - Test date：Not run
 - Tester：Not assigned
 - Reviewer：Not assigned
