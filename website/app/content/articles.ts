@@ -1,4 +1,6 @@
 import editorialMarkerConfig from './editorial-markers.json';
+import { launchArticleRecords } from './launch-articles';
+import { siteConfig } from '../site-config';
 
 export type ArticleStatus = 'draft' | 'needs_review' | 'published' | 'needs_update';
 
@@ -21,9 +23,11 @@ export type ArticleSection = {
 
 export type ArticleRecord = {
   slug: string;
+  path: string;
   status: ArticleStatus;
   humanApproved: boolean;
   evidenceComplete: boolean;
+  screenshotsRequired: boolean;
   screenshotsComplete: boolean;
   category: string;
   categoryHref: string;
@@ -34,7 +38,9 @@ export type ArticleRecord = {
   updatedAt: string;
   publishedAt?: string;
   author: { name: string; type: 'Person' | 'Organization' };
-  sources: Array<{ label: string; href: string }>;
+  evidenceNote: string;
+  sources: Array<{ label: string; href: string; verifiedOn: string }>;
+  relatedArticleSlugs: string[];
   sections: ArticleSection[];
   aside: { eyebrow: string; heading: string; bullets: string[]; linkLabel: string };
   cta: { eyebrow: string; heading: string; text: string; links: Array<{ label: string; href: string; primary?: boolean }> };
@@ -45,9 +51,11 @@ export const editorialMarkers = editorialMarkerConfig.markers;
 const articleRecords: ArticleRecord[] = [
   {
     slug: 'what-should-small-business-automate-first',
+    path: '/blog/what-should-small-business-automate-first',
     status: 'draft',
     humanApproved: false,
     evidenceComplete: false,
+    screenshotsRequired: true,
     screenshotsComplete: false,
     category: 'BEGINNER GUIDE',
     categoryHref: '/ai-automation',
@@ -57,17 +65,19 @@ const articleRecords: ArticleRecord[] = [
     createdAt: '2026-08-24',
     updatedAt: '2026-08-30',
     author: { name: 'Editorial owner not assigned', type: 'Organization' },
+    evidenceNote: 'This draft contains a planned product demonstration. It cannot be published until the real workflow, failure path, no-send control, screenshots, and human review are complete.',
+    relatedArticleSlugs: [],
     sources: [
-      { label: 'Google: choose where to save form responses', href: 'https://support.google.com/docs/answer/2917686?hl=en' },
-      { label: 'Google: view and manage form responses', href: 'https://support.google.com/docs/answer/139706?hl=en' },
-      { label: 'Google: publish and share a form', href: 'https://support.google.com/docs/answer/2839588' },
-      { label: 'Make: pricing and plan details', href: 'https://www.make.com/en/pricing' },
-      { label: 'Make: plan your first scenario', href: 'https://help.make.com/step-1-plan-your-scenario' },
-      { label: 'Make: Gmail integration actions', href: 'https://www.make.com/en/integrations/make/google-email' },
-      { label: 'NIST AI Risk Management Framework 1.0', href: 'https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-ai-rmf-10' },
-      { label: 'NIST AI Resource Center', href: 'https://airc.nist.gov/' },
-      { label: 'Office of the Australian Information Commissioner: commercial AI privacy guidance', href: 'https://www.oaic.gov.au/privacy/privacy-guidance-for-organisations-and-government-agencies/guidance-on-privacy-and-the-use-of-commercially-available-ai-products' },
-      { label: 'Office of the Privacy Commissioner of Canada: generative AI privacy principles', href: 'https://www.priv.gc.ca/en/privacy-topics/technology/artificial-intelligence/gd_principles_ai' },
+      { label: 'Google: choose where to save form responses', href: 'https://support.google.com/docs/answer/2917686?hl=en', verifiedOn: '2026-08-31' },
+      { label: 'Google: view and manage form responses', href: 'https://support.google.com/docs/answer/139706?hl=en', verifiedOn: '2026-08-30' },
+      { label: 'Google: publish and share a form', href: 'https://support.google.com/docs/answer/2839588', verifiedOn: '2026-08-30' },
+      { label: 'Make: pricing and plan details', href: 'https://www.make.com/en/pricing', verifiedOn: '2026-08-31' },
+      { label: 'Make: plan your first scenario', href: 'https://help.make.com/step-1-plan-your-scenario', verifiedOn: '2026-08-30' },
+      { label: 'Make: Gmail modules', href: 'https://apps.make.com/gmail-modules', verifiedOn: '2026-08-31' },
+      { label: 'NIST AI Risk Management Framework 1.0', href: 'https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-ai-rmf-10', verifiedOn: '2026-08-30' },
+      { label: 'NIST AI Resource Center', href: 'https://airc.nist.gov/', verifiedOn: '2026-08-30' },
+      { label: 'Office of the Australian Information Commissioner: commercial AI privacy guidance', href: 'https://www.oaic.gov.au/privacy/privacy-guidance-for-organisations-and-government-agencies/guidance-on-privacy-and-the-use-of-commercially-available-ai-products', verifiedOn: '2026-08-30' },
+      { label: 'Office of the Privacy Commissioner of Canada: generative AI privacy principles', href: 'https://www.priv.gc.ca/en/privacy-topics/technology/artificial-intelligence/gd_principles_ai', verifiedOn: '2026-08-30' },
     ],
     sections: [
       {
@@ -243,12 +253,17 @@ const articleRecords: ArticleRecord[] = [
       ],
     },
   },
+  ...launchArticleRecords,
 ];
 
 export const articles = articleRecords;
 
 export function getArticle(slug: string) {
   return articleRecords.find((article) => article.slug === slug);
+}
+
+export function getArticleByPath(path: string) {
+  return articleRecords.find((article) => article.path === path);
 }
 
 export function getUnresolvedEditorialMarkers(article: ArticleRecord) {
@@ -261,7 +276,7 @@ export function isPublishable(article: ArticleRecord) {
     article.status === 'published' &&
       article.humanApproved &&
       article.evidenceComplete &&
-      article.screenshotsComplete &&
+      (!article.screenshotsRequired || article.screenshotsComplete) &&
       getUnresolvedEditorialMarkers(article).length === 0 &&
       article.author.name !== 'Editorial owner not assigned' &&
       article.publishedAt,
@@ -269,7 +284,11 @@ export function isPublishable(article: ArticleRecord) {
 }
 
 export function getPublishedArticles() {
-  return articleRecords.filter(isPublishable);
+  return articleRecords.filter(isPubliclyAvailable);
+}
+
+export function isPubliclyAvailable(article: ArticleRecord) {
+  return siteConfig.isLaunchReady && isPublishable(article);
 }
 
 export function canPreviewDrafts() {

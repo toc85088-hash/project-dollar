@@ -43,8 +43,11 @@ Article records live in `app/content/articles.ts` and use one shared semantic re
 2. `humanApproved` and `evidenceComplete` are true.
 3. A real author owner and publication date are assigned.
 4. Metadata, Article schema, topic-hub links, and the sitemap are then generated from the same record.
+5. The global site launch gate must also pass before the article route becomes publicly available.
 
-The foundation article remains a draft. It has no public navigation link, canonical, Article schema, publication date, or sitemap entry. Future article bodies can be added to the registry; move to validated Markdown/MDX before the volume makes typed records cumbersome.
+The foundation article remains a draft. It has no public navigation link, canonical, Article schema, publication date, or sitemap entry. Seven vendor-neutral launch candidates are stored as `needs_review` records with current primary-source dates and honest evidence boundaries. They remain unavailable until a person approves each record and adds a publication date. Move to validated Markdown/MDX before the volume makes typed records cumbersome.
+
+Workflows, Tutorials, AI Automation, and Blog automatically list only records that pass the centralized publication gate. Review candidates never appear in those lists.
 
 The full editorial process is documented in `../05_內容/PUBLISHING_WORKFLOW.md`.
 
@@ -62,7 +65,7 @@ Until then, global metadata uses `noindex`, `robots.txt` disallows crawling, the
 
 ## Remaining human blockers
 
-- Public inbox, author identities, final logo/favicon/OG approval, legal/privacy text, and consent choices.
+- Public inbox, responsible publication owner, any named author/reviewer identities, final logo/favicon/OG approval, legal/privacy text, and consent choices.
 - Real research, reproducible workflow/tool testing, screenshots, fact check, and article approval.
 - Google property creation, ownership verification, tag installation approval, and AdSense application.
 - Domain ownership/renewal confirmation, hosting, DNS, HTTPS, production environment, backups, rollback, and final launch review.

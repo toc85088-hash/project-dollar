@@ -1,5 +1,5 @@
 import type { ArticleRecord } from '../content/articles';
-import { isPublishable } from '../content/articles';
+import { getArticle, getUnresolvedEditorialMarkers, isPubliclyAvailable } from '../content/articles';
 import { siteConfig } from '../site-config';
 import { Breadcrumbs, Footer, Header } from './site-shell';
 import { SiteLink as Link } from './site-link';
@@ -14,11 +14,30 @@ function displayDate(value: string) {
 }
 
 export function ArticlePage({ article }: { article: ArticleRecord }) {
-  const published = isPublishable(article);
-  const articlePath = `/blog/${article.slug}`;
+  const published = isPubliclyAvailable(article);
+  const articlePath = article.path;
+  const pendingRequirements = [
+    article.status !== 'published' ? 'publication status' : null,
+    !article.humanApproved ? 'human approval' : null,
+    !article.evidenceComplete ? 'evidence' : null,
+    article.screenshotsRequired && !article.screenshotsComplete ? 'required screenshots' : null,
+    article.author.name === 'Editorial owner not assigned' ? 'editorial ownership' : null,
+    !article.publishedAt ? 'publication date' : null,
+    getUnresolvedEditorialMarkers(article).length > 0 ? 'editorial markers' : null,
+    !siteConfig.isLaunchReady ? 'site launch approval' : null,
+  ].filter((requirement): requirement is string => Boolean(requirement));
+  const categoryLabel = article.categoryHref
+    .split('/')
+    .filter(Boolean)
+    .map((part) => part.replaceAll('-', ' '))
+    .join(' ')
+    .replace(/^\w/, (letter) => letter.toUpperCase());
+  const relatedArticles = article.relatedArticleSlugs
+    .map((slug) => getArticle(slug))
+    .filter((related): related is ArticleRecord => Boolean(related && isPubliclyAvailable(related)));
   const breadcrumbItems = [
     { label: 'Home', href: '/' },
-    { label: 'Blog', href: '/blog' },
+    { label: categoryLabel, href: article.categoryHref },
     { label: article.title },
   ];
 
@@ -42,7 +61,7 @@ export function ArticlePage({ article }: { article: ArticleRecord }) {
         '@type': 'BreadcrumbList',
         itemListElement: [
           { '@type': 'ListItem', position: 1, name: 'Home', item: `${siteConfig.url}/` },
-          { '@type': 'ListItem', position: 2, name: 'Blog', item: `${siteConfig.url}/blog` },
+          { '@type': 'ListItem', position: 2, name: categoryLabel, item: `${siteConfig.url}${article.categoryHref}` },
           { '@type': 'ListItem', position: 3, name: article.title, item: `${siteConfig.url}${articlePath}` },
         ],
       }
@@ -56,7 +75,8 @@ export function ArticlePage({ article }: { article: ArticleRecord }) {
           <Breadcrumbs items={breadcrumbItems} />
           {!published && (
             <div className="draft-banner" role="status">
-              <strong>Editorial preview — not published.</strong> Claims, evidence, screenshots, author ownership, and human approval are incomplete.
+              <strong>Editorial preview — not published.</strong>{' '}
+              Pending: {pendingRequirements.join(', ')}.
             </div>
           )}
           <header className="article-header">
@@ -89,7 +109,12 @@ export function ArticlePage({ article }: { article: ArticleRecord }) {
                   {section.bullets && <ul>{section.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}</ul>}
                   {section.steps && (
                     <ol className="steps">
-                      {section.steps.map((step) => <li key={step.title}><strong>{step.title}</strong> {step.text}</li>)}
+                      {section.steps.map((step, index) => (
+                        <li key={step.title}>
+                          <span className="step-number" aria-hidden="true">{index + 1}</span>
+                          <span><strong>{step.title}</strong> {step.text}</span>
+                        </li>
+                      ))}
                     </ol>
                   )}
                   {section.faqs && (
@@ -119,15 +144,31 @@ export function ArticlePage({ article }: { article: ArticleRecord }) {
 
               {article.sources.length > 0 && (
                 <section aria-labelledby="article-sources-heading">
-                  <h2 id="article-sources-heading">Sources checked for this draft</h2>
-                  <p>Official documentation supports the limited product and guidance claims listed here. It is not evidence that the planned workflow has been tested.</p>
+                  <h2 id="article-sources-heading">Sources and evidence boundary</h2>
+                  <p>{article.evidenceNote}</p>
                   <ul>
                     {article.sources.map((source) => (
                       <li key={source.href}>
-                        <a href={source.href} rel="noopener noreferrer" target="_blank">{source.label}</a>
+                        <a href={source.href} rel="noopener noreferrer" target="_blank">{source.label}</a>{' '}
+                        <span className="source-date">(checked {displayDate(source.verifiedOn)})</span>
                       </li>
                     ))}
                   </ul>
+                </section>
+              )}
+
+              {relatedArticles.length > 0 && (
+                <section aria-labelledby="related-articles-heading">
+                  <p className="eyebrow">RELATED GUIDES</p>
+                  <h2 id="related-articles-heading">Continue with a connected workflow.</h2>
+                  <div className="article-related-grid">
+                    {relatedArticles.map((related) => (
+                      <Link key={related.path} className="article-related-card" href={related.path}>
+                        <strong>{related.title}</strong>
+                        <span>{related.description}</span>
+                      </Link>
+                    ))}
+                  </div>
                 </section>
               )}
 

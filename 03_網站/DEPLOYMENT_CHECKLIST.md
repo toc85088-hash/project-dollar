@@ -1,6 +1,6 @@
 # Deployment Checklist
 
-更新日期：2026-08-29
+更新日期：2026-09-17
 
 狀態：**準備中；本輪禁止正式部署、購買網域、登入 hosting 或修改 DNS。**
 
@@ -41,8 +41,10 @@
 
 ## 5. Build and release — PASS LOCALLY / NEEDS STAGING
 
-- [x] `pnpm lint` 本機成功（2026-08-24）。
-- [x] `pnpm build` 本機成功（2026-08-24）。
+- [x] `pnpm lint` 本機成功（2026-09-17）。
+- [x] TypeScript strict 本機成功（2026-09-17）。
+- [x] `pnpm build` 本機成功（2026-09-17）。
+- [x] Production route／link／robots／sitemap／draft-isolation tests 成功（2026-09-17）。
 - [ ] 在乾淨 CI/staging 以 lockfile 安裝並重跑 lint/build/test。
 - [ ] Review build log、bundle、server/runtime compatibility 與 dependency scripts policy。
 - [ ] 產生 immutable release identifier，保存前一個可回復 artifact。
@@ -57,13 +59,16 @@
 - [ ] 確認 launch sitemap 只含 200、indexable、approved URLs，且 robots 宣告同一 sitemap。
 - [ ] 用 validator 與 Search Console 檢查 schema／sitemap；不得在 domain 未確認時開 gate。
 
-## 7. Content and trust — BLOCKED
+## 7. Content and trust — BLOCKED BY HUMAN APPROVAL
 
-- [ ] 至少一批原創、完整、已研究與人工核准的 articles；目前 0 published。
-- [ ] About author/editor responsibility、corrections、ownership 與 real contact channel 完成。
+- [x] 七篇原創、vendor-neutral launch candidates 已完成 primary-source 查核與 evidence boundary；目前皆為 `needs_review`，0 published。
+- [x] About 與新增 Editorial Policy 說明 organisational byline、sources、testing、AI assistance、corrections 與 commercial independence。
+- [ ] 七篇逐篇完成 human fact check／editor approval，設定 publication owner 與日期後才可發布。
+- [ ] About／Contact 的真實 publication owner 與 public inbox 完成。
 - [ ] Privacy、Terms、Affiliate Disclosure 依 final stack／markets 人工及必要的專業審查。
 - [ ] 沒有 placeholder page、fake review、fake test、fake price、copied content 或 broken link。
-- [ ] 404、navigation、mobile、keyboard、screen reader、contrast 與 major browser 人工 QA。
+- [x] Codex local QA 已檢查 desktop、360px、768px、mobile menu、keyboard focus、article overflow、Editorial Policy 與 404；發現並修復 article table 引起的 page-level overflow。
+- [ ] 真人完成 major browser、真實裝置、screen reader、zoom、contrast 與品牌視覺 QA。
 
 ## 8. Search Console and analytics — BLOCKED
 

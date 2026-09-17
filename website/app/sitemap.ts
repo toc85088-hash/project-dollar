@@ -7,13 +7,29 @@ import { siteConfig } from './site-config';
 export default function sitemap(): MetadataRoute.Sitemap {
   if (!siteConfig.isLaunchReady) return [];
 
-  const articleRoutes = getPublishedArticles().map((article) => `blog/${article.slug}`);
-  const standardRoutes = Object.keys(pageContent).filter((slug) => isStandardRouteIndexable(slug, siteConfig.isLaunchReady));
-  const staticRoutes = ['', ...standardRoutes, ...articleRoutes];
-  return staticRoutes.map((route) => ({
-    url: `${siteConfig.url}/${route}`,
-    lastModified: new Date('2026-08-24T00:00:00+08:00'),
-    changeFrequency: route === '' ? 'weekly' : 'monthly',
-    priority: route === '' ? 1 : route.startsWith('blog/') ? 0.8 : 0.7,
+  const standardRoutes: MetadataRoute.Sitemap = Object.entries(pageContent)
+    .filter(([slug]) => isStandardRouteIndexable(slug, siteConfig.isLaunchReady))
+    .map(([slug, page]) => ({
+      url: `${siteConfig.url}/${slug}`,
+      lastModified: new Date(`${page.updatedAt ?? '2026-09-17'}T00:00:00Z`),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    }));
+  const articleRoutes: MetadataRoute.Sitemap = getPublishedArticles().map((article) => ({
+    url: `${siteConfig.url}${article.path}`,
+    lastModified: new Date(`${article.updatedAt}T00:00:00Z`),
+    changeFrequency: 'monthly',
+    priority: 0.8,
   }));
+
+  return [
+    {
+      url: `${siteConfig.url}/`,
+      lastModified: new Date('2026-09-17T00:00:00Z'),
+      changeFrequency: 'weekly',
+      priority: 1,
+    },
+    ...standardRoutes,
+    ...articleRoutes,
+  ];
 }

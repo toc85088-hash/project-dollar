@@ -1,13 +1,13 @@
 # AdSense Readiness Checklist
 
-更新日期：2026-08-24
+更新日期：2026-09-17
 狀態：**NOT READY — 不申請、不登入 Google、不安裝 AdSense code**
 
 狀態標記：`[x]` prototype／文件已具備、`[ ]` 未完成或需人工確認。完成文件不等於通過 Google 審核。
 
 ## Content Quality
 
-- [ ] Original useful content — briefs 已建立，但尚無足量人工完成文章
+- [ ] Original useful content — 七篇原創launch candidates已完成研究並等待人工審閱；目前仍0 published，不能視為public content inventory
 - [x] No copied content — prototype 與專案文件為原創；正式文章仍需逐篇查核
 - [x] No fake reviews — 編輯規範禁止；目前未發布 reviews
 - [x] No prohibited content — prototype 未含禁止內容；正式全站需再審
@@ -23,8 +23,8 @@
 - [x] Privacy Policy — prototype draft；**需法律／隱私人工審閱**
 - [x] Terms — prototype draft；**需法律人工審閱**
 - [x] Affiliate Disclosure — prototype draft；正式 program 加入後需更新
-- [ ] No placeholder pages — 正式上線前逐頁檢查；暫用品牌與 email 尚未替換
-- [ ] No broken links — final build 後以自動檢查及人工點擊確認
+- [ ] No thin／unfinished indexable pages — centralized Hub gates全部仍為`contentReady=false`，人工發布內容後才可逐一開啟
+- [x] No broken local links — 2026-09-17 production route crawler通過14個public routes／14個unique internal links；部署後仍需production crawl
 
 ## Technical Readiness
 

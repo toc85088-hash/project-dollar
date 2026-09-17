@@ -1,6 +1,6 @@
 export type HubIndexingPolicy = {
   contentReady: boolean;
-  currentStatus: 'foundation_draft' | 'method_only' | 'roadmap_only' | 'empty_publication';
+  currentStatus: 'foundation_draft' | 'method_only' | 'roadmap_only' | 'empty_publication' | 'review_queue';
   reason: string;
   humanActionRequired: string;
 };
@@ -14,9 +14,9 @@ export const hubIndexingPolicies = {
   },
   workflows: {
     contentReady: false,
-    currentStatus: 'roadmap_only',
-    reason: 'The route describes the planned workflow cluster; no tested workflow articles are published.',
-    humanActionRequired: 'Publish and review useful workflow content, then approve the hub as a standalone reader resource.',
+    currentStatus: 'review_queue',
+    reason: 'Six substantive workflow guides are in editorial review, but none has final human approval or a publication date.',
+    humanActionRequired: 'Approve the workflow guides, publish only the accepted records, review the hub with its live links, then change contentReady.',
   },
   'ai-tools': {
     contentReady: false,
@@ -26,9 +26,9 @@ export const hubIndexingPolicies = {
   },
   tutorials: {
     contentReady: false,
-    currentStatus: 'method_only',
-    reason: 'The route describes the tutorial standard; no verified tutorials are published.',
-    humanActionRequired: 'Publish at least one complete tested tutorial and approve the hub copy.',
+    currentStatus: 'review_queue',
+    reason: 'One vendor-neutral task-automation tutorial is in editorial review; no tutorial is publicly publishable yet.',
+    humanActionRequired: 'Approve and publish the tutorial, review the hub with its live article card, then change contentReady.',
   },
   comparisons: {
     contentReady: false,
@@ -44,9 +44,9 @@ export const hubIndexingPolicies = {
   },
   blog: {
     contentReady: false,
-    currentStatus: 'empty_publication',
-    reason: 'The editorial queue has briefs and drafts, but zero publishable articles.',
-    humanActionRequired: 'Publish approved original articles and review the Blog landing page before changing contentReady.',
+    currentStatus: 'review_queue',
+    reason: 'Seven evidence-bounded launch guides await human approval; the public article count remains zero.',
+    humanActionRequired: 'Approve and publish the accepted articles, verify the generated guide list, then change contentReady.',
   },
 } as const satisfies Record<string, HubIndexingPolicy>;
 

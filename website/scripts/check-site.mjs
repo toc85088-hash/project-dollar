@@ -9,13 +9,23 @@ const publicRoutes = [
   '/templates',
   '/blog',
   '/about',
+  '/editorial-policy',
   '/contact',
   '/privacy-policy',
   '/terms',
   '/affiliate-disclosure',
 ];
-const draftRoute = '/blog/what-should-small-business-automate-first';
-const retiredDraftRoute = '/blog/ai-automation-for-small-business';
+const unavailableArticleRoutes = [
+  '/blog/what-should-small-business-automate-first',
+  '/blog/ai-automation-for-small-business',
+  '/tutorials/automate-repetitive-tasks-small-business',
+  '/workflows/small-business-automation-ideas',
+  '/workflows/ai-email-automation-small-business',
+  '/workflows/ai-customer-service-small-business',
+  '/workflows/ai-lead-follow-up-automation',
+  '/workflows/ai-meeting-notes-small-business',
+  '/workflows/ai-automation-mistakes-small-businesses-make',
+];
 const approvedBrand = 'Naveliqo';
 const approvedOrigin = 'https://naveliqo.com';
 const approvedPositioning = 'Simple AI Automation for Small Business';
@@ -74,18 +84,19 @@ for (const route of publicRoutes) {
   }
 }
 
-expect(!discoveredLinks.has(draftRoute), 'An unpublished draft is linked from a public page');
+for (const route of unavailableArticleRoutes) {
+  expect(!discoveredLinks.has(route), `Unpublished article ${route} is linked from a public page`);
+}
 
 for (const href of [...discoveredLinks].sort()) {
   const response = await fetch(new URL(href, baseUrl), { redirect: 'manual' });
   expect(response.status >= 200 && response.status < 400, `Internal link ${href} returned ${response.status}`);
 }
 
-const draft = await fetch(new URL(draftRoute, baseUrl));
-expect(draft.status === 404, `Draft route must return 404 with SHOW_DRAFTS disabled, received ${draft.status}`);
-
-const retiredDraft = await fetch(new URL(retiredDraftRoute, baseUrl));
-expect(retiredDraft.status === 404, `Retired draft route must remain unavailable, received ${retiredDraft.status}`);
+for (const route of unavailableArticleRoutes) {
+  const response = await fetch(new URL(route, baseUrl));
+  expect(response.status === 404, `Unpublished article ${route} must return 404 with SHOW_DRAFTS disabled, received ${response.status}`);
+}
 
 const missing = await fetch(new URL('/this-page-should-not-exist', baseUrl));
 expect(missing.status === 404, `Unknown route should return 404, received ${missing.status}`);
@@ -103,4 +114,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log(`Site checks passed: ${publicRoutes.length} public routes, ${discoveredLinks.size} unique internal links, hub noindex/canonical/schema gates, draft isolation, robots, empty sitemap, and 404.`);
+console.log(`Site checks passed: ${publicRoutes.length} public routes, ${discoveredLinks.size} unique internal links, hub noindex/canonical/schema gates, ${unavailableArticleRoutes.length} isolated article routes, robots, empty sitemap, and 404.`);

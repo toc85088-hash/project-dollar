@@ -34,6 +34,7 @@ const requiredDocs = [
   '05_內容/research/ARTICLE_01_SERP_RESEARCH.md',
   '05_內容/research/ARTICLE_01_TEST_PLAN.md',
   '05_內容/research/ARTICLE_01_QUALITY_AUDIT.md',
+  '05_內容/research/LAUNCH_CONTENT_SOURCE_REGISTER.md',
   '05_內容/drafts/ARTICLE_01_DRAFT.md',
   '06_收入/AFFILIATE_IMPLEMENTATION.md',
   '06_收入/DIGITAL_PRODUCT_ROADMAP.md',
@@ -48,6 +49,7 @@ const requiredDocs = [
   '07_Codex/ARTICLE_01_RESEARCH_REPORT.md',
   '07_Codex/ARTICLE_01_EVIDENCE_REPORT.md',
   '07_Codex/ARTICLE_01_OAUTH_BOUNDARY_REPORT.md',
+  '07_Codex/NAVELIQO_LAUNCH_READINESS_REPORT.md',
   '07_Codex/ROUND2_REPORT.md',
   '11_待辦事項/Roadmap.md',
 ];
@@ -62,7 +64,7 @@ const briefDirectory = join(projectRoot, '05_內容', 'briefs');
 const briefs = existsSync(briefDirectory)
   ? readdirSync(briefDirectory).filter((name) => /^\d{2}-.*\.md$/.test(name)).sort()
   : [];
-expect(briefs.length === 10, `Expected 10 content briefs, found ${briefs.length}`);
+expect(briefs.length === 11, `Expected 11 content briefs, found ${briefs.length}`);
 
 const briefHeadings = [
   '## Primary keyword',
@@ -94,7 +96,7 @@ const researchDirectory = join(projectRoot, '05_內容', 'research-checklists');
 const researchChecklists = existsSync(researchDirectory)
   ? readdirSync(researchDirectory).filter((name) => /^\d{2}-.*\.md$/.test(name)).sort()
   : [];
-expect(researchChecklists.length === 10, `Expected 10 research checklists, found ${researchChecklists.length}`);
+expect(researchChecklists.length === 11, `Expected 11 research checklists, found ${researchChecklists.length}`);
 
 const checklistHeadings = [
   '## Claims requiring verification',
@@ -204,10 +206,54 @@ if (existsSync(articleRegistryPath)) {
   for (const status of ["'draft'", "'needs_review'", "'published'", "'needs_update'"]) {
     expect(articleRegistry.includes(status), `Article registry is missing status ${status}`);
   }
-  for (const gate of ['humanApproved', 'evidenceComplete', 'screenshotsComplete', 'publishedAt', 'isPublishable', 'getUnresolvedEditorialMarkers']) {
+  for (const gate of ['humanApproved', 'evidenceComplete', 'screenshotsComplete', 'publishedAt', 'isPublishable', 'isPubliclyAvailable', 'getUnresolvedEditorialMarkers']) {
     expect(articleRegistry.includes(gate), `Article registry is missing publication gate ${gate}`);
   }
   expect(/status:\s*'draft'/.test(articleRegistry), 'Foundation article must remain a draft until human approval');
+  expect(/evidenceComplete:\s*false/.test(articleRegistry), 'Foundation article evidence must remain incomplete until the real workflow test');
+  expect(/screenshotsRequired:\s*true/.test(articleRegistry), 'Foundation article must retain its real-screenshot requirement');
+  expect(/siteConfig\.isLaunchReady\s*&&\s*isPublishable\(article\)/.test(articleRegistry), 'Public article availability must require the global launch gate');
+}
+
+const launchArticlePath = join(appRoot, 'content', 'launch-articles.ts');
+expect(existsSync(launchArticlePath), 'Missing launch article review registry');
+if (existsSync(launchArticlePath)) {
+  const launchArticles = readFileSync(launchArticlePath, 'utf8');
+  const expectedLaunchSlugs = [
+    'automate-repetitive-tasks-small-business',
+    'small-business-automation-ideas',
+    'ai-email-automation-small-business',
+    'ai-customer-service-small-business',
+    'ai-lead-follow-up-automation',
+    'ai-meeting-notes-small-business',
+    'ai-automation-mistakes-small-businesses-make',
+  ];
+  for (const slug of expectedLaunchSlugs) {
+    expect(launchArticles.includes(`slug: '${slug}'`), `Launch article registry is missing ${slug}`);
+  }
+  expect((launchArticles.match(/status:\s*'needs_review'/g) ?? []).length === 7, 'All seven launch candidates must remain needs_review');
+  expect((launchArticles.match(/humanApproved:\s*false/g) ?? []).length === 7, 'All seven launch candidates must await human approval');
+  expect((launchArticles.match(/evidenceComplete:\s*true/g) ?? []).length === 7, 'All seven vendor-neutral launch candidates must retain their reviewed evidence boundary');
+  expect((launchArticles.match(/screenshotsRequired:\s*false/g) ?? []).length === 7, 'Launch candidates must not imply unperformed screenshot testing');
+  expect((launchArticles.match(/author:\s*\{ name: siteConfig\.editorialByline, type: 'Organization' \}/g) ?? []).length === 7, 'Launch candidates must use the centralized organisational byline');
+  expect(!/publishedAt\s*:/.test(launchArticles), 'Launch candidates must not have a publication date before human approval');
+  expect(launchArticles.includes("const verifiedOn = '2026-09-17'"), 'Launch article sources are missing the current verification date');
+  for (const marker of ['[TEST REQUIRED]', '[SCREENSHOT REQUIRED]', '[VERIFY CURRENT PLAN]', '[SOURCE REQUIRED]']) {
+    expect(!launchArticles.includes(marker), `Launch candidate source contains unresolved marker ${marker}`);
+  }
+}
+
+for (const routeFile of [
+  join(appRoot, 'blog', '[slug]', 'page.tsx'),
+  join(appRoot, 'tutorials', '[slug]', 'page.tsx'),
+  join(appRoot, 'workflows', '[slug]', 'page.tsx'),
+]) {
+  expect(existsSync(routeFile), `Missing article route file: ${routeFile}`);
+  if (existsSync(routeFile)) {
+    const routeSource = readFileSync(routeFile, 'utf8');
+    expect(routeSource.includes('metadataForArticlePath'), `Article route does not use centralized metadata: ${routeFile}`);
+    expect(routeSource.includes('renderArticlePath'), `Article route does not use centralized publication gating: ${routeFile}`);
+  }
 }
 
 const hubPolicyPath = join(appRoot, 'route-indexing.ts');
@@ -226,6 +272,11 @@ for (const relative of publicNavigationSources) {
   const body = readFileSync(join(appRoot, relative), 'utf8');
   expect(!body.includes('/blog/what-should-small-business-automate-first'), `Draft article is linked from public source: ${relative}`);
 }
+
+const pageContentSource = readFileSync(join(appRoot, 'page-content.ts'), 'utf8');
+expect(pageContentSource.includes("'editorial-policy':"), 'Missing public editorial policy content');
+expect(pageContentSource.includes("articleCollection: 'all'"), 'Hub content does not expose centralized published-article collections');
+expect(pageContentSource.includes('siteConfig.editorialByline'), 'About page does not explain the centralized organisational byline');
 
 const workflowSpec = readFileSync(join(projectRoot, '05_內容', 'research', 'ARTICLE_01_WORKFLOW_BUILD_SPEC.md'), 'utf8');
 expect(workflowSpec.includes('NOT BUILT / NOT TESTED / OAUTH NOT GRANTED'), 'Article 1 workflow spec must retain its untested/OAuth hold state');

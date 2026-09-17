@@ -51,6 +51,7 @@ const isLaunchReady = Boolean(
 
 export const siteConfig = {
   name,
+  editorialByline: `${name} Editorial`,
   status: isLaunchReady ? 'INDEPENDENT PUBLICATION' : 'PRE-LAUNCH',
   isApprovedBrand,
   positioning: approvedBrand.positioning,

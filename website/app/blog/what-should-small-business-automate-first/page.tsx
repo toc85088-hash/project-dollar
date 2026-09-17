@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { ArticlePage } from '../../components/article-page';
-import { canPreviewDrafts, getArticle, isPublishable } from '../../content/articles';
+import { canPreviewDrafts, getArticle, isPubliclyAvailable } from '../../content/articles';
 import { siteConfig } from '../../site-config';
 
 const article = getArticle('what-should-small-business-automate-first')!;
@@ -27,6 +27,6 @@ export const metadata: Metadata = {
 };
 
 export default function ArticleOneDraftRoute() {
-  if (!isPublishable(article) && !canPreviewDrafts()) notFound();
+  if (!isPubliclyAvailable(article) && !canPreviewDrafts()) notFound();
   return <ArticlePage article={article} />;
 }

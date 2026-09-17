@@ -43,6 +43,7 @@ export function Footer() {
         </div>
         <nav aria-label="Footer navigation">
           <Link href="/about">About</Link>
+          <Link href="/editorial-policy">Editorial Policy</Link>
           <Link href="/contact">Contact</Link>
           <Link href="/privacy-policy">Privacy</Link>
           <Link href="/terms">Terms</Link>

@@ -1,6 +1,6 @@
 # Hub Indexing Audit
 
-稽核日期：2026-08-24  
+稽核日期：2026-09-17
 範圍：Naveliqo 所有內容 Hub／category routes。
 
 決策原則：只有具備獨立讀者價值、實際可用內容、完成事實查核且經人工核准的 Hub，才能把集中式 `contentReady` 改為 `true`。
@@ -24,12 +24,12 @@
 | Route | Current status | Indexable | Reason | Human action required |
 |---|---|---:|---|---|
 | `/ai-automation` | `foundation_draft` | **NO** | 有基本 editorial framework，但 foundation article、evidence、author 與 human approval 尚未完成。 | 核准 Hub copy，並至少完成一篇 evidence-complete supporting article，再人工修改 `contentReady`。 |
-| `/workflows` | `roadmap_only` | **NO** | 內容主要說明預計發布的 workflow cluster；沒有任何已發布、真實測試的 workflow guide。 | 完成並發布有用的 workflow content，確認 Hub 本身不只是 future-content list。 |
+| `/workflows` | `review_queue` | **NO** | 六篇substantive workflow guides已完成vendor-neutral evidence boundary，但仍待human fact check／publication approval。 | 核准並發布接受的articles，檢查Hub generated cards，再人工修改`contentReady`。 |
 | `/ai-tools` | `method_only` | **NO** | 只有 evaluation principles，沒有完成 first-hand tool evaluation 或可查核結論。 | 真實測試具名工具、完成 evidence/limitations/disclosure，補足 substantive Hub content。 |
-| `/tutorials` | `method_only` | **NO** | 只說明 tutorial standard，沒有 verified tutorial。 | 完成至少一篇 end-to-end tested tutorial，補 internal links 與人工內容核准。 |
+| `/tutorials` | `review_queue` | **NO** | 一篇vendor-neutral task-automation tutorial已完成研究並待審；目前仍0 publishable tutorials。 | 核准並發布tutorial、檢查Hub generated card，再人工修改`contentReady`。 |
 | `/comparisons` | `method_only` | **NO** | 只有 comparison methodology；Zapier vs Make 尚未同情境實測，沒有 verdict。 | 完成 same-scenario tests、current plan/price facts、screenshots、disclosure、fact check 與 human approval。 |
 | `/templates` | `roadmap_only` | **NO** | 列出規劃中的 templates，但沒有真正可下載且通過 usability/accessibility test 的資源。 | 建立並測試至少一份 real resource，確認 instructions、format、accessibility 與 download 都有效。 |
-| `/blog` | `empty_publication` | **NO** | 有 10 briefs 與一篇受控 draft，但目前 0 publishable articles。 | 人工發布足量的 original approved articles，重新審查 Blog landing page，再修改 `contentReady`。 |
+| `/blog` | `review_queue` | **NO** | 七篇launch candidates在editorial review；Article 1仍因Make evidence不足而draft；目前0 publishable articles。 | 人工核准並發布接受的articles、檢查Blog generated list，再修改`contentReady`。 |
 
 ## Human readiness checklist before changing a flag
 
@@ -46,4 +46,6 @@
 
 - Indexable Hub routes：**0 / 7**
 - Technical gate：**PASS**
+- Review-ready launch candidates：**7**
+- Publicly publishable articles：**0**
 - Content readiness：**BLOCKED / NEEDS HUMAN REVIEW**
