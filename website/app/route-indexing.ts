@@ -1,6 +1,6 @@
 export type HubIndexingPolicy = {
   contentReady: boolean;
-  currentStatus: 'foundation_draft' | 'method_only' | 'roadmap_only' | 'empty_publication' | 'review_queue';
+  currentStatus: 'foundation_ready' | 'method_only' | 'roadmap_only' | 'empty_publication' | 'review_queue';
   reason: string;
   humanActionRequired: string;
 };
@@ -8,9 +8,9 @@ export type HubIndexingPolicy = {
 export const hubIndexingPolicies = {
   'ai-automation': {
     contentReady: false,
-    currentStatus: 'foundation_draft',
-    reason: 'The hub contains an editorial framework, but its foundation article and supporting evidence are not approved.',
-    humanActionRequired: 'Approve the hub copy and at least one evidence-complete supporting article before changing contentReady.',
+    currentStatus: 'foundation_ready',
+    reason: 'The generic framework is retained as an unindexed resource while the first commercial MVP focuses on residential cleaning.',
+    humanActionRequired: 'Review its role after the Cleaning MVP; generic content is not approved for indexing by this sprint.',
   },
   workflows: {
     contentReady: false,

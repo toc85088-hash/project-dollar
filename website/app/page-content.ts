@@ -18,7 +18,7 @@ export type PageContent = {
   related: Array<{ label: string; href: string; description: string }>;
 };
 
-const updatedAt = '2026-09-17';
+const updatedAt = '2026-09-18';
 
 export const pageContent: Record<string, PageContent> = {
   'ai-automation': {
@@ -173,7 +173,7 @@ export const pageContent: Record<string, PageContent> = {
       },
       {
         heading: 'Download gate',
-        paragraphs: ['Downloads will appear only after the actual files pass content, accessibility, security, and usability review. No email gate, checkout, or downloadable resource is active on this pre-launch site.'],
+        paragraphs: ['Template packs will appear only after the actual files pass content, accessibility, security, and usability review. The Cleaning pilot page offers a local planning-brief download, not a connected automation template. No email gate or checkout is active.'],
       },
       {
         heading: 'Free before paid',
@@ -211,18 +211,19 @@ export const pageContent: Record<string, PageContent> = {
   },
   about: {
     eyebrow: 'ABOUT',
-    title: 'Practical automation guidance without invented authority.',
+    title: `About ${siteConfig.name}`,
     description: `About ${siteConfig.name}, its audience, editorial identity, and evidence standard.`,
-    intro: `${siteConfig.name} is the approved brand for an independent English-language publication about simple AI automation for small business owners. It is not presented as a registered company, agency, or multi-person team.`,
-    updatedAt,
+    intro: `${siteConfig.name} is a practical automation brand for small business owners. Our first focus is US residential cleaning: inquiry follow-up, quote preparation, and booking handoffs with an owner in control. The name does not imply a registered company, certification, or multi-person team.`,
+    updatedAt: '2026-09-21',
     sections: [
       {
         heading: 'Who this is for',
-        paragraphs: ['We write for non-technical owners in the United States, United Kingdom, Canada, and Australia who want fewer repetitive tasks and more reliable processes—not a stream of AI news or unsupported promises.'],
+        paragraphs: ['The first pilot is designed for US residential cleaning owners and office leads. The broader brand remains open to other small businesses and home services. Future verticals are not live service offerings, and the cleaning demo is not evidence of a completed customer implementation.'],
+        links: [{ label: 'Explore the cleaning pilot', href: '/cleaning' }],
       },
       {
         heading: 'Editorial identity',
-        paragraphs: [`Articles prepared for the publication use the organisational byline “${siteConfig.editorialByline}”. That byline identifies the brand responsible for the material; it does not claim a separately named author, reviewer, legal entity, or editorial team. A real publication owner and any named author or reviewer biography still require human approval before launch.`],
+        paragraphs: [`Articles use the organisational byline “${siteConfig.editorialByline}”. It identifies the publication responsible for the material and does not imply a separately named author, reviewer, legal entity, or staff team. When a named contributor or reviewer is added later, the site will identify that person only after their role and biography are verified.`],
       },
       {
         heading: 'How material is prepared',
@@ -231,7 +232,7 @@ export const pageContent: Record<string, PageContent> = {
       },
       {
         heading: 'Corrections and updates',
-        paragraphs: ['Material corrections should state what changed and update the review date when the underlying facts are rechecked. Software, plans, laws, and policies can change; readers should verify current official information before acting.'],
+        paragraphs: ['Material corrections state what changed when the error could affect a reader’s decision. Review dates change only after meaningful rechecking. Software, plans, laws, and policies can change, so readers should verify current official information before acting. Correction requests use the public channel listed on the Contact page.'],
       },
     ],
     related: [
@@ -244,7 +245,7 @@ export const pageContent: Record<string, PageContent> = {
     eyebrow: 'EDITORIAL POLICY',
     title: 'Evidence before confidence.',
     description: `${siteConfig.name} editorial policy for sources, tool testing, AI assistance, corrections, updates, and commercial independence.`,
-    intro: 'This policy explains the publication standard. It does not claim that every planned article, tool test, or reviewer identity is already complete.',
+    intro: 'This policy explains how material earns publication, how evidence is described, and what remains unpublished when verification is incomplete.',
     updatedAt,
     sections: [
       {
@@ -261,7 +262,7 @@ export const pageContent: Record<string, PageContent> = {
       },
       {
         heading: 'Corrections, updates, and conflicts',
-        paragraphs: ['Material errors should be corrected promptly after verification. Update dates reflect meaningful review, not cosmetic edits. Affiliate eligibility, sponsorship, or vendor access does not determine inclusion, ranking, or verdict.'],
+        paragraphs: ['Material errors are corrected after verification, with a visible note when the change could affect a reader’s decision. Update dates reflect meaningful review, not cosmetic edits. Affiliate eligibility, sponsorship, or vendor access does not determine inclusion, ranking, or verdict.'],
       },
       {
         heading: 'Publication gate',
@@ -277,22 +278,22 @@ export const pageContent: Record<string, PageContent> = {
   contact: {
     eyebrow: 'CONTACT',
     title: 'Questions, corrections, and clear boundaries.',
-    description: `How to contact ${siteConfig.name}${siteConfig.contactEmail ? '' : ' after a public inbox is approved'}.`,
+    description: `Contact-channel status for ${siteConfig.name}, cleaning pilot questions, corrections, accessibility, and disclosures.`,
     intro: siteConfig.contactEmail
       ? `Email ${siteConfig.name} at ${siteConfig.contactEmail}. Do not include passwords, payment details, customer records, or other sensitive information.`
-      : 'A verified public email address has not been approved. No contact form or unverified address is shown on the pre-launch site.',
+      : 'A verified public email address has not been configured. The launch gate remains closed, and no unverified address or non-functional contact form is shown.',
     updatedAt,
     sections: [
       {
         heading: 'What the contact channel is for',
-        paragraphs: ['Readers may report a factual error, broken link, accessibility problem, unclear disclosure, or workflow question. Product pitches do not guarantee coverage, and corrections are checked against evidence before publication.'],
+        paragraphs: ['Once the contact channel opens, visitors may ask about a cleaning pilot scope, report a factual error, broken link, accessibility problem, unclear disclosure, or workflow question. The local pilot-brief builder does not submit an enquiry. Product pitches do not guarantee coverage, and corrections are checked against evidence before publication.'],
         points: ['Do not send passwords, authentication codes, API keys, payment details, customer records, health information, or other sensitive material.', 'Include the page address and a reliable source when reporting a factual issue.', 'Do not use this channel for urgent, legal, medical, financial, safety, or account-support requests.'],
       },
       {
-        heading: 'Contact status',
+        heading: siteConfig.contactEmail ? 'How messages are handled' : 'Contact status',
         paragraphs: siteConfig.contactEmail
-          ? ['The configured inbox must still pass ownership, delivery, access, retention, and privacy review before the full launch gate is approved.']
-          : ['The owner must choose a real public address, verify inbox ownership and delivery, define access and retention, and update the Privacy Policy before launch.'],
+          ? ['Messages are used to review and respond to the enquiry, document material corrections, and prevent abuse. Access should remain limited to the publication operator, and messages should be deleted when they are no longer needed for those purposes or a legal obligation. The Privacy Policy explains this boundary.']
+          : ['Public launch requires one real inbox that the owner controls. Its address, delivery, access controls, and reply path must be verified before the launch gate can open.'],
         links: siteConfig.contactEmail ? [{ label: `Email ${siteConfig.contactEmail}`, href: `mailto:${siteConfig.contactEmail}` }] : undefined,
       },
     ],
@@ -303,31 +304,49 @@ export const pageContent: Record<string, PageContent> = {
     ],
   },
   'privacy-policy': {
-    eyebrow: 'PRIVACY POLICY — PRE-LAUNCH DRAFT',
+    eyebrow: 'PRIVACY POLICY',
     title: 'Privacy Policy',
-    description: `Pre-launch privacy policy for ${siteConfig.name}; final owner, provider, retention, and legal review remain required.`,
-    intro: 'This draft describes the current site and known launch boundary. It is not legal advice and must be approved against the real hosting, contact, analytics, advertising, affiliate, and consent configuration before public launch.',
-    updatedAt,
+    description: `How ${siteConfig.name} handles technical request data and messages under its current, privacy-minimising site configuration.`,
+    intro: `Reviewed 21 September 2026 for the local pre-launch MVP. This notice describes the current ${siteConfig.name} site. It must be updated before analytics, advertising, affiliate tracking, submitted forms, accounts, newsletters, payments, or any materially different data use is activated.`,
+    updatedAt: '2026-09-21',
     sections: [
       {
-        heading: 'Current collection',
-        paragraphs: ['The current site displays editorial content. It has no contact form, user account, newsletter signup, analytics tag, advertising code, checkout, payment flow, or customer database. It does not intentionally ask visitors to submit personal information through the site.'],
+        heading: 'What the site does not collect directly',
+        paragraphs: ['The site displays information, a fictional cleaning-inquiry simulation, and a local pilot-planning tool. It has no submitted contact form, user account, newsletter signup, analytics tag, advertising code, affiliate tracking, checkout, payment flow, or customer database. It does not ask visitors to enter personal information on the site.'],
       },
       {
-        heading: 'Hosting and security data',
-        paragraphs: ['A public hosting and network provider may process technical request data such as IP address, browser or device information, requested pages, timestamps, and security events to deliver and protect the site. The final provider, fields, purpose, retention, access, transfer, and deletion details must be confirmed from the actual production service.'],
+        heading: 'Local demo and planning choices',
+        paragraphs: ['The demo uses predefined fictional records. The planning tool uses service and workflow choices rather than personal or customer details. Results stay in page memory and are cleared on refresh; the tools do not transmit those choices or save them in browser storage. A brief download creates a text file on the visitor’s device. It does not submit an application or contact us. Ordinary page and asset requests still reach the site’s hosting provider.'],
+      },
+      {
+        heading: 'Technical request and security data',
+        paragraphs: ['The hosting and network provider processes information needed to deliver and protect the site. This can include IP address, browser or device information, requested URL, timestamp, response status, and security signals. That processing is limited to site delivery, reliability, abuse prevention, troubleshooting, and security. Provider-specific access, location, and retention must be verified in the production data inventory before launch.'],
       },
       {
         heading: 'Contact messages',
-        paragraphs: ['If a public email is enabled, the email provider and authorised inbox users will process the address, message, headers, and any information the sender includes so the enquiry can be reviewed and answered. Visitors should not send sensitive records. The provider and retention period remain launch decisions.'],
+        paragraphs: ['When a visitor emails the public contact address, the email provider and authorised operator process the sender address, message, headers, and any information the sender chooses to include. The information is used to review and respond to the enquiry, document material corrections, and prevent abuse. Do not send passwords, payment details, customer records, health information, or other sensitive material.'],
       },
       {
-        heading: 'Analytics, advertising, affiliates, and cookies',
-        paragraphs: ['Google Analytics, AdSense, affiliate tracking, behavioural advertising, newsletter tools, and consent-management code are not active. If any service is added later, this policy and the relevant notice or choice must be updated before activation.'],
+        heading: 'Cookies, analytics, advertising, and affiliates',
+        paragraphs: ['Google Analytics, AdSense, affiliate tracking, behavioural advertising, newsletter tools, and consent-management code are not active. The hosting or security layer may use strictly necessary storage or request controls to deliver and protect the site. Any optional measurement, advertising, affiliate, or consent technology requires a policy update and the appropriate notice or choice before activation.'],
       },
       {
-        heading: 'Rights and responsible owner',
-        paragraphs: ['The responsible publisher, applicable rights process, complaint route, governing privacy framework, international-transfer safeguards, and public contact must be identified and reviewed for the actual target markets before launch.'],
+        heading: 'Retention, access, and international processing',
+        paragraphs: ['Access is limited to the provider and authorised operator as needed for the purposes above. Contact messages should be deleted when no longer needed to answer the enquiry, document a correction, prevent abuse, or meet a legal obligation. Providers may process data in more than one country under their own safeguards; the actual hosting and email-provider terms must be checked before launch.'],
+      },
+      {
+        heading: 'Your choices and privacy questions',
+        paragraphs: ['Depending on applicable law, a person may ask for access, correction, deletion, restriction, or objection concerning information held about them. Use the public address on the Contact page. The operator will verify the request and respond according to the law that applies; a person may also contact the relevant privacy regulator.'],
+        links: [
+          { label: 'US Federal Trade Commission privacy resources', href: 'https://www.ftc.gov/business-guidance/privacy-security/consumer-privacy' },
+          { label: 'UK Information Commissioner', href: 'https://ico.org.uk/make-a-complaint/data-protection-complaints/' },
+          { label: 'Office of the Privacy Commissioner of Canada', href: 'https://www.priv.gc.ca/en/report-a-concern/' },
+          { label: 'Office of the Australian Information Commissioner', href: 'https://www.oaic.gov.au/privacy/privacy-complaints' },
+        ],
+      },
+      {
+        heading: 'Children and changes to this notice',
+        paragraphs: ['The publication is written for small-business owners and is not directed to children. The policy is reviewed when the site adds a service, changes provider, or changes how information is used. Material changes receive a new review date before the changed processing begins.'],
       },
     ],
     related: [
@@ -337,11 +356,11 @@ export const pageContent: Record<string, PageContent> = {
     ],
   },
   terms: {
-    eyebrow: 'TERMS OF USE — PRE-LAUNCH DRAFT',
+    eyebrow: 'TERMS OF USE',
     title: 'Terms of Use',
-    description: `Pre-launch terms for ${siteConfig.name}; final owner, jurisdiction, effective date, and qualified legal review remain required.`,
-    intro: 'These draft terms describe the intended educational site. They are not legal advice and are not approved for public launch until the responsible publisher and applicable legal terms are confirmed.',
-    updatedAt,
+    description: `Terms for using ${siteConfig.name} educational content and external links.`,
+    intro: `Reviewed 21 September 2026 for the local pre-launch MVP. Use ${siteConfig.name} lawfully and understand the planning, evidence, and external-service limits below. These terms do not override rights or liabilities that applicable law does not allow to be excluded.`,
+    updatedAt: '2026-09-21',
     sections: [
       {
         heading: 'Educational information',
@@ -356,12 +375,20 @@ export const pageContent: Record<string, PageContent> = {
         paragraphs: ['Software, availability, policies, and prices can change. Dates and evidence boundaries show the review scope but do not guarantee that information remains current. External links are provided for context; third-party services operate under their own terms and privacy practices.'],
       },
       {
-        heading: 'Content use and submissions',
-        paragraphs: ['The final publisher must define copyright ownership, permitted quotation, template licences, prohibited reuse, and the treatment of reader submissions. The current site does not accept user-generated content or sell downloadable products.'],
+        heading: 'Permitted use of the content',
+        paragraphs: ['You may read, link to, and quote short excerpts with clear attribution. You may not republish substantially all of an article, remove attribution, misrepresent an endorsement, interfere with the site, attempt unauthorised access, or use the material unlawfully. Third-party names, marks, and linked material remain subject to their owners’ rights.'],
       },
       {
-        heading: 'Terms still requiring approval',
-        paragraphs: ['The responsible legal owner, effective date, governing law, eligibility, warranty and liability language, dispute process, change notice, intellectual-property terms, and any digital-product conditions require qualified review before launch.'],
+        heading: 'No accounts, submissions, or purchases',
+        paragraphs: ['The current site has no user accounts, public comments, submitted customer data, checkout, paid product, or subscription. The local simulation and downloaded brief do not create an external draft, task, quote, booking, application, or service agreement. A pilot requires a separate written scope, fees, permissions, and acceptance agreement before work on connected accounts. Saving a brief or sending an email does not create a client, advisory, employment, partnership, or support relationship.'],
+      },
+      {
+        heading: 'Availability and responsibility limits',
+        paragraphs: ['The site may be corrected, changed, suspended, or withdrawn. To the extent permitted by applicable law, the material is provided without a promise that it is complete, continuously available, error-free, or suitable for a particular decision. Nothing in these terms excludes a responsibility that applicable law says cannot be excluded.'],
+      },
+      {
+        heading: 'Changes and questions',
+        paragraphs: ['Material changes to these terms receive a new effective date. Continued use after a change means the current terms apply from that date, subject to mandatory rights. Questions about these terms use the verified address shown on the Contact page.'],
       },
     ],
     related: [

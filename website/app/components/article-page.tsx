@@ -18,6 +18,7 @@ export function ArticlePage({ article }: { article: ArticleRecord }) {
   const articlePath = article.path;
   const pendingRequirements = [
     article.status !== 'published' ? 'publication status' : null,
+    !article.editorialReady ? 'editorial completion' : null,
     !article.humanApproved ? 'human approval' : null,
     !article.evidenceComplete ? 'evidence' : null,
     article.screenshotsRequired && !article.screenshotsComplete ? 'required screenshots' : null,

@@ -1,6 +1,12 @@
 # Hub Indexing Audit
 
-稽核日期：2026-09-17
+## Current policy override — 2026-09-21
+
+Cleaning-first MVP supersedes the prior generic-content readiness assessment below. AI Automation is now `contentReady=false`, as are Workflows, AI Tools, Tutorials, Comparisons, Templates and Blog. No generic hub is indexable even if the global launch flag is later approved. `/cleaning`, `/cleaning/demo`, `/cleaning/pilot` are implemented but explicitly noindex, no canonical, no schema and absent from sitemap pending their own release review. Future vertical slots have no routes. Global gate CLOSED; empty sitemap and robots Disallow `/` unchanged.
+
+## Historical assessment — 2026-09-18
+
+稽核日期：2026-09-18
 範圍：Naveliqo 所有內容 Hub／category routes。
 
 決策原則：只有具備獨立讀者價值、實際可用內容、完成事實查核且經人工核准的 Hub，才能把集中式 `contentReady` 改為 `true`。
@@ -9,7 +15,7 @@
 
 集中設定：`website/app/route-indexing.ts`
 
-目前所有 Hub 均為 `contentReady=false`。Route metadata 與 sitemap 共同使用 `isStandardRouteIndexable()`，避免每頁分散判斷。對未 ready Hub：
+`/ai-automation` 已完成可獨立使用的基礎框架，因此集中設定為 `contentReady=true`；其餘六個 Hub 維持 `false`。Route metadata 與 sitemap 共同使用 `isStandardRouteIndexable()`，避免每頁分散判斷。全站 launch gate 仍關閉，所以目前七頁仍全部 noindex。對未 ready Hub：
 
 - Route 可在本機／pre-launch site 回應 200，方便編輯與 QA。
 - `robots` metadata 維持 `noindex, nofollow, nocache`。
@@ -23,7 +29,7 @@
 
 | Route | Current status | Indexable | Reason | Human action required |
 |---|---|---:|---|---|
-| `/ai-automation` | `foundation_draft` | **NO** | 有基本 editorial framework，但 foundation article、evidence、author 與 human approval 尚未完成。 | 核准 Hub copy，並至少完成一篇 evidence-complete supporting article，再人工修改 `contentReady`。 |
+| `/ai-automation` | `foundation_ready` | **NO（global gate closed）** | 有可獨立使用的 task-selection、risk、review 與 fallback framework；launch 後只會列出通過全部 publication gates 的文章。 | Hub 本身無額外內容動作；公開前仍需完成全站 approval 與 staging。 |
 | `/workflows` | `review_queue` | **NO** | 六篇substantive workflow guides已完成vendor-neutral evidence boundary，但仍待human fact check／publication approval。 | 核准並發布接受的articles，檢查Hub generated cards，再人工修改`contentReady`。 |
 | `/ai-tools` | `method_only` | **NO** | 只有 evaluation principles，沒有完成 first-hand tool evaluation 或可查核結論。 | 真實測試具名工具、完成 evidence/limitations/disclosure，補足 substantive Hub content。 |
 | `/tutorials` | `review_queue` | **NO** | 一篇vendor-neutral task-automation tutorial已完成研究並待審；目前仍0 publishable tutorials。 | 核准並發布tutorial、檢查Hub generated card，再人工修改`contentReady`。 |
@@ -44,7 +50,8 @@
 
 ## Current result
 
-- Indexable Hub routes：**0 / 7**
+- Content-ready Hub routes：**1 / 7**
+- Currently indexable Hub routes：**0 / 7**（global launch gate closed）
 - Technical gate：**PASS**
 - Review-ready launch candidates：**7**
 - Publicly publishable articles：**0**

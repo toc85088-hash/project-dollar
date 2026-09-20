@@ -9,22 +9,19 @@ export function Header() {
           <span className="brand-wordmark">{siteConfig.name}</span>
         </Link>
         <nav className="desktop-navigation" aria-label="Primary navigation">
-          <Link href="/workflows">Workflows</Link>
-          <Link href="/ai-tools">AI Tools</Link>
-          <Link href="/tutorials">Tutorials</Link>
-          <Link href="/templates">Templates</Link>
-          <Link className="nav-cta" href="/blog">Browse guides</Link>
+          <Link href="/cleaning">For cleaning businesses</Link>
+          <Link href="/cleaning/demo">Demo</Link>
+          <Link href="/about">About</Link>
+          <Link className="nav-cta" href="/cleaning/pilot">Explore the pilot</Link>
         </nav>
         <details className="mobile-navigation">
           <summary>Menu</summary>
           <nav aria-label="Mobile navigation">
-            <Link href="/ai-automation">AI Automation</Link>
-            <Link href="/workflows">Workflows</Link>
-            <Link href="/ai-tools">AI Tools</Link>
-            <Link href="/tutorials">Tutorials</Link>
-            <Link href="/comparisons">Comparisons</Link>
-            <Link href="/templates">Templates</Link>
-            <Link href="/blog">Blog</Link>
+            <Link href="/cleaning">For cleaning businesses</Link>
+            <Link href="/cleaning/demo">Demo</Link>
+            <Link href="/cleaning/pilot">Explore the pilot</Link>
+            <Link href="/about">About</Link>
+            <Link href="/contact">Contact</Link>
           </nav>
         </details>
       </div>
@@ -39,7 +36,7 @@ export function Footer() {
         <div>
           <p className="eyebrow">{siteConfig.status}</p>
           <p className="footer-brand">{siteConfig.name}</p>
-          <p className="muted">Independent, practical guidance for owners who would rather run their business than learn to code.</p>
+          <p className="muted">Simple AI automation for small business. Our first focus: inquiry follow-up, quote preparation, and booking handoffs for US residential cleaning businesses.</p>
         </div>
         <nav aria-label="Footer navigation">
           <Link href="/about">About</Link>

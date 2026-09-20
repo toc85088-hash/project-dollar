@@ -1,25 +1,38 @@
 import { siteConfig } from './site-config';
 import { Footer, Header } from './components/site-shell';
 import { SiteLink as Link } from './components/site-link';
+import type { Metadata } from 'next';
+import { cleaningMvp } from './industries';
+
+export const metadata: Metadata = {
+  title: { absolute: `${cleaningMvp.title} | ${siteConfig.name}` },
+  description: cleaningMvp.description,
+  openGraph: {
+    title: cleaningMvp.title, description: cleaningMvp.description, url: '/',
+    type: 'website', locale: 'en_US', siteName: siteConfig.name,
+    images: [{ url: '/og.png', width: 1731, height: 909, alt: `${siteConfig.name}: ${siteConfig.positioning}` }],
+  },
+  twitter: { card: 'summary_large_image', title: cleaningMvp.title, description: cleaningMvp.description, images: ['/og.png'] },
+};
 
 const categories = [
   {
     number: '01',
-    title: 'Start with AI automation',
-    body: 'Understand what to automate, what to keep human, and how to choose a low-risk first workflow.',
-    href: '/ai-automation',
+    title: 'Follow up on a cleaning inquiry',
+    body: 'Check the request, prepare an acknowledgment draft, and put the next action in an owner’s queue.',
+    href: '/cleaning#follow-up',
   },
   {
     number: '02',
-    title: 'Build a practical workflow',
-    body: 'Follow plain-English processes for email, customer service, follow-up, meetings, and admin.',
-    href: '/workflows',
+    title: 'Get the details needed for a quote',
+    body: 'Gather service type, home size, frequency, and requested extras. Your team sets the price and confirms the scope.',
+    href: '/cleaning#quote',
   },
   {
     number: '03',
-    title: 'Choose tools with evidence',
-    body: 'Use transparent testing criteria and comparisons—without invented hands-on claims or hype.',
-    href: '/ai-tools',
+    title: 'Hand off a booking request',
+    body: 'Capture preferred timing and route it for availability review. A requested slot is never treated as confirmed.',
+    href: '/cleaning#booking',
   },
 ];
 
@@ -31,24 +44,24 @@ export default function Home() {
         <section className="hero">
           <div className="shell hero-grid">
             <div>
-              <p className="eyebrow">Built for non-technical business owners</p>
-              <h1>Make busywork smaller.<br /><span>Keep your business human.</span></h1>
-              <p className="hero-copy">{siteConfig.promise}</p>
+              <p className="eyebrow">For US residential cleaning businesses</p>
+              <h1>A new cleaning lead.<br /><span>A clear next step.</span></h1>
+              <p className="hero-copy">Keep inquiries moving from first reply to quote preparation and booking review—with your team in control of prices, promises, and the final send.</p>
               <div className="button-row">
-                <Link className="button button-primary" href="/ai-automation">Start with the plain-English guide</Link>
-                <Link className="button button-secondary" href="/templates">See workflow templates</Link>
+                <Link className="button button-primary" href="/cleaning/demo">Try the cleaning demo</Link>
+                <Link className="button button-secondary" href="/cleaning/pilot">Explore the pilot</Link>
               </div>
-              <p className="trust-note">Clear steps · Honest limitations · Human review built in</p>
+              <p className="trust-note">Residential cleaning first · Review before send · No automatic quotes</p>
             </div>
-            <aside className="workflow-card" aria-label="Example automation workflow">
-              <p className="card-label">A SMALL, SAFE FIRST WIN</p>
-              <h2>Turn a new enquiry into a ready-to-review reply</h2>
+            <aside className="workflow-card" aria-label="Illustrative cleaning inquiry workflow">
+              <p className="card-label">THE CLEANING WORKFLOW</p>
+              <h2>Inquiry → quote-ready details → booking review</h2>
               <ol>
-                <li><span>1</span><div><strong>Capture</strong><small>A form submission arrives</small></div></li>
-                <li><span>2</span><div><strong>Draft</strong><small>AI prepares a reply from approved notes</small></div></li>
-                <li><span>3</span><div><strong>Review</strong><small>You check it before anything is sent</small></div></li>
+                <li><span>1</span><div><strong>Check the request</strong><small>Service area, cleaning type, and reply details</small></div></li>
+                <li><span>2</span><div><strong>Prepare the handoff</strong><small>A reply draft and a quote checklist for your team</small></div></li>
+                <li><span>3</span><div><strong>Approve the next step</strong><small>You confirm pricing, availability, and any message</small></div></li>
               </ol>
-              <p className="card-foot">The person stays in control.</p>
+              <p className="card-foot">Illustrative flow. The demo uses fictional records and sends nothing.</p>
             </aside>
           </div>
         </section>
@@ -56,20 +69,20 @@ export default function Home() {
         <section className="principles" aria-labelledby="principles-heading">
           <div className="shell principles-grid">
             <div>
-              <p className="eyebrow">OUR EDITORIAL STANDARD</p>
-              <h2 id="principles-heading">Useful before impressive.</h2>
+              <p className="eyebrow">A FOCUSED FIRST PILOT</p>
+              <h2 id="principles-heading">One inbox. One handoff. One owner.</h2>
             </div>
-            <p>We explain the work, the trade-offs, and the checks. Any tool claim that needs hands-on testing stays clearly labelled until it is verified.</p>
+            <p>Start with one residential cleaning inquiry source. Define the reply, the missing-detail questions, and the person who approves the quote and booking. Choose integrations only after that process is clear.</p>
           </div>
         </section>
 
         <section className="section shell" aria-labelledby="path-heading">
           <div className="section-heading">
             <div>
-              <p className="eyebrow">A PRACTICAL PATH</p>
-              <h2 id="path-heading">From one repetitive task to one reliable system.</h2>
+              <p className="eyebrow">FROM INQUIRY TO HANDOFF</p>
+              <h2 id="path-heading">Three moments to make easier.</h2>
             </div>
-            <p>Start small, document what should happen, then add automation only where it earns its keep.</p>
+            <p>Use rules for required fields and routing. Consider AI for a bounded draft only when your approved service information can support it.</p>
           </div>
           <div className="category-list">
             {categories.map((category) => (
@@ -86,21 +99,28 @@ export default function Home() {
         <section className="featured">
           <div className="shell featured-grid">
             <div>
-              <p className="eyebrow">FOUNDATION GUIDE</p>
-              <h2>AI automation for small business, explained without the theatre.</h2>
-              <p>Learn how to find a sensible use case, map the manual process, protect customer information, and define a human approval point.</p>
-              <Link className="text-link" href="/ai-automation">Explore the foundation hub <span aria-hidden="true">→</span></Link>
+              <p className="eyebrow">SEE THE EXCEPTIONS TOO</p>
+              <h2>What happens when a lead is missing a reply address?</h2>
+              <p>Run a complete inquiry, a missing-email case, or an out-of-area request. See the draft, follow-up task, and status each case should produce.</p>
+              <Link className="text-link" href="/cleaning/demo">Open the interactive demo <span aria-hidden="true">→</span></Link>
             </div>
             <div className="checklist" aria-label="What the guide covers">
-              <p>Before you automate</p>
+              <p>Inside the proposed pilot</p>
               <ul>
-                <li>Is the task repetitive and rule-based?</li>
-                <li>What could go wrong if the output is wrong?</li>
-                <li>Who reviews the result?</li>
-                <li>How will you measure saved time?</li>
+                <li>Map one existing inquiry source.</li>
+                <li>Prepare replies from your approved service notes.</li>
+                <li>Route missing details to manual review.</li>
+                <li>Test before connecting a live workflow.</li>
               </ul>
             </div>
           </div>
+        </section>
+        <section className="section shell cleaning-close">
+          <p className="eyebrow">{siteConfig.name} · SIMPLE AI AUTOMATION</p>
+          <h2>Start with your cleaning inquiry process.</h2>
+          <p>Review the pilot scope and prepare a short brief about your current tools. No customer records are needed.</p>
+          <Link className="button button-primary" href="/cleaning/pilot">Build my pilot brief</Link>
+          <p className="trust-note">{siteConfig.tagline}</p>
         </section>
       </main>
       <Footer />

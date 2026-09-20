@@ -1,6 +1,6 @@
 # Staging QA Checklist
 
-更新日期：2026-09-17
+更新日期：2026-09-18
 
 目前環境：local/pre-launch only；`naveliqo.com` 已核准但尚未執行 DNS、staging 或 hosting。
 
@@ -18,12 +18,12 @@
 | Navigation | PASS | Automated route crawler 可到達 required routes；仍需人工確認 labels、順序與 current-page orientation。 |
 | Mobile menu | NEEDS HUMAN REVIEW | Codex 已以native Expand與Tab驗證menu展開、完整links與visible focus；仍需touch、Escape expectation、zoom與major-browser review。 |
 | Homepage | NEEDS HUMAN REVIEW | Route、metadata、H1 與 Naveliqo 集中品牌設定有自動檢查；copy、visual hierarchy 與 final CTA仍需真人瀏覽器核准。 |
-| Article page | NEEDS HUMAN REVIEW | Production route隔離通過；development preview檢查了heading、draft banner、table、sources與mobile/tablet layout。七篇仍待human editorial review，不可發布。 |
-| Hub pages | PASS | 7 Hubs均集中 `contentReady=false`，無 canonical/schema/sitemap；內容品質仍需人工核准後才可改 flag。 |
-| About | NEEDS HUMAN REVIEW | 頁面與organisational byline disclosure已完成；真實publication owner／entity／named author decision仍未完成。 |
+| Article page | NEEDS HUMAN REVIEW | Production route隔離通過；development preview檢查了heading、draft banner、table、sources與mobile/tablet layout。七篇已完成local editorial preflight，但仍待一次human release approval。 |
+| Hub pages | PASS | `/ai-automation`為唯一`contentReady=true` Hub，但global gate使其仍noindex；其餘6頁保持false。 |
+| About | NEEDS HUMAN REVIEW | 頁面與`Naveliqo Editorial` organisational-byline disclosure已完成；最後publication/operator label由owner在單一approval record確認。 |
 | Contact | NEEDS HUMAN REVIEW | 沒有 fake email；需真實 inbox、delivery、privacy、copy/interaction測試。 |
-| Privacy | NEEDS HUMAN REVIEW | 明確為 draft；需依 final providers/data flows/markets做人工及必要的專業審查。 |
-| Terms | NEEDS HUMAN REVIEW | 明確為 draft；需 final entity、services、jurisdiction與專業審查。 |
+| Privacy | NEEDS HUMAN REVIEW | Launch-safe baseline已完成且準確說明zero analytics/ads/forms/accounts/commerce；需用final host、email與owner facts完成fit review。 |
+| Terms | NEEDS HUMAN REVIEW | Launch-safe information-only terms已完成，沒有聲稱lawyer review；owner仍需在單一approval record確認。 |
 | Affiliate Disclosure | NEEDS HUMAN REVIEW | 正確說明目前沒有 active relationship；program/link出現前需重新審查 placement與wording。 |
 | 404 | PASS | Automated test確認unknown route與9個unpublished／retired article routes回HTTP 404；Codex視覺抽查正常。 |
 | Footer | NEEDS HUMAN REVIEW | Trust links有 route檢查；需檢查mobile wrapping、contrast、focus、final copyright/entity資訊。 |

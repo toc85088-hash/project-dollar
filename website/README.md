@@ -1,12 +1,20 @@
 # Naveliqo website
 
-Local Vinext/React site for **Simple AI Automation for Small Business**. Internal project codename: Project Dollar. The codebase is responsive, server-rendered, SEO-aware, and intentionally gated against accidental public indexing while legal text, contact channel, visual assets, content, and launch approval remain incomplete.
+## Cleaning MVP update — 2026-09-21
+
+Existing stack retained; no new dependencies. Homepage now focuses on US residential cleaning while `app/site-config.ts` retains the general parent brand. `app/industries.ts` reserves six vertical slots; only Cleaning has routes. `/cleaning`, `/cleaning/demo`, `/cleaning/pilot` remain noindex with no canonical/schema. Generic hubs now all have contentReady=false.
+
+Demo: fictional fixed records and deterministic templates, no AI/network/storage. Pilot builder: local select-based brief and `.txt` download, no lead submission or email. A configured public inbox is still missing. These local tools do not prove a Google/Make integration. Run `pnpm test:cleaning` or `pnpm test:project`; running-site validation is `pnpm test:site`. Refer to `../03_網站/CLEANING_MVP_SPEC.md` and `../07_Codex/CLEANING_MVP_SPRINT1_REPORT.md` for current scope and evidence.
+
+Local Vinext/React site for **Simple AI Automation for Small Business**. Internal project codename: Project Dollar. The codebase is responsive, server-rendered, SEO-aware, and intentionally gated against accidental public indexing while the public inbox, final human approval, staging, and release decision remain incomplete.
 
 The approved Naveliqo name, positioning, tagline, and `https://naveliqo.com` canonical origin are centralized in `app/site-config.ts`. `.env.example` contains those approved public values; contact and Google integration values remain blank. The header uses a text-only wordmark fallback, and the current OG image is a temporary staging asset—not a final logo or visual identity.
 
 ## Local development
 
 Requirements: Node.js 22.13+ and pnpm.
+
+For a loopback-only production preview after building, use `pnpm start --hostname 127.0.0.1` (this Vinext version uses `--hostname`, not `--host`). This is a local preview, not a deployment.
 
 ```powershell
 pnpm install
@@ -33,19 +41,19 @@ Internal links use the centralized `app/components/site-link.tsx` standard-ancho
 
 ## Hub indexing system
 
-Hub readiness is centralized in `app/route-indexing.ts`. AI Automation, Workflows, AI Tools, Tutorials, Comparisons, Templates, and Blog currently use `contentReady=false`. Until an editor manually changes an approved Hub to true, it has no canonical, no page structured data, and no sitemap entry—even if the site-wide launch gate is later enabled.
+Hub readiness is centralized in `app/route-indexing.ts`. AI Automation is the only Hub with `contentReady=true` because it contains a substantive standalone foundation; the other six remain false. The global launch gate still keeps all seven noindex. An unready Hub has no canonical, page structured data, or sitemap entry even if the site-wide gate is later enabled.
 
 ## Article content system
 
 Article records live in `app/content/articles.ts` and use one shared semantic renderer. The registry supports `draft`, `needs_review`, `published`, and `needs_update` states. An article becomes publicly renderable only when all publication gates pass:
 
 1. `status` is `published`.
-2. `humanApproved` and `evidenceComplete` are true.
+2. `editorialReady`, `humanApproved`, and `evidenceComplete` are true.
 3. A real author owner and publication date are assigned.
 4. Metadata, Article schema, topic-hub links, and the sitemap are then generated from the same record.
 5. The global site launch gate must also pass before the article route becomes publicly available.
 
-The foundation article remains a draft. It has no public navigation link, canonical, Article schema, publication date, or sitemap entry. Seven vendor-neutral launch candidates are stored as `needs_review` records with current primary-source dates and honest evidence boundaries. They remain unavailable until a person approves each record and adds a publication date. Move to validated Markdown/MDX before the volume makes typed records cumbersome.
+The foundation article remains a draft. It has no public navigation link, canonical, Article schema, publication date, or sitemap entry. Seven vendor-neutral launch candidates have `editorialReady=true`, current primary-source dates, and honest evidence boundaries, but remain `needs_review` and unavailable until the owner completes the single approval record and publication dates are added. Move to validated Markdown/MDX before the volume makes typed records cumbersome.
 
 Workflows, Tutorials, AI Automation, and Blog automatically list only records that pass the centralized publication gate. Review candidates never appear in those lists.
 
@@ -63,9 +71,6 @@ Public indexing requires all conditions below:
 
 Until then, global metadata uses `noindex`, `robots.txt` disallows crawling, the sitemap is empty, and Organization structured data is withheld. Google Analytics, AdSense, affiliate tracking, email handling, payment, and deployment are not connected.
 
-## Remaining human blockers
+## Remaining human blocker
 
-- Public inbox, responsible publication owner, any named author/reviewer identities, final logo/favicon/OG approval, legal/privacy text, and consent choices.
-- Real research, reproducible workflow/tool testing, screenshots, fact check, and article approval.
-- Google property creation, ownership verification, tag installation approval, and AdSense application.
-- Domain ownership/renewal confirmation, hosting, DNS, HTTPS, production environment, backups, rollback, and final launch review.
+Provide and approve one real monitored public contact inbox first. The earlier seven-article approval proposal is superseded by the Cleaning MVP direction; do not publish generic guides to satisfy an obsolete launch count. Operator/privacy/provider facts, pilot scope/fees, connected-account permissions and release approval remain separate. Deployment, DNS, HTTPS, backups, rollback, real-device QA, Search Console, analytics, and AdSense are not authorized by this sprint.

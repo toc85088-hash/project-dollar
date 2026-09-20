@@ -12,7 +12,8 @@
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
     "check:placeholders": "node scripts/check-placeholders.mjs --production",
     "check:editorial-markers": "node scripts/check-editorial-markers.mjs --production",
-    "test:project": "node scripts/check-project.mjs && node scripts/check-placeholders.mjs --production && node scripts/check-editorial-markers.mjs --production",
+    "test:project": "node scripts/check-project.mjs && node scripts/check-placeholders.mjs --production && node scripts/check-editorial-markers.mjs --production && node scripts/check-cleaning.mjs",
+    "test:cleaning": "node scripts/check-cleaning.mjs",
     "test:site": "node scripts/check-site.mjs"
   },
   "dependencies": {

@@ -4,6 +4,14 @@
 範圍：About、Contact、Privacy Policy、Terms of Use、Affiliate Disclosure。  
 聲明：**這些頁面沒有經過律師審查；本文件不是法律意見。**
 
+## 2026-09-18 blocker-fix update
+
+About、Editorial Policy、Privacy Policy、Terms of Use 與 Affiliate Disclosure 已改為可供 final fit review 的 launch-safe baseline，不再把 public copy 標示為「pre-launch draft」。內容只描述目前 information-only、無表單、無帳號、無 analytics、無 ads、無 affiliate tracking、無 checkout 的實際狀態；沒有新增公司、地址、人員、認證或 lawyer-review 聲稱。
+
+唯一不可由 Codex 代填的 public trust fact 是真實 inbox，以及與該 inbox／production host 一起確認的 operator label 與 provider data handling。這些資訊與七篇文章核准已集中至 `07_Codex/LAUNCH_APPROVAL_RECORD.md` 的單一人工 approval statement。完成前 `TRUST_PAGES_APPROVED` 與 global launch gate 都必須保持 false。
+
+以下 2026-08-24 詳細項目保留為原始 baseline；其中標示 draft copy 未完成的描述，已由上述 2026-09-18 更新取代，但 provider／owner／真人審查要求仍有效。
+
 ## Overall status — BLOCKED for public launch
 
 現有頁面誠實描述 local prototype、沒有 active tracking/ads/affiliate/payment，也沒有假稱已完成法律審查。這是良好起點，但 final entity、contact channel、technology stack、data flows、jurisdictions 與 commercial relationships 都未確定，因此不能當成 production legal text。

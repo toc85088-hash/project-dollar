@@ -11,6 +11,11 @@ function expect(condition, message) {
 }
 
 const requiredDocs = [
+  '01_市場研究/CLEANING_MVP_STRATEGY.md',
+  '03_網站/CLEANING_MVP_SPEC.md',
+  '06_收入/CLEANING_PILOT_OFFER.md',
+  '06_收入/CLEANING_LEAD_GENERATION.md',
+  '07_Codex/CLEANING_MVP_SPRINT1_REPORT.md',
   'README.md',
   '02_品牌/品牌定位.md',
   '02_品牌/BRAND_STATUS.md',
@@ -49,6 +54,7 @@ const requiredDocs = [
   '07_Codex/ARTICLE_01_RESEARCH_REPORT.md',
   '07_Codex/ARTICLE_01_EVIDENCE_REPORT.md',
   '07_Codex/ARTICLE_01_OAUTH_BOUNDARY_REPORT.md',
+  '07_Codex/LAUNCH_APPROVAL_RECORD.md',
   '07_Codex/NAVELIQO_LAUNCH_READINESS_REPORT.md',
   '07_Codex/ROUND2_REPORT.md',
   '11_待辦事項/Roadmap.md',
@@ -177,7 +183,7 @@ for (const approvedValue of [
 ]) {
   expect(siteConfigSource.includes(approvedValue), `Central site config is missing approved value: ${approvedValue}`);
 }
-expect(siteConfigSource.includes("status: isLaunchReady ? 'INDEPENDENT PUBLICATION' : 'PRE-LAUNCH'"), 'Pre-launch status is not controlled by the global launch gate');
+expect(siteConfigSource.includes("status: isLaunchReady ? 'PRACTICAL AUTOMATION' : 'PRE-LAUNCH'"), 'Pre-launch status is not controlled by the global launch gate');
 expect(siteConfigSource.includes("process.env.SITE_LAUNCH_READY === 'true'"), 'Global launch gate is missing from site config');
 
 const envExamplePath = join(websiteRoot, '.env.example');
@@ -206,10 +212,11 @@ if (existsSync(articleRegistryPath)) {
   for (const status of ["'draft'", "'needs_review'", "'published'", "'needs_update'"]) {
     expect(articleRegistry.includes(status), `Article registry is missing status ${status}`);
   }
-  for (const gate of ['humanApproved', 'evidenceComplete', 'screenshotsComplete', 'publishedAt', 'isPublishable', 'isPubliclyAvailable', 'getUnresolvedEditorialMarkers']) {
+  for (const gate of ['editorialReady', 'humanApproved', 'evidenceComplete', 'screenshotsComplete', 'publishedAt', 'isPublishable', 'isPubliclyAvailable', 'getUnresolvedEditorialMarkers']) {
     expect(articleRegistry.includes(gate), `Article registry is missing publication gate ${gate}`);
   }
   expect(/status:\s*'draft'/.test(articleRegistry), 'Foundation article must remain a draft until human approval');
+  expect(/editorialReady:\s*false/.test(articleRegistry), 'Foundation article must remain editorially incomplete until the real workflow evidence is resolved');
   expect(/evidenceComplete:\s*false/.test(articleRegistry), 'Foundation article evidence must remain incomplete until the real workflow test');
   expect(/screenshotsRequired:\s*true/.test(articleRegistry), 'Foundation article must retain its real-screenshot requirement');
   expect(/siteConfig\.isLaunchReady\s*&&\s*isPublishable\(article\)/.test(articleRegistry), 'Public article availability must require the global launch gate');
@@ -232,12 +239,13 @@ if (existsSync(launchArticlePath)) {
     expect(launchArticles.includes(`slug: '${slug}'`), `Launch article registry is missing ${slug}`);
   }
   expect((launchArticles.match(/status:\s*'needs_review'/g) ?? []).length === 7, 'All seven launch candidates must remain needs_review');
+  expect((launchArticles.match(/editorialReady:\s*true/g) ?? []).length === 7, 'All seven launch candidates must record completed local editorial preflight');
   expect((launchArticles.match(/humanApproved:\s*false/g) ?? []).length === 7, 'All seven launch candidates must await human approval');
   expect((launchArticles.match(/evidenceComplete:\s*true/g) ?? []).length === 7, 'All seven vendor-neutral launch candidates must retain their reviewed evidence boundary');
   expect((launchArticles.match(/screenshotsRequired:\s*false/g) ?? []).length === 7, 'Launch candidates must not imply unperformed screenshot testing');
   expect((launchArticles.match(/author:\s*\{ name: siteConfig\.editorialByline, type: 'Organization' \}/g) ?? []).length === 7, 'Launch candidates must use the centralized organisational byline');
   expect(!/publishedAt\s*:/.test(launchArticles), 'Launch candidates must not have a publication date before human approval');
-  expect(launchArticles.includes("const verifiedOn = '2026-09-17'"), 'Launch article sources are missing the current verification date');
+  expect(launchArticles.includes("const verifiedOn = '2026-09-18'"), 'Launch article sources are missing the current verification date');
   for (const marker of ['[TEST REQUIRED]', '[SCREENSHOT REQUIRED]', '[VERIFY CURRENT PLAN]', '[SOURCE REQUIRED]']) {
     expect(!launchArticles.includes(marker), `Launch candidate source contains unresolved marker ${marker}`);
   }
@@ -277,6 +285,8 @@ const pageContentSource = readFileSync(join(appRoot, 'page-content.ts'), 'utf8')
 expect(pageContentSource.includes("'editorial-policy':"), 'Missing public editorial policy content');
 expect(pageContentSource.includes("articleCollection: 'all'"), 'Hub content does not expose centralized published-article collections');
 expect(pageContentSource.includes('siteConfig.editorialByline'), 'About page does not explain the centralized organisational byline');
+expect(!/PRIVACY POLICY — PRE-LAUNCH DRAFT|TERMS OF USE — PRE-LAUNCH DRAFT/.test(pageContentSource), 'Trust pages still expose pre-launch draft headings');
+expect(pageContentSource.includes('Reviewed 21 September 2026'), 'Privacy and terms pages are missing the local MVP review date');
 
 const workflowSpec = readFileSync(join(projectRoot, '05_內容', 'research', 'ARTICLE_01_WORKFLOW_BUILD_SPEC.md'), 'utf8');
 expect(workflowSpec.includes('NOT BUILT / NOT TESTED / OAUTH NOT GRANTED'), 'Article 1 workflow spec must retain its untested/OAuth hold state');

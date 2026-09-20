@@ -47,9 +47,6 @@ function allowance(finding) {
   if (id === 'internal-codename' && (path === 'scripts/check-project.mjs' || path === 'scripts/check-site.mjs')) {
     return { allowed: true, developmentOnly: false, reason: 'Negative production-source assertion in project validation.' };
   }
-  if (id === 'placeholder' && path === 'vite.config.ts' && lineText.includes('SITE_CREATOR_PLACEHOLDER_DATABASE_ID')) {
-    return { allowed: true, developmentOnly: true, reason: 'Internal Sites scaffold fallback; D1 is not configured or user-facing.' };
-  }
   if (id === 'placeholder' && path === 'scripts/check-project.mjs') {
     return { allowed: true, developmentOnly: false, reason: 'Project validation text or audit filename.' };
   }

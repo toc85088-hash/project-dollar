@@ -1,6 +1,9 @@
 const baseUrl = process.env.SITE_URL ?? 'http://localhost:3000';
 const publicRoutes = [
   '/',
+  '/cleaning',
+  '/cleaning/demo',
+  '/cleaning/pilot',
   '/ai-automation',
   '/workflows',
   '/ai-tools',
@@ -28,7 +31,7 @@ const unavailableArticleRoutes = [
 ];
 const approvedBrand = 'Naveliqo';
 const approvedOrigin = 'https://naveliqo.com';
-const approvedPositioning = 'Simple AI Automation for Small Business';
+const homeTitle = 'Lead Follow-Up Automation for US Cleaning Businesses';
 const approvedTagline = 'No coding. No AI hype. Just practical workflows that save time and money.';
 const hubRoutes = new Set([
   '/ai-automation',
@@ -41,6 +44,7 @@ const hubRoutes = new Set([
 ]);
 const failures = [];
 const discoveredLinks = new Set();
+const fragmentLinks = new Set();
 
 function expect(condition, message) {
   if (!condition) failures.push(message);
@@ -76,12 +80,28 @@ for (const route of publicRoutes) {
   }
 
   if (route === '/') {
-    expect(body.includes(`<title>${approvedPositioning} | ${approvedBrand}</title>`), 'Home title does not use the approved positioning and brand');
+    expect(body.includes(`<title>${homeTitle} | ${approvedBrand}</title>`), 'Home title must use the Cleaning MVP focus and parent brand');
     expect(body.includes(approvedTagline), 'Home is missing the approved tagline');
     expect(body.includes(`href="${approvedOrigin}"`), 'Home canonical does not use the approved origin');
     expect(body.includes(`content="${approvedBrand}"`), 'Home metadata is missing the approved brand');
     expect(body.includes(`${approvedOrigin}/og.png`), 'Home Open Graph image does not use the approved origin');
   }
+  if (route.startsWith('/cleaning')) {
+    expect(!body.includes('application/ld+json'), `${route} must not output schema before MVP content approval`);
+    expect(!/mailto:/i.test(body), `${route} must not offer email submission without a real configured inbox`);
+  }
+  for (const match of body.matchAll(/href="(\/[^"#]*)#([^"?]+)"/g)) fragmentLinks.add(`${match[1]}#${match[2]}`);
+}
+
+for (const href of fragmentLinks) {
+  const [route, fragment] = href.split('#');
+  const html = await (await fetch(new URL(route, baseUrl))).text();
+  expect(html.includes(`id="${fragment}"`), `Internal anchor ${href} has no target`);
+}
+
+for (const route of ['/hvac', '/plumbing', '/landscaping', '/pest-control', '/other-home-services']) {
+  const response = await fetch(new URL(route, baseUrl));
+  expect(response.status === 404, `Future vertical ${route} must not expose an empty destination`);
 }
 
 for (const route of unavailableArticleRoutes) {

@@ -1,5 +1,15 @@
 # Naveliqo Launch Readiness Report
 
+## Current direction override — 2026-09-21
+
+Owner has selected **Naveliqo parent brand → US Residential Cleaning first MVP**. The older generic-content launch sprint below is retained as history, not the current release plan. The local homepage, Cleaning service, fictional demo and planning-brief flow are implemented; refer to `CLEANING_MVP_SPRINT1_REPORT.md` for verification. No article was approved/published. All generic hubs, including AI Automation, are contentReady=false. Cleaning pages remain noindex without canonical/schema; global gate CLOSED, robots Disallow `/`, sitemap empty.
+
+Public deployment/indexing/Search Console/AdSense remain **NO**. Current blockers: real monitored public inbox, human approval of commercial scope and truthful operator/privacy/provider details, private staging review and explicit release approval. A real connected workflow additionally requires separate permissions and fictional integration tests; the browser demo is not that evidence. Generic Article 1 remains isolated and is not a dependency for a cleaning-service MVP release.
+
+First concrete owner action: **provide and approve one real monitored public contact email**. This alone does not open any launch gate, authorize sends or require approving seven generic articles.
+
+## Historical generic-content assessment
+
 Report date：**2026-09-17**
 
 Scope：actual local repository and local production build. No deployment, DNS change, external-account login, Search Console submission, analytics installation, AdSense application, affiliate enrolment, payment, public indexing, or remote push occurred.

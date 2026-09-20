@@ -1,5 +1,13 @@
 # Naveliqo
 
+## Current direction — 2026-09-21
+
+Naveliqo 是通用母品牌；**US Residential Cleaning 是第一個垂直 MVP**。本輪先做 lead follow-up → quote preparation → booking handoff，由 owner 保留決策。Cleaning 不是永久品牌限制；HVAC、Plumbing、Landscaping、Pest Control、Other Home Services 預留在集中 vertical registry，未建立空白頁。
+
+已沿用既有架構建立 `/cleaning`、`/cleaning/demo`、`/cleaning/pilot`。Demo 是固定虛構資料的本機 simulation；pilot brief 可本機下載，沒有 submission、email send、外部 integration 或 active intake。所有 launch/indexing gates 仍關閉。Generic content 保留 draft/needs_review/noindex，不以完成舊文章數量阻塞 MVP。
+
+最新工作入口：`01_市場研究/CLEANING_MVP_STRATEGY.md`、`03_網站/CLEANING_MVP_SPEC.md`、`06_收入/CLEANING_PILOT_OFFER.md`、`06_收入/CLEANING_LEAD_GENERATION.md`、`07_Codex/CLEANING_MVP_SPRINT1_REPORT.md`。以下為保留的基礎定位與專案資料。
+
 Naveliqo 是一個面向美國、英國、加拿大與澳洲英語市場的內容網站，定位為 **Simple AI Automation for Small Business**。`Project Dollar` 僅保留為內部 project codename，不用於 production-facing branding。
 
 > **No coding. No AI hype. Just practical workflows that save time and money.**

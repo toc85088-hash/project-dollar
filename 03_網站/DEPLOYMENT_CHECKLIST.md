@@ -1,6 +1,6 @@
 # Deployment Checklist
 
-更新日期：2026-09-17
+更新日期：2026-09-18
 
 狀態：**準備中；本輪禁止正式部署、購買網域、登入 hosting 或修改 DNS。**
 
@@ -59,13 +59,12 @@
 - [ ] 確認 launch sitemap 只含 200、indexable、approved URLs，且 robots 宣告同一 sitemap。
 - [ ] 用 validator 與 Search Console 檢查 schema／sitemap；不得在 domain 未確認時開 gate。
 
-## 7. Content and trust — BLOCKED BY HUMAN APPROVAL
+## 7. Content and trust — LOCAL WORK COMPLETE / BLOCKED BY ONE HUMAN APPROVAL RECORD
 
-- [x] 七篇原創、vendor-neutral launch candidates 已完成 primary-source 查核與 evidence boundary；目前皆為 `needs_review`，0 published。
+- [x] 七篇原創、vendor-neutral launch candidates 已完成 2026-09-18 primary-source refresh、evidence boundary 與 local editorial preflight；目前皆為 `needs_review`，0 published。
 - [x] About 與新增 Editorial Policy 說明 organisational byline、sources、testing、AI assistance、corrections 與 commercial independence。
-- [ ] 七篇逐篇完成 human fact check／editor approval，設定 publication owner 與日期後才可發布。
-- [ ] About／Contact 的真實 publication owner 與 public inbox 完成。
-- [ ] Privacy、Terms、Affiliate Disclosure 依 final stack／markets 人工及必要的專業審查。
+- [x] Privacy、Terms 與 Affiliate Disclosure 已完成符合目前 zero-tracking／zero-commerce stack 的 launch-safe baseline；沒有聲稱 lawyer review。
+- [ ] Owner 完成 `07_Codex/LAUNCH_APPROVAL_RECORD.md` 的單一 approval statement：一次確認七篇文章、organisational byline、trust pages、真實 public inbox、operator label 與 host data handling。
 - [ ] 沒有 placeholder page、fake review、fake test、fake price、copied content 或 broken link。
 - [x] Codex local QA 已檢查 desktop、360px、768px、mobile menu、keyboard focus、article overflow、Editorial Policy 與 404；發現並修復 article table 引起的 page-level overflow。
 - [ ] 真人完成 major browser、真實裝置、screen reader、zoom、contrast 與品牌視覺 QA。

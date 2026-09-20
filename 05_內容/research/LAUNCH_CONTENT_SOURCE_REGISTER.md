@@ -1,8 +1,8 @@
 # Naveliqo Launch Content Source Register
 
-Verification date：**2026-09-17**
+Verification date：**2026-09-18**
 
-Scope：seven vendor-neutral launch candidates prepared for human editorial review.
+Scope：seven vendor-neutral launch candidates that completed local editorial preflight and await one final human release approval.
 
 Evidence boundary：no hands-on product test, screenshot, price, plan limit, saving, accuracy rate, revenue result, or customer outcome is claimed for these articles.
 
@@ -10,13 +10,13 @@ Evidence boundary：no hands-on product test, screenshot, price, plan limit, sav
 
 | Article | Route | Evidence status | Product test required for current scope |
 |---|---|---|---|
-| How to Automate Repetitive Tasks in a Small Business | `/tutorials/automate-repetitive-tasks-small-business` | Primary sources rechecked; editorial review pending | No |
-| 10 Small Business Automation Ideas That Start With a Real Workflow | `/workflows/small-business-automation-ideas` | Primary sources rechecked; editorial review pending | No |
-| AI Email Automation for Small Business: Draft First, Send Later | `/workflows/ai-email-automation-small-business` | Primary sources rechecked; editorial review pending | No |
-| AI Customer Service for Small Business: Start With Triage, Not a Bot | `/workflows/ai-customer-service-small-business` | Primary sources rechecked; editorial review pending | No |
-| AI Lead Follow-Up Automation: Keep Approval Before Send | `/workflows/ai-lead-follow-up-automation` | Primary sources rechecked; editorial review pending | No |
-| AI Meeting Notes for Small Business: A Review-First Workflow | `/workflows/ai-meeting-notes-small-business` | Primary sources rechecked; editorial review pending | No |
-| 9 AI Automation Mistakes Small Businesses Make | `/workflows/ai-automation-mistakes-small-businesses-make` | Primary sources rechecked; editorial review pending | No |
+| How to Automate Repetitive Tasks in a Small Business | `/tutorials/automate-repetitive-tasks-small-business` | Sources rechecked; local editorial preflight complete | No |
+| 10 Small Business Automation Ideas That Start With a Real Workflow | `/workflows/small-business-automation-ideas` | Sources rechecked; local editorial preflight complete | No |
+| AI Email Automation for Small Business: Draft First, Send Later | `/workflows/ai-email-automation-small-business` | Sources rechecked; local editorial preflight complete | No |
+| AI Customer Service for Small Business: Start With Triage, Not a Bot | `/workflows/ai-customer-service-small-business` | Sources rechecked; local editorial preflight complete | No |
+| AI Lead Follow-Up Automation: Keep Approval Before Send | `/workflows/ai-lead-follow-up-automation` | Sources rechecked; local editorial preflight complete | No |
+| AI Meeting Notes for Small Business: A Review-First Workflow | `/workflows/ai-meeting-notes-small-business` | Sources rechecked; local editorial preflight complete | No |
+| 9 AI Automation Mistakes Small Businesses Make | `/workflows/ai-automation-mistakes-small-businesses-make` | Sources rechecked; local editorial preflight complete | No |
 
 Article 1, tool roundups, product comparisons, and template downloads are intentionally outside this group because their planned claims require incomplete first-hand evidence or a real downloadable artifact.
 
@@ -40,7 +40,7 @@ Article 1, tool roundups, product comparisons, and template downloads are intent
 - Source URLs and verification dates are stored with each article record.
 - The site displays a plain-language evidence boundary before the source list.
 - Vendor-neutral articles set `screenshotsRequired: false`; this means no product screenshot is part of the claim set, not that evidence review is optional.
-- Every record remains `status: needs_review`, `humanApproved: false`, and without a publication date.
+- Every launch record now has `editorialReady: true`, but remains `status: needs_review`, `humanApproved: false`, and without a publication date. This separates completed local content work from the final human release decision.
 - Article 1 remains a separate draft with `evidenceComplete: false` and unresolved testing markers.
 
 ## Publication-day refresh

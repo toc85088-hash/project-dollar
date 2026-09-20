@@ -52,13 +52,13 @@ const isLaunchReady = Boolean(
 export const siteConfig = {
   name,
   editorialByline: `${name} Editorial`,
-  status: isLaunchReady ? 'INDEPENDENT PUBLICATION' : 'PRE-LAUNCH',
+  status: isLaunchReady ? 'PRACTICAL AUTOMATION' : 'PRE-LAUNCH',
   isApprovedBrand,
   positioning: approvedBrand.positioning,
   tagline: approvedBrand.tagline,
   promise: approvedBrand.tagline,
   description:
-    `${name} provides practical, evidence-led guides to simple AI automation for non-technical small business owners. ${approvedBrand.tagline}`,
+    `${name} helps small businesses plan practical automation, starting with lead follow-up, quote preparation, and booking handoffs for US residential cleaning businesses.`,
   url,
   hasProductionUrl,
   hasConfiguredContact,

@@ -25,6 +25,7 @@ export type ArticleRecord = {
   slug: string;
   path: string;
   status: ArticleStatus;
+  editorialReady: boolean;
   humanApproved: boolean;
   evidenceComplete: boolean;
   screenshotsRequired: boolean;
@@ -53,6 +54,7 @@ const articleRecords: ArticleRecord[] = [
     slug: 'what-should-small-business-automate-first',
     path: '/blog/what-should-small-business-automate-first',
     status: 'draft',
+    editorialReady: false,
     humanApproved: false,
     evidenceComplete: false,
     screenshotsRequired: true,
@@ -274,6 +276,7 @@ export function getUnresolvedEditorialMarkers(article: ArticleRecord) {
 export function isPublishable(article: ArticleRecord) {
   return Boolean(
     article.status === 'published' &&
+      article.editorialReady &&
       article.humanApproved &&
       article.evidenceComplete &&
       (!article.screenshotsRequired || article.screenshotsComplete) &&
