@@ -50,4 +50,4 @@ Ask about inquiry source, existing tools, missing details, current manual fallba
 
 ## Activation boundary
 
-Public marketing copy and contact are prepared; the website has not been deployed. Host selection and a separate release decision remain. Real account permission grants, testing and production activation are separate from public marketing readiness. No outreach, purchase, account connection or live customer automation is authorised by Sprint 1.5.
+Public marketing copy and contact are prepared; the website has not been deployed. Cloudflare Workers was selected and locally validated; actual deployment/DNS cutover still needs a separate release decision. Real account permission grants, testing and production activation are separate from public marketing readiness. No outreach, purchase, account connection or live customer automation is authorised by Sprint 1.5.

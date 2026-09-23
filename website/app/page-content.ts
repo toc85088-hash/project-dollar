@@ -310,8 +310,8 @@ export const pageContent: Record<string, PageContent> = {
     eyebrow: 'PRIVACY POLICY',
     title: 'Privacy Policy',
     description: `How ${siteConfig.name} handles technical request data and messages under its current, privacy-minimising site configuration.`,
-    intro: `Last updated 23 September 2026. This notice explains the ${siteConfig.name} information site, browser-only demo, local planning tool and email enquiries. For privacy questions, contact ${siteConfig.contactEmail}.`,
-    updatedAt: '2026-09-23',
+    intro: `Last updated 24 September 2026. This notice explains the ${siteConfig.name} information site, browser-only demo, local planning tool and email enquiries. For privacy questions, contact ${siteConfig.contactEmail}.`,
+    updatedAt: '2026-09-24',
     sections: [
       {
         heading: 'What the site does not collect directly',
@@ -323,7 +323,7 @@ export const pageContent: Record<string, PageContent> = {
       },
       {
         heading: 'Technical request and security data',
-        paragraphs: ['When you access the site, hosting and network providers process technical request information to deliver and protect it. This may include IP address, browser or device information, requested URL, timestamp, response status and security signals. This is distinct from the demo choices, which stay in your browser. Provider logs and necessary security controls are governed by the applicable provider terms and settings; this notice does not promise anonymous access or zero infrastructure logging.'],
+        paragraphs: ['The public website is configured for Cloudflare Workers hosting and network delivery. Cloudflare processes technical request information needed to deliver and protect it, which may include IP address, browser or device information, requested URL, timestamp, response status and security signals. This is distinct from the demo choices, which stay in your browser. Optional persisted Worker application logs are disabled in the release configuration. Provider infrastructure records and necessary security controls remain governed by Cloudflare’s terms and settings; this notice does not promise anonymous access or zero infrastructure logging.'],
       },
       {
         heading: 'Contact messages',

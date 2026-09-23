@@ -4,7 +4,7 @@
 
 The owner-approved public inbox is now **hello@naveliqo.com**, active and monitored through Cloudflare Email Routing; the private destination is not exposed. The approved **US$149–199** scoped setup offer, useful demo/email CTAs and consistent trust copy are integrated. Missing public contact and unspecified advertised pricing are no longer blockers.
 
-See `CLEANING_MVP_SPRINT_1_5_REPORT.md` for current QA and go/no-go. The actual website hosting platform is still unselected; choose it so runtime, infrastructure data handling, HTTPS/cutover and rollback can be checked. No deployment or indexing is authorised. All article/hub/robots/sitemap safeguards remain unchanged. An informational, noindex release does not require generic articles or a completed external-account demo.
+See `CLEANING_MVP_SPRINT_1_5_REPORT.md` for current QA and go/no-go. Owner selected Cloudflare Workers; generated release configuration, dry-run and local workerd route/browser checks passed. The informational noindex release package is ready for a separately authorised deployment/DNS cutover; account/HTTPS/live smoke checks remain execution-time steps, not completed remote tests. No deployment or indexing is authorised here. All article/hub/robots/sitemap safeguards remain unchanged. An informational release does not require generic articles or a completed external-account demo.
 
 The dated assessments below are historical; their request for a public inbox is superseded.
 

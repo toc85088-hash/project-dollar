@@ -11,13 +11,14 @@
 - [x] Owner 核准並確認 active/monitored 的 `hello@naveliqo.com`；不公開私人 forwarding destination。
 - [x] 集中核准的 US$149–199 setup range、scope、exclusions、customer responsibilities、limitations 與 email/demo CTA。
 - [x] 更新 trust pages：真實 contact、Cloudflare Email Routing、local-only tools、無 checkout、無虛構實績。
-- [ ] Owner 選擇網站 hosting target；完成對應 runtime、privacy/log settings 與 rollback 驗證後再決定部署。
+- [x] Owner 選擇 Cloudflare Workers；完成 source/generated config guard、dry-run、本機 workerd routes/browser QA 與對應部署/rollback 文件。
+- [ ] Owner 另行核准實際部署與 DNS 切換，再依 checklist 確认 account、HTTPS、live smoke checks；本輪不執行。
 - [ ] 取得真人 discovery 回饋；有授權後才進行外部聯繫。
 - [ ] 個別核准帳號權限後，在 fictional data 下驗證真實 integration、partial failure、no-send 與 disabled 狀態。
 - [ ] 人工核准公開 launch；此 sprint 不部署、不開索引、不提交 Search Console/AdSense。
 
 舊 generic articles 與 Make Article 1 evidence 保留隔離，不作為 Cleaning demo 實測證據。
-Sprint 2 尚未開始；最新驗證與唯一目前人工作業入口見 `07_Codex/CLEANING_MVP_SPRINT_1_5_REPORT.md`。
+Sprint 2 尚未開始；本機準備已完成，發布操作的人工作業入口見 `07_Codex/CLEANING_MVP_SPRINT_1_5_REPORT.md`。
 
 更新日期：2026-08-24
 

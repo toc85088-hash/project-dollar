@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 
 const websiteRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const productionMode = process.argv.includes('--production') || process.env.NODE_ENV === 'production';
-const excludedDirectories = new Set(['.git', '.next', '.vinext', 'dist', 'node_modules', 'out', 'outputs', 'work']);
+const excludedDirectories = new Set(['.git', '.next', '.vinext', '.wrangler', 'dist', 'node_modules', 'out', 'outputs', 'work']);
 const excludedFiles = new Set(['pnpm-lock.yaml', 'check-placeholders.mjs']);
 const textExtensions = new Set(['.css', '.env', '.html', '.js', '.json', '.jsx', '.md', '.mdx', '.mjs', '.svg', '.ts', '.tsx', '.txt']);
 

@@ -1,10 +1,10 @@
 # Cleaning MVP — Production Environment Preparation
 
-Updated: 2026-09-24. Prepared locally; no hosting environment or DNS changed. The website hosting platform still needs an owner decision. Email Routing alone does not identify it.
+Updated: 2026-09-24. Owner selected **Cloudflare Workers**, retaining the existing Vinext/Vite adapter. Release configuration is prepared and tested locally; no hosting account, remote Worker or DNS was changed.
 
 ## Exact public configuration
 
-`website/.env.example` is the source template. Set these identically at build/runtime where the eventual host requires them; a deployed artifact must be rebuilt when build-time public values change.
+`website/.env.example` is the application-value template. `website/wrangler.json` records these same public values as Worker runtime bindings; `scripts/check-worker.mjs` rejects drift in both source and generated configuration. Rebuild when changing build-time public values.
 
 ```dotenv
 NEXT_PUBLIC_SITE_NAME=Naveliqo
@@ -21,7 +21,7 @@ NEXT_PUBLIC_ADSENSE_PUBLISHER_ID=
 
 No application API keys, Google OAuth credentials, customer-account tokens, database or payment secrets are required for this informational MVP. Do not populate the unused Google settings. Do not put the private forwarding inbox in environment variables, source, build logs or artifacts. Site config rejects any contact override other than the approved public address without printing the rejected value.
 
-`NODE_ENV=production` is supplied by the production build/runtime; runtime port/binding is provider-specific, not a public site value. Use Node 22.13+ and the existing pnpm lockfile. The local production check uses `pnpm build` then `pnpm start --hostname 127.0.0.1`; it is not a deployment command. Do not use that loopback binding as an unreviewed hosting recipe.
+`NODE_ENV=production` is supplied by the production build/runtime. Use Node 22.13+ for building, with the existing pnpm lockfile. Cloudflare executes the generated Worker, not a Node listening server. The retained `nodejs_compat` flag and compatibility date `2026-05-15` support runtime `process.env` bindings; no compatibility-date upgrade was needed. See [Cloudflare environment variables](https://developers.cloudflare.com/workers/configuration/environment-variables/).
 
 ## Gates and boundaries
 
@@ -32,9 +32,25 @@ No application API keys, Google OAuth credentials, customer-account tokens, data
 - The fictional demo and downloadable brief are browser-only. No Gmail/Make/CRM/calendar/booking connection exists.
 - Pilot range and CTA copy are centralized in `website/app/cleaning/offer.ts`; domain, brand and inbox in `website/app/site-config.ts`.
 
-## Provider-specific completion after host selection
+## Workers release configuration — locally verified
 
-Confirm target runtime compatibility with the existing build, build-time versus runtime variable injection, access controls, technical logging/retention, HTTPS/custom-domain procedure, release artifact persistence and rollback. The Vite configuration contains a Cloudflare adapter but that does **not** establish a provisioned or tested hosting environment. Do not invent a deployment project, account ID, route or token.
+- Source: `website/wrangler.json`; generated deployable configuration: `website/dist/server/wrangler.json` with `index.js` and assets in `../client`. Never hand-edit generated output.
+- Worker release name: `naveliqo-cleaning-mvp` (local configuration name, not a claim that a remote Worker exists).
+- `workers_dev=false`, `preview_urls=false`, `routes=[]`: no public target is enabled by the prepared config. Domain association remains a separate, explicit release/DNS action.
+- Optional persisted Worker logs and Wrangler usage telemetry are off. This does not mean Cloudflare infrastructure processes no request/security data. Privacy copy describes that distinction; no GA4/ad code is installed.
+- No D1, R2, KV, queues, email, schedules or external service bindings. No account ID/token is invented or committed. `.dev.vars*` is ignored alongside `.env*`.
+
+Verified commands from `website` (all local):
+
+```powershell
+pnpm build
+pnpm exec wrangler deploy --config dist/server/wrangler.json --dry-run --outdir .wrangler/dry-run
+pnpm exec wrangler dev --config dist/server/wrangler.json --local --ip 127.0.0.1 --port 3000 --inspector-port 9231
+```
+
+The first Wrangler command **must retain `--dry-run`**: it performed package checks and exited without uploading. `--local` disables remote bindings for runtime QA. Validation used telemetry disabled and `CLOUDFLARE_LOAD_DEV_VARS_FROM_DOT_ENV=false`; no login. The local Worker passed the full route suite and a browser hydration/demo check. This does not claim deployed-account, live HTTPS or production-traffic verification.
+
+Sources checked 2026-09-24: [Vite/Workers runtime](https://developers.cloudflare.com/workers/vite-plugin/) and [Wrangler configuration](https://developers.cloudflare.com/workers/wrangler/configuration/). Use `DEPLOYMENT_CHECKLIST.md` for the remaining human-controlled release steps, not an automatic command runner.
 
 Cloudflare Email Routing handles inbound delivery. It does not by itself verify branded outbound replies. The owner should use a reply configuration that does not disclose the private forwarding destination; this sprint did not log in, inspect mailbox headers or send test email. The approved active/monitored status is owner-provided evidence, not an agent-performed delivery test.
 

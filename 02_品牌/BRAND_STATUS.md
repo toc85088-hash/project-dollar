@@ -33,4 +33,4 @@
 
 ## Launch boundary
 
-目前不得部署、修改 DNS、啟用 indexing、提交 Search Console、安裝 analytics／AdSense、加入 affiliate links，或將 draft 改為 published。保留上述視覺 fallback，不把它們聲稱為已核准的 final identity；最小 Cleaning informational release 不需先完成完整 logo/social/author package。當前發布決策與 hosting blocker 以 `07_Codex/CLEANING_MVP_SPRINT_1_5_REPORT.md` 為準，後續視覺替換仍需獨立確認。
+目前不得部署、修改 DNS、啟用 indexing、提交 Search Console、安裝 analytics／AdSense、加入 affiliate links，或將 draft 改為 published。保留上述視覺 fallback，不把它們聲稱為已核准的 final identity；最小 Cleaning informational release 不需先完成完整 logo/social/author package。當前發布決策與人工作業邊界以 `07_Codex/CLEANING_MVP_SPRINT_1_5_REPORT.md` 為準，後續視覺替換仍需獨立確認。

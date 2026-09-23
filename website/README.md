@@ -31,9 +31,12 @@ pnpm build
 pnpm check:placeholders
 pnpm test:project
 pnpm test:site
+pnpm check:worker
 ```
 
 `build` and `test:project` run the production placeholder guard. Approved development-only matches produce explicit launch-blocking warnings; new high-risk matches such as TODO/FIXME, sample addresses, Lorem, unapproved prices, fabricated reviews, or statistical claims fail production validation.
+
+`build` also validates the source/generated Cloudflare Workers configuration. The owner selected Workers; `wrangler.json` provides approved public values, closed gates, no public routes/preview URLs and no optional persisted Worker logs. The production bundle has passed local workerd route and browser smoke tests, not a live deployment. See `../03_網站/CLEANING_PRODUCTION_ENVIRONMENT.md` for local-only commands and `../03_網站/DEPLOYMENT_CHECKLIST.md` for the separately authorised release/DNS procedure. `.wrangler` holds generated local artifacts and is excluded from source lint/scans, not from runtime checks.
 
 `test:site` expects a development or production server at `http://localhost:3000`. Set `SITE_URL` only when testing another approved local origin. In preparation mode with draft preview disabled, the test expects the article draft to return 404, site-wide `noindex`, Hub-level canonical/schema protection, a crawl-blocking `robots.txt`, and an empty sitemap.
 
@@ -71,6 +74,6 @@ Public indexing requires all conditions below:
 
 Until then, global metadata uses `noindex`, `robots.txt` disallows crawling, the sitemap is empty, and Organization structured data is withheld. Google Analytics, AdSense, affiliate tracking, server-side email handling, payment, and deployment are not connected. A later owner-authorized informational deployment can retain these exact closed gates; public availability and search indexing are different approvals. Do not change gates just to make a deployment possible.
 
-## Remaining human blocker
+## Remaining human release boundary
 
-Public inbox and advertised setup range are now approved. Select the actual website hosting target so its runtime, logs/privacy settings, deployment and rollback can be checked. Cloudflare Email Routing does not select website hosting. The seven-article proposal is superseded by the Cleaning MVP direction; do not publish generic guides or run a real customer automation to satisfy this informational release. No deployment, DNS changes, indexing or Sprint 2 work is authorized here.
+Public inbox, advertised setup range and Cloudflare Workers target are approved. Local configuration/runtime QA is complete. The owner must separately authorise the actual deployment and DNS cutover, then execute account/HTTPS/live smoke checks in the checklist. No account, domain or rollback-version existence is inferred from local QA. The seven-article proposal is superseded; do not publish generic guides or run a real customer automation to satisfy this informational release. No deployment, DNS changes, indexing or Sprint 2 work is authorized here.

@@ -14,7 +14,6 @@ const isCodexSeatbeltSandbox = process.env.CODEX_SANDBOX === 'seatbelt';
 
 const localBindingConfig = {
   main: 'vinext/server/app-router-entry',
-  compatibility_flags: ['nodejs_compat'],
   d1_databases: d1
     ? [
         {
@@ -53,6 +52,7 @@ export default defineConfig(async () => {
       vinext(),
       sites(),
       cloudflare({
+        configPath: './wrangler.json',
         viteEnvironment: { name: 'rsc', childEnvironments: ['ssr'] },
         config: localBindingConfig,
       }),

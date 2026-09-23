@@ -1,0 +1,24 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "naveliqo-cleaning-mvp",
+  "main": "vinext/server/app-router-entry",
+  "compatibility_date": "2026-05-15",
+  "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": false,
+  "preview_urls": false,
+  "routes": [],
+  "send_metrics": false,
+  "observability": { "enabled": false },
+  "vars": {
+    "NEXT_PUBLIC_SITE_NAME": "Naveliqo",
+    "NEXT_PUBLIC_SITE_URL": "https://naveliqo.com",
+    "NEXT_PUBLIC_CONTACT_EMAIL": "hello@naveliqo.com",
+    "NEXT_PUBLIC_SHOW_DRAFTS": "false",
+    "SITE_LAUNCH_READY": "false",
+    "CONTENT_LAUNCH_APPROVED": "false",
+    "TRUST_PAGES_APPROVED": "false",
+    "GOOGLE_SITE_VERIFICATION": "",
+    "NEXT_PUBLIC_GA_MEASUREMENT_ID": "",
+    "NEXT_PUBLIC_ADSENSE_PUBLISHER_ID": ""
+  }
+}
