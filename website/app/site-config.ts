@@ -1,13 +1,18 @@
 const approvedBrand = {
   name: 'Naveliqo',
   siteUrl: 'https://naveliqo.com',
+  contactEmail: 'hello@naveliqo.com',
   positioning: 'Simple AI Automation for Small Business',
   tagline: 'No coding. No AI hype. Just practical workflows that save time and money.',
 } as const;
 
 const configuredName = process.env.NEXT_PUBLIC_SITE_NAME?.trim() || approvedBrand.name;
 const configuredUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim() || approvedBrand.siteUrl;
-const configuredContactEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL?.trim();
+// The public address is owner-approved. Never render a forwarding address from an environment override.
+const configuredContactEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL?.trim() || approvedBrand.contactEmail;
+if (configuredContactEmail !== approvedBrand.contactEmail) {
+  throw new Error('NEXT_PUBLIC_CONTACT_EMAIL must match the approved public contact address.');
+}
 
 function normalizedUrl(value: string) {
   try {
@@ -33,11 +38,7 @@ const name = configuredName;
 const url = normalizedUrl(configuredUrl);
 const isApprovedBrand = name === approvedBrand.name;
 const hasProductionUrl = isPublicHttpsUrl(configuredUrl) && url === approvedBrand.siteUrl;
-const hasConfiguredContact = Boolean(
-  configuredContactEmail &&
-    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(configuredContactEmail) &&
-    !configuredContactEmail.toLowerCase().endsWith('@example.com'),
-);
+const hasConfiguredContact = configuredContactEmail === approvedBrand.contactEmail;
 const contentLaunchApproved = process.env.CONTENT_LAUNCH_APPROVED === 'true';
 const trustPagesApproved = process.env.TRUST_PAGES_APPROVED === 'true';
 const isLaunchReady = Boolean(
@@ -65,7 +66,8 @@ export const siteConfig = {
   contentLaunchApproved,
   trustPagesApproved,
   isLaunchReady,
-  contactEmail: hasConfiguredContact ? configuredContactEmail! : null,
+  contactEmail: approvedBrand.contactEmail,
+  contactHref: `mailto:${approvedBrand.contactEmail}`,
   google: {
     siteVerification: process.env.GOOGLE_SITE_VERIFICATION?.trim() || null,
     analyticsMeasurementId: process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID?.trim() || null,

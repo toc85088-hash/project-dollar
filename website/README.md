@@ -1,14 +1,14 @@
 # Naveliqo website
 
-## Cleaning MVP update — 2026-09-21
+## Cleaning MVP update — Sprint 1.5, 2026-09-24
 
 Existing stack retained; no new dependencies. Homepage now focuses on US residential cleaning while `app/site-config.ts` retains the general parent brand. `app/industries.ts` reserves six vertical slots; only Cleaning has routes. `/cleaning`, `/cleaning/demo`, `/cleaning/pilot` remain noindex with no canonical/schema. Generic hubs now all have contentReady=false.
 
-Demo: fictional fixed records and deterministic templates, no AI/network/storage. Pilot builder: local select-based brief and `.txt` download, no lead submission or email. A configured public inbox is still missing. These local tools do not prove a Google/Make integration. Run `pnpm test:cleaning` or `pnpm test:project`; running-site validation is `pnpm test:site`. Refer to `../03_網站/CLEANING_MVP_SPEC.md` and `../07_Codex/CLEANING_MVP_SPRINT1_REPORT.md` for current scope and evidence.
+Demo: fictional fixed records and deterministic templates, no AI/network/storage. Pilot builder: local select-based brief and `.txt` download, no lead submission or email. The owner-approved public inbox is `hello@naveliqo.com`; mail links open the visitor's composer and do not send. The approved pilot setup range and two conversion CTAs live in `app/cleaning/offer.ts`. These local tools do not prove a Google/Make integration. Run `pnpm test:cleaning` or `pnpm test:project`; running-site validation is `pnpm test:site`. See `../07_Codex/CLEANING_MVP_SPRINT_1_5_REPORT.md` for results and `../03_網站/DEPLOYMENT_CHECKLIST.md` for the separate release boundary.
 
-Local Vinext/React site for **Simple AI Automation for Small Business**. Internal project codename: Project Dollar. The codebase is responsive, server-rendered, SEO-aware, and intentionally gated against accidental public indexing while the public inbox, final human approval, staging, and release decision remain incomplete.
+Local Vinext/React site for **Simple AI Automation for Small Business**. Internal project codename: Project Dollar. The codebase is responsive, server-rendered, SEO-aware, and intentionally gated against accidental public indexing. Public contact approval does not open the indexing or article publication gates.
 
-The approved Naveliqo name, positioning, tagline, and `https://naveliqo.com` canonical origin are centralized in `app/site-config.ts`. `.env.example` contains those approved public values; contact and Google integration values remain blank. The header uses a text-only wordmark fallback, and the current OG image is a temporary staging asset—not a final logo or visual identity.
+The approved Naveliqo name, positioning, tagline, `https://naveliqo.com` canonical origin and public inbox are centralized in `app/site-config.ts`. `.env.example` contains those approved public values; Google integration values remain blank. A contact override differing from the approved public inbox fails closed without printing its value. The header uses a text-only wordmark fallback; no final logo is claimed.
 
 ## Local development
 
@@ -41,7 +41,7 @@ Internal links use the centralized `app/components/site-link.tsx` standard-ancho
 
 ## Hub indexing system
 
-Hub readiness is centralized in `app/route-indexing.ts`. AI Automation is the only Hub with `contentReady=true` because it contains a substantive standalone foundation; the other six remain false. The global launch gate still keeps all seven noindex. An unready Hub has no canonical, page structured data, or sitemap entry even if the site-wide gate is later enabled.
+Hub readiness is centralized in `app/route-indexing.ts`. All seven generic hubs currently have `contentReady=false` under the Cleaning MVP direction. An unready Hub has no canonical, page structured data, or sitemap entry even if the site-wide gate is later enabled. The three Cleaning routes also retain their current noindex policy.
 
 ## Article content system
 
@@ -65,12 +65,12 @@ Public indexing requires all conditions below:
 
 - The approved `Naveliqo` brand supplied through `NEXT_PUBLIC_SITE_NAME`.
 - The approved `https://naveliqo.com` origin supplied through `NEXT_PUBLIC_SITE_URL`.
-- A syntactically valid, non-example public inbox supplied through `NEXT_PUBLIC_CONTACT_EMAIL`.
+- The approved public inbox `hello@naveliqo.com`; a different `NEXT_PUBLIC_CONTACT_EMAIL` is rejected.
 - Explicit human content and trust-page approvals through `CONTENT_LAUNCH_APPROVED=true` and `TRUST_PAGES_APPROVED=true`.
 - An explicit `SITE_LAUNCH_READY=true` after the deployment checklist passes.
 
-Until then, global metadata uses `noindex`, `robots.txt` disallows crawling, the sitemap is empty, and Organization structured data is withheld. Google Analytics, AdSense, affiliate tracking, email handling, payment, and deployment are not connected.
+Until then, global metadata uses `noindex`, `robots.txt` disallows crawling, the sitemap is empty, and Organization structured data is withheld. Google Analytics, AdSense, affiliate tracking, server-side email handling, payment, and deployment are not connected. A later owner-authorized informational deployment can retain these exact closed gates; public availability and search indexing are different approvals. Do not change gates just to make a deployment possible.
 
 ## Remaining human blocker
 
-Provide and approve one real monitored public contact inbox first. The earlier seven-article approval proposal is superseded by the Cleaning MVP direction; do not publish generic guides to satisfy an obsolete launch count. Operator/privacy/provider facts, pilot scope/fees, connected-account permissions and release approval remain separate. Deployment, DNS, HTTPS, backups, rollback, real-device QA, Search Console, analytics, and AdSense are not authorized by this sprint.
+Public inbox and advertised setup range are now approved. Select the actual website hosting target so its runtime, logs/privacy settings, deployment and rollback can be checked. Cloudflare Email Routing does not select website hosting. The seven-article proposal is superseded by the Cleaning MVP direction; do not publish generic guides or run a real customer automation to satisfy this informational release. No deployment, DNS changes, indexing or Sprint 2 work is authorized here.

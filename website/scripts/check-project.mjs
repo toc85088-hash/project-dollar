@@ -11,6 +11,9 @@ function expect(condition, message) {
 }
 
 const requiredDocs = [
+  '03_網站/CLEANING_PRODUCTION_ENVIRONMENT.md',
+  '07_Codex/CLEANING_CTA_AUDIT.md',
+  '07_Codex/CLEANING_MVP_SPRINT_1_5_REPORT.md',
   '01_市場研究/CLEANING_MVP_STRATEGY.md',
   '03_網站/CLEANING_MVP_SPEC.md',
   '06_收入/CLEANING_PILOT_OFFER.md',
@@ -192,8 +195,8 @@ if (existsSync(envExamplePath)) {
   const envExample = readFileSync(envExamplePath, 'utf8');
   expect(/^NEXT_PUBLIC_SITE_NAME=Naveliqo$/m.test(envExample), 'Approved brand is missing from .env.example');
   expect(/^NEXT_PUBLIC_SITE_URL=https:\/\/naveliqo\.com$/m.test(envExample), 'Approved canonical origin is missing from .env.example');
+  expect(/^NEXT_PUBLIC_CONTACT_EMAIL=hello@naveliqo\.com$/m.test(envExample), 'Approved public contact is missing from .env.example');
   for (const variable of [
-    'NEXT_PUBLIC_CONTACT_EMAIL',
     'GOOGLE_SITE_VERIFICATION',
     'NEXT_PUBLIC_GA_MEASUREMENT_ID',
     'NEXT_PUBLIC_ADSENSE_PUBLISHER_ID',
@@ -286,7 +289,7 @@ expect(pageContentSource.includes("'editorial-policy':"), 'Missing public editor
 expect(pageContentSource.includes("articleCollection: 'all'"), 'Hub content does not expose centralized published-article collections');
 expect(pageContentSource.includes('siteConfig.editorialByline'), 'About page does not explain the centralized organisational byline');
 expect(!/PRIVACY POLICY — PRE-LAUNCH DRAFT|TERMS OF USE — PRE-LAUNCH DRAFT/.test(pageContentSource), 'Trust pages still expose pre-launch draft headings');
-expect(pageContentSource.includes('Reviewed 21 September 2026'), 'Privacy and terms pages are missing the local MVP review date');
+expect(pageContentSource.includes('Last updated 23 September 2026'), 'Privacy and terms pages are missing the contact/offer review date');
 
 const workflowSpec = readFileSync(join(projectRoot, '05_內容', 'research', 'ARTICLE_01_WORKFLOW_BUILD_SPEC.md'), 'utf8');
 expect(workflowSpec.includes('NOT BUILT / NOT TESTED / OAUTH NOT GRANTED'), 'Article 1 workflow spec must retain its untested/OAuth hold state');

@@ -31,6 +31,9 @@ const unavailableArticleRoutes = [
 ];
 const approvedBrand = 'Naveliqo';
 const approvedOrigin = 'https://naveliqo.com';
+const approvedContact = 'hello@naveliqo.com';
+const approvedPrice = `US${String.fromCharCode(36)}${[149, 199].join('–')}`;
+const pilotSubject = 'Residential cleaning pilot setup enquiry';
 const homeTitle = 'Lead Follow-Up Automation for US Cleaning Businesses';
 const approvedTagline = 'No coding. No AI hype. Just practical workflows that save time and money.';
 const hubRoutes = new Set([
@@ -70,6 +73,23 @@ for (const route of publicRoutes) {
   expect(!/PROJECT DOLLAR/i.test(body), `${route} exposes the internal project codename`);
   expect(!body.includes('"@type":"Article"'), `${route} must not output Article schema without a publishable article`);
   expect(!body.includes('"@type":"Organization"'), `${route} must not output Organization schema before launch approval`);
+  expect(body.includes(`href="mailto:${approvedContact}"`), `${route} must provide the canonical public contact`);
+  expect(!/[A-Z0-9._%+-]+@(?:gmail|googlemail)\.com/i.test(body), `${route} must not expose a forwarding inbox`);
+  expect(!/contact channel opens|inquiries are not open|address has not been configured/i.test(body), `${route} contains obsolete contact status`);
+  expect(!/href="(?:#|javascript:[^"]*|)"/i.test(body), `${route} contains a dead CTA`);
+  for (const match of body.matchAll(/href="(mailto:[^"]+)"/g)) {
+    const href = new URL(match[1].replaceAll('&amp;', '&'));
+    expect(href.pathname === approvedContact, `${route} has an unapproved mail recipient`);
+    expect(!href.searchParams.has('cc') && !href.searchParams.has('bcc'), `${route} must not add hidden mail recipients`);
+  }
+  if (route === '/' || route.startsWith('/cleaning') || route === '/contact') {
+    expect(body.includes('Ask About the Pilot Setup'), `${route} is missing the approved secondary CTA`);
+    expect(body.includes(`href="mailto:${approvedContact}?subject=${encodeURIComponent(pilotSubject)}"`), `${route} has a wrong pilot enquiry destination`);
+  }
+  if (['/', '/cleaning', '/cleaning/pilot', '/terms'].includes(route)) expect(body.includes(approvedPrice), `${route} is missing the approved setup range`);
+  if (['/', '/cleaning', '/cleaning/pilot', '/contact'].includes(route)) {
+    expect(/href="\/cleaning\/demo"[^>]*>Get a Free 90-Second Demo</.test(body), `${route} must link the approved primary CTA to the real demo`);
+  }
   if (hubRoutes.has(route)) {
     expect(!body.includes('"@type":"BreadcrumbList"'), `${route} must not output structured data while contentReady=false`);
   }
@@ -88,7 +108,6 @@ for (const route of publicRoutes) {
   }
   if (route.startsWith('/cleaning')) {
     expect(!body.includes('application/ld+json'), `${route} must not output schema before MVP content approval`);
-    expect(!/mailto:/i.test(body), `${route} must not offer email submission without a real configured inbox`);
   }
   for (const match of body.matchAll(/href="(\/[^"#]*)#([^"?]+)"/g)) fragmentLinks.add(`${match[1]}#${match[2]}`);
 }

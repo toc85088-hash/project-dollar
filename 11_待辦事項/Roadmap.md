@@ -1,6 +1,6 @@
 # Project Dollar Roadmap
 
-## Active priority — Cleaning MVP, 2026-09-21
+## Active priority — Cleaning MVP Sprint 1.5, 2026-09-24
 
 此區優先於下方保留的 generic-content phases。Naveliqo 母品牌不變；US Residential Cleaning 為第一 vertical。
 
@@ -8,13 +8,16 @@
 - [x] 完成本機成功/缺 email/超區 demo、duplicate guard 與手動 fallback 說明。
 - [x] 建立 bounded pilot scope 與可下載的本機 brief，沒有假 submission。
 - [x] 研究 6 個公開公司流程，記錄 discovery 假設，尚未聯絡。
-- [ ] Owner 提供並核准真實、可收發且有人處理的公開聯絡 email。
-- [ ] 人工核准 pilot scope、實際費用/條件、operator/privacy/hosting facts。
+- [x] Owner 核准並確認 active/monitored 的 `hello@naveliqo.com`；不公開私人 forwarding destination。
+- [x] 集中核准的 US$149–199 setup range、scope、exclusions、customer responsibilities、limitations 與 email/demo CTA。
+- [x] 更新 trust pages：真實 contact、Cloudflare Email Routing、local-only tools、無 checkout、無虛構實績。
+- [ ] Owner 選擇網站 hosting target；完成對應 runtime、privacy/log settings 與 rollback 驗證後再決定部署。
 - [ ] 取得真人 discovery 回饋；有授權後才進行外部聯繫。
 - [ ] 個別核准帳號權限後，在 fictional data 下驗證真實 integration、partial failure、no-send 與 disabled 狀態。
 - [ ] 人工核准公開 launch；此 sprint 不部署、不開索引、不提交 Search Console/AdSense。
 
 舊 generic articles 與 Make Article 1 evidence 保留隔離，不作為 Cleaning demo 實測證據。
+Sprint 2 尚未開始；最新驗證與唯一目前人工作業入口見 `07_Codex/CLEANING_MVP_SPRINT_1_5_REPORT.md`。
 
 更新日期：2026-08-24
 

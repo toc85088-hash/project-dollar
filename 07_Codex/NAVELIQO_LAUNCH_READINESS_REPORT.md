@@ -1,5 +1,13 @@
 # Naveliqo Launch Readiness Report
 
+## Latest status — Cleaning MVP Sprint 1.5, 2026-09-24
+
+The owner-approved public inbox is now **hello@naveliqo.com**, active and monitored through Cloudflare Email Routing; the private destination is not exposed. The approved **US$149–199** scoped setup offer, useful demo/email CTAs and consistent trust copy are integrated. Missing public contact and unspecified advertised pricing are no longer blockers.
+
+See `CLEANING_MVP_SPRINT_1_5_REPORT.md` for current QA and go/no-go. The actual website hosting platform is still unselected; choose it so runtime, infrastructure data handling, HTTPS/cutover and rollback can be checked. No deployment or indexing is authorised. All article/hub/robots/sitemap safeguards remain unchanged. An informational, noindex release does not require generic articles or a completed external-account demo.
+
+The dated assessments below are historical; their request for a public inbox is superseded.
+
 ## Current direction override — 2026-09-21
 
 Owner has selected **Naveliqo parent brand → US Residential Cleaning first MVP**. The older generic-content launch sprint below is retained as history, not the current release plan. The local homepage, Cleaning service, fictional demo and planning-brief flow are implemented; refer to `CLEANING_MVP_SPRINT1_REPORT.md` for verification. No article was approved/published. All generic hubs, including AI Automation, are contentReady=false. Cleaning pages remain noindex without canonical/schema; global gate CLOSED, robots Disallow `/`, sitemap empty.

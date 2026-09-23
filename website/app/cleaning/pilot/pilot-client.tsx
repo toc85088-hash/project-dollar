@@ -11,7 +11,7 @@ const questions = [
 
 type Choices = Record<typeof questions[number]['key'], string>;
 
-export function PilotBriefBuilder({ brandName }: { brandName: string }) {
+export function PilotBriefBuilder({ brandName, setupPrice }: { brandName: string; setupPrice: string }) {
   const [choices, setChoices] = useState<Choices>({ channel: questions[0].options[0], handoff: questions[1].options[0], tools: questions[2].options[0], service: questions[3].options[0] });
   const [brief, setBrief] = useState('');
   const [downloaded, setDownloaded] = useState(false);
@@ -27,7 +27,7 @@ export function PilotBriefBuilder({ brandName }: { brandName: string }) {
   return <div className="pilot-builder">
     <form onSubmit={(event) => {
       event.preventDefault();
-      setBrief(`${brandName} — Residential Cleaning Pilot Brief\n\nPlanning only. Not an application, booking, quote, or service agreement.\n\n${questions.map((question) => `${question.label}\n${choices[question.key]}`).join('\n\n')}\n\nProposed boundary\nOne inquiry source, one service type, an owner-reviewed reply draft, a follow-up task, and a status record. Quote and booking approval stay with the business owner.\n\nBefore any connection\nConfirm service area, required fields, approved reply wording, current software compatibility, permissions, free-plan limits, and a manual fallback. Use fictional records first. Agree fees and scope separately; no purchase is authorized by this brief.\n\nAcceptance checks\nComplete inquiry; missing reply address; out-of-area inquiry; duplicate inquiry; tool failure; manual recovery. No automatic sends or confirmed bookings.\n\nNo personal or customer data is included. This file was generated locally and has not been submitted.`);
+      setBrief(`${brandName} — Residential Cleaning Pilot Brief\n\nPlanning only. Not an application, booking, quote, or service agreement.\n\nPublished pilot setup range: ${setupPrice}. Final fee and scope require written agreement before work. Software costs and ongoing support are not included.\n\n${questions.map((question) => `${question.label}\n${choices[question.key]}`).join('\n\n')}\n\nProposed boundary\nOne inquiry source, one service type, an owner-reviewed reply draft, a follow-up task, and a status record. Quote and booking approval stay with the business owner.\n\nBefore any connection\nConfirm service area, required fields, approved reply wording, current software compatibility, permissions, plan limits, and a manual fallback. Use fictional records first. Agree timing, payment, cancellation and acceptance terms separately; no purchase is authorized by this brief.\n\nAcceptance checks\nComplete inquiry; missing reply address; out-of-area inquiry; duplicate inquiry; tool failure; manual recovery. No automatic sends or confirmed bookings.\n\nNo personal or customer data is included. This file was generated locally and has not been submitted.`);
       setDownloaded(false);
     }}>
       {questions.map((question) => <div className="form-field" key={question.key}><label htmlFor={`pilot-${question.key}`}>{question.label}</label><select id={`pilot-${question.key}`} value={choices[question.key]} onChange={(event) => { setChoices({ ...choices, [question.key]: event.target.value }); setBrief(''); setDownloaded(false); }}>{question.options.map((option) => <option key={option}>{option}</option>)}</select></div>)}

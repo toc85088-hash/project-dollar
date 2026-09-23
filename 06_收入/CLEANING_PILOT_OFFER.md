@@ -1,51 +1,53 @@
-# Cleaning Inquiry Handoff Pilot — Proposed Offer
+# Cleaning Inquiry Handoff Pilot — Approved Public Offer
 
-Date: 2026-09-21. Planning only; not an active offer acceptance, contract, invoice, or confirmed delivery slot.
+Updated: 2026-09-24. Owner-approved advertised setup range: **US$149–199**. Canonical public email: **hello@naveliqo.com**, active and monitored per owner confirmation. This document is not an accepted contract or a confirmed delivery slot.
 
-## Audience and promise boundary
+## Audience and boundary
 
-US residential cleaning owner / office lead with an existing inquiry channel. Help define one reliable handoff from inquiry to owner-reviewed reply and quote/booking preparation. No claim of faster response, additional bookings, hours saved, ROI, current clients, or a tested live integration.
+US residential cleaning owners / office leads with an existing inquiry channel. One inquiry source, one residential cleaning service and one tracking destination. Help prepare an owner-reviewed reply, next action and quote/booking handoff. Do not promise compatibility before reviewing the actual software.
 
-## Proposed deliverables
+The free 90-second demo is an approximate self-guided fictional walkthrough, not a measured implementation speed, customer result or live integration. The free demo is separate from the paid setup offer.
 
-1. One-source workflow map and service-area/required-field rules.
-2. A reply-draft template approved by the business, never automatic send.
-3. Internal follow-up task and status definitions.
-4. Quote-detail checklist, with pricing owned by the business.
-5. Booking handoff, with schedule and crew capacity confirmed manually.
-6. Fictional test pack, acceptance record, pause/disable instructions and manual fallback.
+## Included in the setup
 
-## Scope limits
+1. Map the one-source handoff; define required-field, service-area and exception rules.
+2. Configure one compatible draft-only handoff, owner task and status record after permissions are separately approved.
+3. Define the quote-detail checklist. The customer owns all service prices, discounts, availability and booking decisions.
+4. Run normal, missing-field, duplicate and failure tests with fictional inquiries.
+5. Hand over the agreed configuration, test record, human review checklist and pause/manual recovery instructions.
 
-One inquiry channel and one cleaning service type first. Do not promise compatibility before inspecting existing software. No replacement CRM, autonomous quoting, payment collection, unsolicited SMS, emergency dispatch or real-customer data in initial tests. Prefer existing native capabilities. Any Google/Make or other access needs separately reviewed permissions; no paid plan/trial without explicit approval (not authorized now).
+## Exclusions and customer responsibilities
 
-## Acceptance matrix
+Excluded: software subscriptions/credits, paid trials, migrations, multiple sources/services, CRM replacement, custom integrations, autonomous prices/bookings, sending campaigns, payment collection, ongoing monitoring/support or extra flows. Software costs/plan limits must be verified for the selected tools; any applicable tax or separate cost is disclosed before agreement. No invented vendor pricing.
 
-| Test | Pass condition | Current evidence |
+Customer responsibilities: provide approved service facts and draft wording without sensitive records; own their accounts; approve scoped permissions; assign an acceptance reviewer; check every outgoing message, price and appointment; maintain the manual process. Live activation always needs separate approval.
+
+If the request does not fit the range, reduce scope or expressly agree a separate proposal. No work or payment before written agreement on compatibility, final fee, deliverables, timing, payment/cancellation, permissions and acceptance. No guarantee of bookings, conversion, ROI or time saved. No urgency or scarcity claim.
+
+## Acceptance matrix — actual connected pilot evidence remains separate
+
+| Test | Pass condition | Evidence currently available |
 | --- | --- | --- |
-| Normal fictional inquiry | Correct draft/task/log; quote and booking remain unapproved | Local simulation only |
-| Missing reply | No guessed email; no draft; manual review | Local simulation only |
-| Out of area | No scope promise; owner review | Local simulation only |
-| Duplicate event | No duplicate draft/task; retain original audit | Session-only demonstration; persistent integration untested |
-| Connector/partial failure | Visible incomplete status, no false success, safe recovery | Not tested |
-| Pause and fallback | Owner can disable and finish safely in existing tools | Instructions only |
-| No send | Draft-only action, Sent evidence, scenario disabled afterward | External-account verification not performed |
+| Normal fictional inquiry | Correct draft/task/log; quote and booking unapproved | Browser simulation only |
+| Missing reply | No guessed address or draft; manual review | Browser simulation only |
+| Out of area | No scope promise; owner review | Browser simulation only |
+| Duplicate | No duplicate draft/task | Session-only model; persistent integration untested |
+| Connector/partial failure | Incomplete status and safe recovery, no false success | Not tested |
+| Pause/manual fallback | Owner can disable and finish in existing tools | Instructions only |
+| No send | Draft-only connector, Sent check, scenario disabled after test | External-account verification not performed |
 
-## Fees and timing
+Do not call the simulation a Gmail draft, Google Task, Make run or connected-customer test.
 
-No price invented or published. Owner must approve actual fee, scope, cancellation/support boundary and realistic timeline in a written agreement after discovery. Do not label this free or paid until decided. Software costs and plan limits must be verified separately. No checkout or trial starts from the site.
+## Contact and CTA behaviour
 
-## Discovery script
+- Primary: **Get a Free 90-Second Demo** → `/cleaning/demo`; free, no signup.
+- Secondary: **Ask About the Pilot Setup** → mailto `hello@naveliqo.com` with a neutral enquiry subject.
+- Scope/pricing links → `/cleaning/pilot`.
+- Brief builder → local select choices and text download only; not an order, submission or booking.
+- A visitor reviews and sends their own email. Show the address as a copyable fallback. Never expose the forwarding destination.
 
-- Where does the inquiry arrive and who is responsible next?
-- Which native confirmations and reminders already work?
-- What missing information prevents a quote?
-- What requires manual scope/area/availability judgment?
-- How do you notice duplicate or failed handoffs now?
-- What would count as a useful pilot, compared with the present manual process?
-
-Do not request credentials, access codes, payment details, customer messages or exported customer lists. Ask for a fictional walkthrough first. Capture answers as evidence, not inferred pain.
+Ask about inquiry source, existing tools, missing details, current manual fallback and acceptance criteria. Do not request passwords, payment details, customer exports or access codes.
 
 ## Activation boundary
 
-The website currently provides scope and a local brief, not an active intake. First owner action: provide and approve one real monitored public contact email. Before activation, separately approve scope/fees, operator/privacy facts, hosting and deployment, and the specific account tests. Providing an inbox alone does not authorize launch or outreach.
+Public marketing copy and contact are prepared; the website has not been deployed. Host selection and a separate release decision remain. Real account permission grants, testing and production activation are separate from public marketing readiness. No outreach, purchase, account connection or live customer automation is authorised by Sprint 1.5.

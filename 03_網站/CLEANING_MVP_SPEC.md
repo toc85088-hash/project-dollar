@@ -2,6 +2,8 @@
 
 Date: 2026-09-21. Existing Vinext / React architecture retained. No new dependency, account, hosted backend, deployment, or database.
 
+Sprint 1.5 update (2026-09-24): owner-approved public inbox `hello@naveliqo.com` is now centralized and usable through visitor-controlled mailto links. Approved setup range and two conversion CTAs live in `app/cleaning/offer.ts`; the pilot is an enquiry offer with written scope/fee agreement before work, not a checkout. See `CLEANING_PRODUCTION_ENVIRONMENT.md` and `DEPLOYMENT_CHECKLIST.md`. All indexing/publication safeguards below are unchanged.
+
 ## Information architecture
 
 | Path | Purpose | Indexing |
@@ -32,7 +34,7 @@ Every result: booking NOT CONFIRMED, emailSent=false. `.test` email addresses ne
 
 ## Pilot brief
 
-Four select inputs only: inquiry channel, first handoff, current tools, cleaning service. No personal fields, free text, contact details, analytics event or backend submission. Submit builds local text; download creates a browser Blob file. Changes invalidate the earlier brief. Refresh clears state. No session/local storage. If a real contact email is later approved and configured, mailto may be shown; no automatic sends.
+Four select inputs only: inquiry channel, first handoff, current tools, cleaning service. No personal fields, free text, contact details, analytics event or backend submission. Submit builds local text; download creates a browser Blob file. Changes invalidate the earlier brief. Refresh clears state. No session/local storage. The approved public mailto opens the visitor's composer; no automatic sends. The downloaded brief includes the approved setup range and exclusions but is not an order or accepted service agreement.
 
 ## Connected pilot acceptance — NOT COMPLETED
 

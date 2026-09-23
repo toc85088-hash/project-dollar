@@ -41,6 +41,10 @@ function normalizePath(path) {
 function allowance(finding) {
   const { id, path, lineText } = finding;
 
+  if (id === 'price' && path === 'app/cleaning/offer.ts' && lineText.trim() === "price: 'US$149–199',") {
+    return { allowed: true, developmentOnly: false, reason: 'Exact owner-approved setup range, 2026-09-23; no other price is allowed.' };
+  }
+
   if (id === 'internal-codename' && path === 'README.md' && /internal (?:project )?codename/i.test(lineText)) {
     return { allowed: true, developmentOnly: false, reason: 'Local developer documentation identifies the internal codename explicitly.' };
   }

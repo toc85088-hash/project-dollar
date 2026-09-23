@@ -1,12 +1,12 @@
 # Naveliqo
 
-## Current direction — 2026-09-21
+## Current direction — Cleaning MVP Sprint 1.5
 
 Naveliqo 是通用母品牌；**US Residential Cleaning 是第一個垂直 MVP**。本輪先做 lead follow-up → quote preparation → booking handoff，由 owner 保留決策。Cleaning 不是永久品牌限制；HVAC、Plumbing、Landscaping、Pest Control、Other Home Services 預留在集中 vertical registry，未建立空白頁。
 
-已沿用既有架構建立 `/cleaning`、`/cleaning/demo`、`/cleaning/pilot`。Demo 是固定虛構資料的本機 simulation；pilot brief 可本機下載，沒有 submission、email send、外部 integration 或 active intake。所有 launch/indexing gates 仍關閉。Generic content 保留 draft/needs_review/noindex，不以完成舊文章數量阻塞 MVP。
+已沿用既有架構建立 `/cleaning`、`/cleaning/demo`、`/cleaning/pilot`。Demo 是固定虛構資料的 browser-only simulation；pilot brief 可本機下載，沒有 submission、email send 或外部 integration。Owner 已核准並確認 `hello@naveliqo.com` 透過 Cloudflare Email Routing 有人處理；網站 email CTA 僅開啟訪客自己的 mail composer，不自動寄送。Pilot setup 核准範圍為 US$149–199，詳細 scope 與限制先書面確認。所有 launch/indexing gates 仍關閉。Generic content 保留 draft/needs_review/noindex，不以完成舊文章數量阻塞 MVP。
 
-最新工作入口：`01_市場研究/CLEANING_MVP_STRATEGY.md`、`03_網站/CLEANING_MVP_SPEC.md`、`06_收入/CLEANING_PILOT_OFFER.md`、`06_收入/CLEANING_LEAD_GENERATION.md`、`07_Codex/CLEANING_MVP_SPRINT1_REPORT.md`。以下為保留的基礎定位與專案資料。
+最新工作入口：`07_Codex/CLEANING_MVP_SPRINT_1_5_REPORT.md`、`03_網站/CLEANING_PRODUCTION_ENVIRONMENT.md`、`03_網站/DEPLOYMENT_CHECKLIST.md`、`06_收入/CLEANING_PILOT_OFFER.md`。Sprint 1 報告保留為歷史紀錄。以下為保留的基礎定位與專案資料。
 
 Naveliqo 是一個面向美國、英國、加拿大與澳洲英語市場的內容網站，定位為 **Simple AI Automation for Small Business**。`Project Dollar` 僅保留為內部 project codename，不用於 production-facing branding。
 
@@ -56,9 +56,9 @@ pnpm install
 pnpm dev
 ```
 
-正式品牌與 canonical origin 已集中設定。正式上線前仍需設定：
+正式品牌、canonical origin 與 public contact 已集中設定：
 
-- `NEXT_PUBLIC_CONTACT_EMAIL`：可公開的聯絡信箱
+- `NEXT_PUBLIC_CONTACT_EMAIL=hello@naveliqo.com`：唯一核准 public inbox；不得改成私人轉寄位址。
 
 品牌名稱、positioning、tagline 與 canonical origin 集中於 `website/app/site-config.ts`。Global launch gate 仍為關閉。
 

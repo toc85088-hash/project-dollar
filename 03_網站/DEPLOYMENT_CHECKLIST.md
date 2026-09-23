@@ -1,96 +1,53 @@
-# Deployment Checklist
+# Cleaning MVP — Deployment and Rollback Checklist
 
-更新日期：2026-09-18
+Updated: 2026-09-24. Preparation only; no deployment, hosting registration, DNS changes or indexing activation performed.
 
-狀態：**準備中；本輪禁止正式部署、購買網域、登入 hosting 或修改 DNS。**
+## Release boundary
 
-## 1. Final brand — PARTIALLY APPROVED / NEEDS HUMAN REVIEW
+The next release is the informational Cleaning service, fictional demo, scoped pilot and trust pages. It does not require publishing generic articles or completing the separate Make experiment. A public, noindex release is distinct from permission to enable search indexing.
 
-- [x] Owner 核准 brand name `Naveliqo`、spelling、positioning 與 tagline。
-- [x] `NEXT_PUBLIC_SITE_NAME`、header text wordmark、title、schema、footer 與 legal-page branding 使用集中設定。
-- [x] 建立 Naveliqo temporary staging OG asset；舊 Project Dollar asset 已移出 public assets 並保留為內部歷史檔。
-- [ ] Owner 核准 final logo、favicon 與 final OG visual；目前 fallback 不得宣稱為 final identity。
-- [ ] 如適用，完成 trademark／company-name risk 確認（需適當專業或人工研究）。
+Current local copy uses the approved domain, public email and setup range. The website hosting target is not selected in the available project record. Cloudflare Email Routing is mail routing, not confirmation of website hosting.
 
-## 2. Domain and DNS — DOMAIN APPROVED / DNS BLOCKED
+**Current human action: choose the website hosting platform.** Then validate its existing account/budget, compatible runtime, infrastructure data handling and reversible release process without provisioning or deploying until separately authorised.
 
-- [x] Owner 核准 primary domain 與 canonical origin：`https://naveliqo.com`（apex）。
-- [ ] Owner 確認 domain registration／ownership／renewal；Codex 不購買或輸入付款資料。
-- [ ] 核准 `www` → apex redirect policy 與實際 provider 設定。
-- [ ] 記錄 registrar、DNS owner、renewal、MFA、recovery 與最小權限。
-- [ ] 在 hosting destination 確認後由 owner 建立 DNS records；不得先猜值。
+## Before an authorised release
 
-## 3. HTTPS — BLOCKED
+- [ ] Record selected hosting platform, release owner, access/recovery method and budget. No purchase or trial implied.
+- [ ] Confirm this existing Vinext/Vite/React build runs in that target runtime. Local Node production preview is not proof of an untested edge deployment; do not switch frameworks.
+- [ ] Use Node 22.13+ and the committed pnpm lockfile. Install with `pnpm install --frozen-lockfile` in the authorised build environment, then run `pnpm build`.
+- [ ] Apply the exact values in `CLEANING_PRODUCTION_ENVIRONMENT.md` at build and runtime as required by the host. Never configure a private forwarding inbox.
+- [ ] Keep every launch, content, trust and draft-preview flag false. Keep Google values empty. Do not change them merely to release an informational site.
+- [ ] Check provider access/security/log settings against Privacy; no injected analytics, ads or nonessential tracking. Document provider-specific retention and responsible owner.
+- [ ] Preserve the current DNS zone and existing Email Routing MX/TXT records. Record the actual prior website records/TTL before any separately authorised change; never guess cutover values.
+- [ ] Record immutable release artifact/commit and host rollback procedure before activating it. Save environment/DNS configuration securely outside public Git.
 
-- [ ] Production certificate 成功簽發並自動續期。
-- [ ] HTTP → HTTPS 與 non-canonical host → canonical host 使用單次 permanent redirect。
-- [ ] 檢查 mixed content、certificate chain、HSTS 適用性與 rollback 風險。
+## DNS, HTTPS and release smoke tests — NOT EXECUTED
 
-## 4. Production environment — NEEDS HUMAN REVIEW
+Only after explicit release/DNS approval:
 
-- [ ] 選擇 hosting/provider、region、access、budget、terms 與 data handling。
-- [ ] 從 `website/.env.example` 建立 production variables；不把 secrets 提交 Git。
-- [x] 範本已設定核准的 `NEXT_PUBLIC_SITE_NAME=Naveliqo` 與 `NEXT_PUBLIC_SITE_URL=https://naveliqo.com`。
-- [ ] 設定並驗證真實 public inbox。
-- [ ] Google values 保持空白，直到 owner 建立真實 property 且 consent/installation 獲核准。
-- [ ] `NEXT_PUBLIC_SHOW_DRAFTS=false`；任何 draft preview 應是私有且受控。
-- [ ] Editor 與 owner 完成內容核准後才設 `CONTENT_LAUNCH_APPROVED=true`。
-- [ ] Trust/legal owner 完成頁面核准後才設 `TRUST_PAGES_APPROVED=true`。
-- [ ] 只有所有 launch gate 通過才設 `SITE_LAUNCH_READY=true`。
-- [ ] 設定 CSP/security headers、log retention、access audit 與 dependency update owner。
+- [ ] Provision the selected runtime without adding customer-account integrations; verify privately using the provider's approved preview.
+- [ ] Set only the website records required by that provider. Preserve email routing records; check incoming routing separately without publishing its destination.
+- [ ] Confirm apex HTTPS certificate, renewal, HTTP-to-HTTPS and approved www-to-apex redirect, no mixed content.
+- [ ] Verify Home, Cleaning, demo, pilot, About, Contact, Privacy, Terms, Affiliate Disclosure and 404 on the actual host.
+- [ ] Check desktop/mobile navigation, focus, local demo success/missing-email cases and brief download.
+- [ ] Check primary CTA to the real local demo and secondary mailto recipient `hello@naveliqo.com`; no automatic send or hidden recipients.
+- [ ] Confirm titles/OG use Naveliqo and naveliqo.com; drafts return 404; hubs and Cleaning routes remain noindex.
+- [ ] Confirm `robots.txt` still has `Disallow: /`, sitemap has zero URL entries, no Search Console submission or tags.
+- [ ] Review response errors and asset/runtime failures. A missing provider-specific or HTTPS check means the release is not verified.
 
-## 5. Build and release — PASS LOCALLY / NEEDS STAGING
+## Rollback and previous commit recovery
 
-- [x] `pnpm lint` 本機成功（2026-09-17）。
-- [x] TypeScript strict 本機成功（2026-09-17）。
-- [x] `pnpm build` 本機成功（2026-09-17）。
-- [x] Production route／link／robots／sitemap／draft-isolation tests 成功（2026-09-17）。
-- [ ] 在乾淨 CI/staging 以 lockfile 安裝並重跑 lint/build/test。
-- [ ] Review build log、bundle、server/runtime compatibility 與 dependency scripts policy。
-- [ ] 產生 immutable release identifier，保存前一個可回復 artifact。
+Rollback triggers: broken routes/CTA, unexpected indexability/draft exposure, email/data leak, 5xx, major mobile regression or an external action from the demo.
 
-## 6. Sitemap, robots and canonical — BASE APPROVED / LAUNCH GATE CLOSED
+1. Re-activate the previous immutable host release, with its safe environment snapshot. Do not undo history or force-push.
+2. For a first release with no previous deployment, withdraw the release/custom-domain mapping through the selected provider's documented procedure and restore the **recorded** prior website DNS state if necessary; never remove unrelated MX/TXT.
+3. Source recovery baseline before this sprint: `8bf067f` (`feat: add cleaning-first Naveliqo MVP and pilot demo`). Use a separate recovery directory, not a destructive reset:
 
-- [x] Canonical 與 Organization/Article/Breadcrumb schema 使用集中 site config／article registry。
-- [x] 未 launch 時 global `noindex`、robots disallow、empty sitemap。
-- [x] Draft 不輸出 canonical、Article schema 或 sitemap entry。
-- [x] Canonical、sitemap 與 robots 的集中 base 已更新為 `https://naveliqo.com`。
-- [ ] 在真實 staging／production origin 驗證所有 indexable URL 為 self-canonical；目前不得開啟 indexing。
-- [ ] 確認 launch sitemap 只含 200、indexable、approved URLs，且 robots 宣告同一 sitemap。
-- [ ] 用 validator 與 Search Console 檢查 schema／sitemap；不得在 domain 未確認時開 gate。
+```powershell
+git worktree add --detach ../Naveliqo-recovery-8bf067f 8bf067f
+```
 
-## 7. Content and trust — LOCAL WORK COMPLETE / BLOCKED BY ONE HUMAN APPROVAL RECORD
+Only run after checking that destination is unused. Build there from its lockfile; never deploy the previous version blindly because it lacks this sprint's approved contact/offer fixes. A forward-fix may be safer.
+4. Recheck robots, sitemap, drafts, contact and error logs after rollback; record incident and restoration result.
 
-- [x] 七篇原創、vendor-neutral launch candidates 已完成 2026-09-18 primary-source refresh、evidence boundary 與 local editorial preflight；目前皆為 `needs_review`，0 published。
-- [x] About 與新增 Editorial Policy 說明 organisational byline、sources、testing、AI assistance、corrections 與 commercial independence。
-- [x] Privacy、Terms 與 Affiliate Disclosure 已完成符合目前 zero-tracking／zero-commerce stack 的 launch-safe baseline；沒有聲稱 lawyer review。
-- [ ] Owner 完成 `07_Codex/LAUNCH_APPROVAL_RECORD.md` 的單一 approval statement：一次確認七篇文章、organisational byline、trust pages、真實 public inbox、operator label 與 host data handling。
-- [ ] 沒有 placeholder page、fake review、fake test、fake price、copied content 或 broken link。
-- [x] Codex local QA 已檢查 desktop、360px、768px、mobile menu、keyboard focus、article overflow、Editorial Policy 與 404；發現並修復 article table 引起的 page-level overflow。
-- [ ] 真人完成 major browser、真實裝置、screen reader、zoom、contrast 與品牌視覺 QA。
-
-## 8. Search Console and analytics — BLOCKED
-
-- [ ] Owner 建立／驗證 Search Console property。
-- [ ] Submit launch sitemap only after canonical domain is live.
-- [ ] Owner 決定是否建立 GA4，完成 privacy/consent，提供真實 Measurement ID。
-- [ ] Staging 驗證 consent、events、duplicate tags、PII leakage 與 performance。
-- [ ] AdSense code remains **NOT INSTALLED**；申請不屬於 deployment 工作。
-
-## 9. Backups — BLOCKED BY HOST CHOICE
-
-- [ ] 確認 Git remote/private visibility、branch protection 與 owner access。
-- [ ] 定義 source、environment config、content、uploads、DNS 與 provider settings 的備份範圍。
-- [ ] 設 retention、encryption、restore owner；真實執行一次 restore test。
-- [ ] 備份不能只存在同一 provider/account。
-
-## 10. Rollback — BLOCKED BY HOST CHOICE
-
-- [ ] 寫下上一版 artifact／commit 的 rollback command 與權限 owner。
-- [ ] 定義 rollback triggers：5xx、broken navigation、wrong canonical/noindex、security/privacy issue、major layout regression。
-- [ ] 測試 application rollback 與 DNS rollback 的時間／TTL 影響。
-- [ ] 保留 emergency contact、status communication 與 post-incident review 流程。
-
-## Final go/no-go
-
-只有 owner、editorial、technical、privacy/legal（按需要）共同確認下列項目，才可部署：final visual assets、real content、trust pages、production config、staging tests、domain ownership/DNS、backups、rollback、indexing gate。Brand/domain 已核准但 launch gate 仍關閉，現況是 **NO-GO**。
+No rollback command was executed. Provider-specific release/rollback rehearsal is pending host selection. Source history is retained locally; no remote push. Final logo, SEO content, Google accounts, advertising and a connected pilot are **not** prerequisites for this narrowly scoped informational release.

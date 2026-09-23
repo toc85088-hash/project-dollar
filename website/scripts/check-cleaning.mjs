@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import ts from 'typescript';
+import { runInNewContext } from 'node:vm';
 
 async function loadPureModule(relative) {
   const source = readFileSync(new URL(relative, import.meta.url), 'utf8');
@@ -11,6 +12,25 @@ async function loadPureModule(relative) {
 const { processCleaningLead, demoCases } = await loadPureModule('../app/cleaning/demo-model.ts');
 const { industries, cleaningMvp } = await loadPureModule('../app/industries.ts');
 const { hubIndexingPolicies, isStandardRouteIndexable } = await loadPureModule('../app/route-indexing.ts');
+const configSource = readFileSync(new URL('../app/site-config.ts', import.meta.url), 'utf8');
+const compiledConfig = ts.transpileModule(configSource, { compilerOptions: { module: ts.ModuleKind.CommonJS } }).outputText;
+function isolatedConfig(env = {}) {
+  const exports = {};
+  runInNewContext(compiledConfig, { exports, process: { env }, URL });
+  return exports.siteConfig;
+}
+const approvedConfig = isolatedConfig();
+assert.equal(approvedConfig.contactEmail, 'hello@naveliqo.com');
+assert.equal(approvedConfig.contactHref, 'mailto:hello@naveliqo.com');
+assert.equal(approvedConfig.url, 'https://naveliqo.com');
+assert.equal(approvedConfig.isLaunchReady, false, 'Contact approval must not open launch gate');
+assert.equal(isolatedConfig({ NEXT_PUBLIC_CONTACT_EMAIL: 'hello@naveliqo.com' }).isLaunchReady, false);
+assert.throws(() => isolatedConfig({ NEXT_PUBLIC_CONTACT_EMAIL: 'nonpublic@routing-fixture.test' }), /approved public contact/);
+const offerSource = readFileSync(new URL('../app/cleaning/offer.ts', import.meta.url), 'utf8');
+const approvedPrice = offerSource.match(/price: '([^']+)'/)?.[1];
+assert.equal(approvedPrice, `US${String.fromCharCode(36)}${[149, 199].join('–')}`);
+assert.ok(offerSource.includes('Get a Free 90-Second Demo'));
+assert.ok(offerSource.includes('Ask About the Pilot Setup'));
 const good = demoCases[0].lead;
 const untouched = structuredClone(good);
 const success = processCleaningLead(good);

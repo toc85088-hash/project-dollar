@@ -1,5 +1,6 @@
 import { siteConfig } from '../site-config';
 import { SiteLink as Link } from './site-link';
+import { cleaningOffer } from '../cleaning/offer';
 
 export function Header() {
   return (
@@ -12,14 +13,15 @@ export function Header() {
           <Link href="/cleaning">For cleaning businesses</Link>
           <Link href="/cleaning/demo">Demo</Link>
           <Link href="/about">About</Link>
-          <Link className="nav-cta" href="/cleaning/pilot">Explore the pilot</Link>
+          <Link className="nav-cta" href={cleaningOffer.secondaryCta.href}>{cleaningOffer.secondaryCta.label}</Link>
         </nav>
         <details className="mobile-navigation">
           <summary>Menu</summary>
           <nav aria-label="Mobile navigation">
             <Link href="/cleaning">For cleaning businesses</Link>
             <Link href="/cleaning/demo">Demo</Link>
-            <Link href="/cleaning/pilot">Explore the pilot</Link>
+            <Link href="/cleaning/pilot">Pilot scope and pricing</Link>
+            <Link href={cleaningOffer.secondaryCta.href}>{cleaningOffer.secondaryCta.label}</Link>
             <Link href="/about">About</Link>
             <Link href="/contact">Contact</Link>
           </nav>
@@ -37,6 +39,7 @@ export function Footer() {
           <p className="eyebrow">{siteConfig.status}</p>
           <p className="footer-brand">{siteConfig.name}</p>
           <p className="muted">Simple AI automation for small business. Our first focus: inquiry follow-up, quote preparation, and booking handoffs for US residential cleaning businesses.</p>
+          <p className="footer-contact"><a href={siteConfig.contactHref}>{siteConfig.contactEmail}</a></p>
         </div>
         <nav aria-label="Footer navigation">
           <Link href="/about">About</Link>

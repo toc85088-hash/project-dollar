@@ -3,6 +3,7 @@ import { Footer, Header } from './components/site-shell';
 import { SiteLink as Link } from './components/site-link';
 import type { Metadata } from 'next';
 import { cleaningMvp } from './industries';
+import { cleaningOffer } from './cleaning/offer';
 
 export const metadata: Metadata = {
   title: { absolute: `${cleaningMvp.title} | ${siteConfig.name}` },
@@ -48,10 +49,10 @@ export default function Home() {
               <h1>A new cleaning lead.<br /><span>A clear next step.</span></h1>
               <p className="hero-copy">Keep inquiries moving from first reply to quote preparation and booking review—with your team in control of prices, promises, and the final send.</p>
               <div className="button-row">
-                <Link className="button button-primary" href="/cleaning/demo">Try the cleaning demo</Link>
-                <Link className="button button-secondary" href="/cleaning/pilot">Explore the pilot</Link>
+                <Link className="button button-primary" href={cleaningOffer.primaryCta.href}>{cleaningOffer.primaryCta.label}</Link>
+                <Link className="button button-secondary" href={cleaningOffer.secondaryCta.href}>{cleaningOffer.secondaryCta.label}</Link>
               </div>
-              <p className="trust-note">Residential cleaning first · Review before send · No automatic quotes</p>
+              <p className="trust-note">Free self-guided demo · Fictional data · No signup<br />Pilot setup: {cleaningOffer.price}. <Link className="text-link" href="/cleaning/pilot">View scope and exclusions</Link>.</p>
             </div>
             <aside className="workflow-card" aria-label="Illustrative cleaning inquiry workflow">
               <p className="card-label">THE CLEANING WORKFLOW</p>
@@ -102,10 +103,10 @@ export default function Home() {
               <p className="eyebrow">SEE THE EXCEPTIONS TOO</p>
               <h2>What happens when a lead is missing a reply address?</h2>
               <p>Run a complete inquiry, a missing-email case, or an out-of-area request. See the draft, follow-up task, and status each case should produce.</p>
-              <Link className="text-link" href="/cleaning/demo">Open the interactive demo <span aria-hidden="true">→</span></Link>
+              <Link className="text-link" href={cleaningOffer.primaryCta.href}>{cleaningOffer.primaryCta.label}</Link>
             </div>
-            <div className="checklist" aria-label="What the guide covers">
-              <p>Inside the proposed pilot</p>
+            <div className="checklist" aria-label="Pilot scope">
+              <p>Inside the pilot setup</p>
               <ul>
                 <li>Map one existing inquiry source.</li>
                 <li>Prepare replies from your approved service notes.</li>
@@ -119,7 +120,8 @@ export default function Home() {
           <p className="eyebrow">{siteConfig.name} · SIMPLE AI AUTOMATION</p>
           <h2>Start with your cleaning inquiry process.</h2>
           <p>Review the pilot scope and prepare a short brief about your current tools. No customer records are needed.</p>
-          <Link className="button button-primary" href="/cleaning/pilot">Build my pilot brief</Link>
+          <Link className="button button-secondary" href={cleaningOffer.secondaryCta.href}>{cleaningOffer.secondaryCta.label}</Link>
+          <p className="trust-note">Opens your email app. Or write to <a className="text-link" href={siteConfig.contactHref}>{siteConfig.contactEmail}</a>.</p>
           <p className="trust-note">{siteConfig.tagline}</p>
         </section>
       </main>

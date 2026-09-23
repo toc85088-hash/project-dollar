@@ -1,4 +1,5 @@
 import { siteConfig } from './site-config';
+import { cleaningOffer } from './cleaning/offer';
 
 export type PageSection = {
   heading: string;
@@ -214,7 +215,7 @@ export const pageContent: Record<string, PageContent> = {
     title: `About ${siteConfig.name}`,
     description: `About ${siteConfig.name}, its audience, editorial identity, and evidence standard.`,
     intro: `${siteConfig.name} is a practical automation brand for small business owners. Our first focus is US residential cleaning: inquiry follow-up, quote preparation, and booking handoffs with an owner in control. The name does not imply a registered company, certification, or multi-person team.`,
-    updatedAt: '2026-09-21',
+    updatedAt: '2026-09-23',
     sections: [
       {
         heading: 'Who this is for',
@@ -233,6 +234,11 @@ export const pageContent: Record<string, PageContent> = {
       {
         heading: 'Corrections and updates',
         paragraphs: ['Material corrections state what changed when the error could affect a reader’s decision. Review dates change only after meaningful rechecking. Software, plans, laws, and policies can change, so readers should verify current official information before acting. Correction requests use the public channel listed on the Contact page.'],
+      },
+      {
+        heading: 'Talk about your workflow',
+        paragraphs: [`Contact ${siteConfig.name} at ${siteConfig.contactEmail} with a general description of your inquiry process. Please do not send customer records or account credentials. The free demo is a fictional simulation, not a customer case study or connected implementation.`],
+        links: [cleaningOffer.secondaryCta, { label: 'Cleaning pilot scope and pricing', href: '/cleaning/pilot' }],
       },
     ],
     related: [
@@ -278,23 +284,20 @@ export const pageContent: Record<string, PageContent> = {
   contact: {
     eyebrow: 'CONTACT',
     title: 'Questions, corrections, and clear boundaries.',
-    description: `Contact-channel status for ${siteConfig.name}, cleaning pilot questions, corrections, accessibility, and disclosures.`,
-    intro: siteConfig.contactEmail
-      ? `Email ${siteConfig.name} at ${siteConfig.contactEmail}. Do not include passwords, payment details, customer records, or other sensitive information.`
-      : 'A verified public email address has not been configured. The launch gate remains closed, and no unverified address or non-functional contact form is shown.',
-    updatedAt,
+    description: `Contact ${siteConfig.name} for cleaning pilot questions, corrections, accessibility, and disclosures.`,
+    intro: `Email ${siteConfig.name} at ${siteConfig.contactEmail}. This is our monitored public contact address. Do not include passwords, payment details, customer records, or other sensitive information.`,
+    updatedAt: '2026-09-23',
     sections: [
       {
         heading: 'What the contact channel is for',
-        paragraphs: ['Once the contact channel opens, visitors may ask about a cleaning pilot scope, report a factual error, broken link, accessibility problem, unclear disclosure, or workflow question. The local pilot-brief builder does not submit an enquiry. Product pitches do not guarantee coverage, and corrections are checked against evidence before publication.'],
+        paragraphs: ['Ask about a cleaning pilot setup, report a factual error, broken link, accessibility problem, unclear disclosure, or workflow question. An email starts a conversation, not an order or confirmed service booking. The local pilot-brief builder does not submit an enquiry.'],
         points: ['Do not send passwords, authentication codes, API keys, payment details, customer records, health information, or other sensitive material.', 'Include the page address and a reliable source when reporting a factual issue.', 'Do not use this channel for urgent, legal, medical, financial, safety, or account-support requests.'],
+        links: [cleaningOffer.secondaryCta, cleaningOffer.primaryCta],
       },
       {
-        heading: siteConfig.contactEmail ? 'How messages are handled' : 'Contact status',
-        paragraphs: siteConfig.contactEmail
-          ? ['Messages are used to review and respond to the enquiry, document material corrections, and prevent abuse. Access should remain limited to the publication operator, and messages should be deleted when they are no longer needed for those purposes or a legal obligation. The Privacy Policy explains this boundary.']
-          : ['Public launch requires one real inbox that the owner controls. Its address, delivery, access controls, and reply path must be verified before the launch gate can open.'],
-        links: siteConfig.contactEmail ? [{ label: `Email ${siteConfig.contactEmail}`, href: `mailto:${siteConfig.contactEmail}` }] : undefined,
+        heading: 'How to email us',
+        paragraphs: [`Email links open your email app; nothing is sent automatically. If an app does not open, copy ${siteConfig.contactEmail} into your usual mail service. Include your inquiry source, existing tools and the handoff you want to discuss—not customer data. You may attach the locally generated planning brief after reviewing it.`, 'Messages are used to respond to enquiries, scope a requested pilot, handle corrections and prevent abuse. The Privacy Policy explains the data boundary. No reply-time or service-availability guarantee is made.'],
+        links: [{ label: siteConfig.contactEmail, href: siteConfig.contactHref }],
       },
     ],
     related: [
@@ -307,8 +310,8 @@ export const pageContent: Record<string, PageContent> = {
     eyebrow: 'PRIVACY POLICY',
     title: 'Privacy Policy',
     description: `How ${siteConfig.name} handles technical request data and messages under its current, privacy-minimising site configuration.`,
-    intro: `Reviewed 21 September 2026 for the local pre-launch MVP. This notice describes the current ${siteConfig.name} site. It must be updated before analytics, advertising, affiliate tracking, submitted forms, accounts, newsletters, payments, or any materially different data use is activated.`,
-    updatedAt: '2026-09-21',
+    intro: `Last updated 23 September 2026. This notice explains the ${siteConfig.name} information site, browser-only demo, local planning tool and email enquiries. For privacy questions, contact ${siteConfig.contactEmail}.`,
+    updatedAt: '2026-09-23',
     sections: [
       {
         heading: 'What the site does not collect directly',
@@ -320,11 +323,12 @@ export const pageContent: Record<string, PageContent> = {
       },
       {
         heading: 'Technical request and security data',
-        paragraphs: ['The hosting and network provider processes information needed to deliver and protect the site. This can include IP address, browser or device information, requested URL, timestamp, response status, and security signals. That processing is limited to site delivery, reliability, abuse prevention, troubleshooting, and security. Provider-specific access, location, and retention must be verified in the production data inventory before launch.'],
+        paragraphs: ['When you access the site, hosting and network providers process technical request information to deliver and protect it. This may include IP address, browser or device information, requested URL, timestamp, response status and security signals. This is distinct from the demo choices, which stay in your browser. Provider logs and necessary security controls are governed by the applicable provider terms and settings; this notice does not promise anonymous access or zero infrastructure logging.'],
       },
       {
         heading: 'Contact messages',
-        paragraphs: ['When a visitor emails the public contact address, the email provider and authorised operator process the sender address, message, headers, and any information the sender chooses to include. The information is used to review and respond to the enquiry, document material corrections, and prevent abuse. Do not send passwords, payment details, customer records, health information, or other sensitive material.'],
+        paragraphs: [`Email sent to ${siteConfig.contactEmail} passes through Cloudflare Email Routing to the operator’s managed inbox. Cloudflare, the inbox provider and the authorised site operator process the sender address, message, headers and any attachments you choose to send. The forwarding destination is not a public contact address. Messages are used to respond to your enquiry, discuss a requested pilot, record material corrections and prevent abuse.`, 'Do not send passwords, payment details, customer records, home access codes, health information or other sensitive material. The site does not connect to your inbox, CRM or customer accounts. Any later connected pilot requires a separate scope, permissions and data-handling agreement.'],
+        links: [{ label: 'Cloudflare privacy policy', href: 'https://www.cloudflare.com/privacypolicy/' }],
       },
       {
         heading: 'Cookies, analytics, advertising, and affiliates',
@@ -332,12 +336,13 @@ export const pageContent: Record<string, PageContent> = {
       },
       {
         heading: 'Retention, access, and international processing',
-        paragraphs: ['Access is limited to the provider and authorised operator as needed for the purposes above. Contact messages should be deleted when no longer needed to answer the enquiry, document a correction, prevent abuse, or meet a legal obligation. Providers may process data in more than one country under their own safeguards; the actual hosting and email-provider terms must be checked before launch.'],
+        paragraphs: ['Enquiries are handled by the authorised operator and the providers needed to receive and protect them, not published as testimonials or customer examples. Retention depends on the purpose of the enquiry, any resulting agreement, legal obligations and provider backup or security records. You can request deletion or ask about retention at the public contact address; information required for an unresolved issue or legal obligation may need to be retained. Providers may process information in more than one country under their own terms.'],
       },
       {
         heading: 'Your choices and privacy questions',
-        paragraphs: ['Depending on applicable law, a person may ask for access, correction, deletion, restriction, or objection concerning information held about them. Use the public address on the Contact page. The operator will verify the request and respond according to the law that applies; a person may also contact the relevant privacy regulator.'],
+        paragraphs: [`You can ask about information you sent, request correction or deletion, or raise a privacy concern at ${siteConfig.contactEmail}. Requests may require identity verification. Rights, exceptions and response requirements depend on applicable law; a person may also contact the relevant privacy regulator.`],
         links: [
+          { label: 'Email a privacy enquiry', href: siteConfig.contactHref },
           { label: 'US Federal Trade Commission privacy resources', href: 'https://www.ftc.gov/business-guidance/privacy-security/consumer-privacy' },
           { label: 'UK Information Commissioner', href: 'https://ico.org.uk/make-a-complaint/data-protection-complaints/' },
           { label: 'Office of the Privacy Commissioner of Canada', href: 'https://www.priv.gc.ca/en/report-a-concern/' },
@@ -358,9 +363,9 @@ export const pageContent: Record<string, PageContent> = {
   terms: {
     eyebrow: 'TERMS OF USE',
     title: 'Terms of Use',
-    description: `Terms for using ${siteConfig.name} educational content and external links.`,
-    intro: `Reviewed 21 September 2026 for the local pre-launch MVP. Use ${siteConfig.name} lawfully and understand the planning, evidence, and external-service limits below. These terms do not override rights or liabilities that applicable law does not allow to be excluded.`,
-    updatedAt: '2026-09-21',
+    description: `Terms for using ${siteConfig.name}, the fictional demo, planning tools and pilot enquiries.`,
+    intro: `Last updated 23 September 2026. Use ${siteConfig.name} lawfully and understand the planning, evidence and external-service limits below. These terms do not override rights or liabilities that applicable law does not allow to be excluded. Questions: ${siteConfig.contactEmail}.`,
+    updatedAt: '2026-09-23',
     sections: [
       {
         heading: 'Educational information',
@@ -379,8 +384,9 @@ export const pageContent: Record<string, PageContent> = {
         paragraphs: ['You may read, link to, and quote short excerpts with clear attribution. You may not republish substantially all of an article, remove attribution, misrepresent an endorsement, interfere with the site, attempt unauthorised access, or use the material unlawfully. Third-party names, marks, and linked material remain subject to their owners’ rights.'],
       },
       {
-        heading: 'No accounts, submissions, or purchases',
-        paragraphs: ['The current site has no user accounts, public comments, submitted customer data, checkout, paid product, or subscription. The local simulation and downloaded brief do not create an external draft, task, quote, booking, application, or service agreement. A pilot requires a separate written scope, fees, permissions, and acceptance agreement before work on connected accounts. Saving a brief or sending an email does not create a client, advisory, employment, partnership, or support relationship.'],
+        heading: 'Demo, planning and pilot enquiries',
+        paragraphs: ['The current site has no user accounts, public comments, online checkout, subscription purchase or submitted customer-data form. The free demo uses fictional records and fixed templates. The “90-second” description is an approximate walkthrough length, not a measured setup-time, software-performance or business-result claim. The simulation and downloaded brief do not create an external draft, task, quote, booking or service agreement.', `The Cleaning pilot setup range is ${cleaningOffer.price}. It covers the limited scope on the pilot page, not software subscriptions or ongoing services. Compatibility, final fee, scope, timing, payment, cancellation, permissions and acceptance terms require a separate written agreement before work or payment. Saving a brief or sending an email does not place an order.`],
+        links: [{ label: 'Pilot scope, responsibilities and exclusions', href: '/cleaning/pilot' }],
       },
       {
         heading: 'Availability and responsibility limits',
@@ -388,7 +394,8 @@ export const pageContent: Record<string, PageContent> = {
       },
       {
         heading: 'Changes and questions',
-        paragraphs: ['Material changes to these terms receive a new effective date. Continued use after a change means the current terms apply from that date, subject to mandatory rights. Questions about these terms use the verified address shown on the Contact page.'],
+        paragraphs: [`Material changes to these terms receive a new review date. Questions about these terms can be sent to ${siteConfig.contactEmail}. No lawyer review, certification or professional advice is implied by this notice.`],
+        links: [{ label: 'Email a terms enquiry', href: siteConfig.contactHref }],
       },
     ],
     related: [
@@ -402,7 +409,7 @@ export const pageContent: Record<string, PageContent> = {
     title: 'Affiliate Disclosure',
     description: `How ${siteConfig.name} will label affiliate relationships and protect editorial independence.`,
     intro: 'There are no active affiliate links, program relationships, sponsored placements, or affiliate tracking on this site. A future commission relationship must be disclosed clearly before or near the relevant commercial link.',
-    updatedAt,
+    updatedAt: '2026-09-23',
     sections: [
       {
         heading: 'What an affiliate link would mean',
@@ -416,6 +423,11 @@ export const pageContent: Record<string, PageContent> = {
       {
         heading: 'Link and tracking rules',
         paragraphs: ['Future affiliate links must be recorded, labelled, use the appropriate sponsored relationship attribute, and be checked for destination, disclosure, market restrictions, tracking behaviour, and program terms. No relationship is active until a person approves it.'],
+      },
+      {
+        heading: 'Our own pilot service',
+        paragraphs: [`The Cleaning pilot is ${siteConfig.name}’s own setup offer, not an affiliate recommendation or a third-party endorsement. Questions about fees, disclosures or commercial relationships can be sent to ${siteConfig.contactEmail}. No customer results or vendor partnerships are implied.`],
+        links: [{ label: 'Email a disclosure question', href: siteConfig.contactHref }, { label: 'Review the pilot scope', href: '/cleaning/pilot' }],
       },
     ],
     related: [

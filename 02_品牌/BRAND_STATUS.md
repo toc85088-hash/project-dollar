@@ -1,6 +1,6 @@
 # Naveliqo Brand Status
 
-更新日期：2026-08-29
+更新日期：2026-09-24
 
 網站狀態：**PRE-LAUNCH；brand/domain approval 不等於 launch approval。**
 
@@ -10,6 +10,8 @@
 - Primary domain：**https://naveliqo.com**
 - Positioning：**Simple AI Automation for Small Business**
 - Tagline：**No coding. No AI hype. Just practical workflows that save time and money.**
+- Public contact：**hello@naveliqo.com**；owner 已確認 active/monitored，透過 Cloudflare Email Routing。私人 forwarding destination 不公開。
+- Cleaning / Residential Cleaning 是第一個 vertical；Naveliqo 仍是可擴展的母品牌。
 
 以上文字已集中於 `website/app/site-config.ts`。環境設定範本也包含核准的 brand name 與 canonical origin；這些值不會解除 global launch gate。
 
@@ -25,10 +27,10 @@
 - [ ] Final logo
 - [ ] Favicon approval
 - [ ] Final OG visual approval
-- [ ] Public contact email
+- [x] Public contact email — approved in Sprint 1.5
 - [ ] Author identity
 - [ ] Social profiles（若 owner 決定建立；目前不假設存在）
 
 ## Launch boundary
 
-目前不得部署、修改 DNS、啟用 indexing、提交 Search Console、安裝 analytics／AdSense、加入 affiliate links，或將 draft 改為 published。所有視覺 fallback 與 public trust details 都需在 launch 前由 owner 人工核准。
+目前不得部署、修改 DNS、啟用 indexing、提交 Search Console、安裝 analytics／AdSense、加入 affiliate links，或將 draft 改為 published。保留上述視覺 fallback，不把它們聲稱為已核准的 final identity；最小 Cleaning informational release 不需先完成完整 logo/social/author package。當前發布決策與 hosting blocker 以 `07_Codex/CLEANING_MVP_SPRINT_1_5_REPORT.md` 為準，後續視覺替換仍需獨立確認。
