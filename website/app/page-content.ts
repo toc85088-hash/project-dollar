@@ -285,12 +285,12 @@ export const pageContent: Record<string, PageContent> = {
     eyebrow: 'CONTACT',
     title: 'Questions, corrections, and clear boundaries.',
     description: `Contact ${siteConfig.name} for cleaning pilot questions, corrections, accessibility, and disclosures.`,
-    intro: `Email ${siteConfig.name} at ${siteConfig.contactEmail}. This is our monitored public contact address. Do not include passwords, payment details, customer records, or other sensitive information.`,
-    updatedAt: '2026-09-23',
+    intro: `Use the Cleaning pilot inquiry form, or email ${siteConfig.name} at ${siteConfig.contactEmail}, our monitored public contact address. Do not include passwords, payment details, customer records, or other sensitive information.`,
+    updatedAt: '2026-10-07',
     sections: [
       {
         heading: 'What the contact channel is for',
-        paragraphs: ['Ask about a cleaning pilot setup, report a factual error, broken link, accessibility problem, unclear disclosure, or workflow question. An email starts a conversation, not an order or confirmed service booking. The local pilot-brief builder does not submit an enquiry.'],
+        paragraphs: ['Ask about a cleaning pilot setup using the web inquiry form. For corrections, broken links, accessibility or disclosure questions, use our public email address. A submitted form or email starts a conversation, not an order or confirmed booking. The separate local pilot-brief builder does not submit an enquiry.'],
         points: ['Do not send passwords, authentication codes, API keys, payment details, customer records, health information, or other sensitive material.', 'Include the page address and a reliable source when reporting a factual issue.', 'Do not use this channel for urgent, legal, medical, financial, safety, or account-support requests.'],
         links: [cleaningOffer.secondaryCta, cleaningOffer.primaryCta],
       },
@@ -310,20 +310,20 @@ export const pageContent: Record<string, PageContent> = {
     eyebrow: 'PRIVACY POLICY',
     title: 'Privacy Policy',
     description: `How ${siteConfig.name} handles technical request data and messages under its current, privacy-minimising site configuration.`,
-    intro: `Last updated 24 September 2026. This notice explains the ${siteConfig.name} information site, browser-only demo, local planning tool and email enquiries. For privacy questions, contact ${siteConfig.contactEmail}.`,
-    updatedAt: '2026-09-24',
+    intro: `Last updated 7 October 2026. This notice explains the ${siteConfig.name} information site, browser-only demo, local planning tool, web inquiry form and email enquiries. For privacy questions, contact ${siteConfig.contactEmail}.`,
+    updatedAt: '2026-10-07',
     sections: [
       {
-        heading: 'What the site does not collect directly',
-        paragraphs: ['The site displays information, a fictional cleaning-inquiry simulation, and a local pilot-planning tool. It has no submitted contact form, user account, newsletter signup, analytics tag, advertising code, affiliate tracking, checkout, payment flow, or customer database. It does not ask visitors to enter personal information on the site.'],
+        heading: 'Information you submit',
+        paragraphs: ['The Cleaning pilot inquiry form asks for your name, business name, email, primary lead source and automation needs. Website and approximate inquiry volume are optional. Clicking Send pilot inquiry transmits these details to a Cloudflare Worker, which validates them and sends a notification through Cloudflare’s email service to the operator’s managed inbox. We use them to respond, discuss the requested scope and prevent abuse. The form does not subscribe you to marketing, create an account, take payment or send you an automatic confirmation email.', 'The application does not save inquiries in a website database. Submitted messages are held in the receiving inbox and processed by the email providers. The site has no newsletter signup, analytics tag, advertising code, affiliate tracking or checkout.'],
       },
       {
         heading: 'Local demo and planning choices',
-        paragraphs: ['The demo uses predefined fictional records. The planning tool uses service and workflow choices rather than personal or customer details. Results stay in page memory and are cleared on refresh; the tools do not transmit those choices or save them in browser storage. A brief download creates a text file on the visitor’s device. It does not submit an application or contact us. Ordinary page and asset requests still reach the site’s hosting provider.'],
+        paragraphs: ['The demo uses predefined fictional records. The separate planning tool uses service and workflow choices rather than personal or customer details. Results stay in page memory and are cleared on refresh; these two tools do not transmit those choices or save them in browser storage. A brief download creates a text file on the visitor’s device. It does not submit an application or contact us. The inquiry form is separate and sends information only when submitted. Ordinary page and asset requests still reach the site’s hosting provider.'],
       },
       {
         heading: 'Technical request and security data',
-        paragraphs: ['The public website is configured for Cloudflare Workers hosting and network delivery. Cloudflare processes technical request information needed to deliver and protect it, which may include IP address, browser or device information, requested URL, timestamp, response status and security signals. This is distinct from the demo choices, which stay in your browser. Optional persisted Worker application logs are disabled in the release configuration. Provider infrastructure records and necessary security controls remain governed by Cloudflare’s terms and settings; this notice does not promise anonymous access or zero infrastructure logging.'],
+        paragraphs: ['The public website uses Cloudflare Workers hosting and network delivery. Cloudflare processes technical request information needed to deliver and protect it, which may include IP address, browser or device information, requested URL, timestamp, response status and security signals. The inquiry handler temporarily keeps IP-based attempt counters in Worker memory to limit abuse; it does not persist those counters or log form contents in application code. Optional persisted Worker application logs are disabled in the release configuration. Provider infrastructure records and necessary security controls remain governed by Cloudflare’s terms and settings; this notice does not promise anonymous access or zero infrastructure logging.'],
       },
       {
         heading: 'Contact messages',
@@ -364,8 +364,8 @@ export const pageContent: Record<string, PageContent> = {
     eyebrow: 'TERMS OF USE',
     title: 'Terms of Use',
     description: `Terms for using ${siteConfig.name}, the fictional demo, planning tools and pilot enquiries.`,
-    intro: `Last updated 23 September 2026. Use ${siteConfig.name} lawfully and understand the planning, evidence and external-service limits below. These terms do not override rights or liabilities that applicable law does not allow to be excluded. Questions: ${siteConfig.contactEmail}.`,
-    updatedAt: '2026-09-23',
+    intro: `Last updated 7 October 2026. Use ${siteConfig.name} lawfully and understand the planning, evidence and external-service limits below. These terms do not override rights or liabilities that applicable law does not allow to be excluded. Questions: ${siteConfig.contactEmail}.`,
+    updatedAt: '2026-10-07',
     sections: [
       {
         heading: 'Educational information',
@@ -385,7 +385,7 @@ export const pageContent: Record<string, PageContent> = {
       },
       {
         heading: 'Demo, planning and pilot enquiries',
-        paragraphs: ['The current site has no user accounts, public comments, online checkout, subscription purchase or submitted customer-data form. The free demo uses fictional records and fixed templates. The “90-second” description is an approximate walkthrough length, not a measured setup-time, software-performance or business-result claim. The simulation and downloaded brief do not create an external draft, task, quote, booking or service agreement.', `The Cleaning pilot setup range is ${cleaningOffer.price}. It covers the limited scope on the pilot page, not software subscriptions or ongoing services. Compatibility, final fee, scope, timing, payment, cancellation, permissions and acceptance terms require a separate written agreement before work or payment. Saving a brief or sending an email does not place an order.`],
+        paragraphs: ['The current site has no user accounts, public comments, online checkout or subscription purchase. The pilot inquiry form requests business contact information, not your customer records. The free demo uses fictional records and fixed templates. The “90-second” description is an approximate walkthrough length, not a measured setup-time, software-performance or business-result claim. The simulation and downloaded brief do not create an external draft, task, quote, booking or service agreement.', `The Cleaning pilot setup range is ${cleaningOffer.price}. It covers the limited scope on the pilot page, not software subscriptions or ongoing services. Compatibility, final fee, scope, timing, payment, cancellation, permissions and acceptance terms require a separate written agreement before work or payment. Saving a brief, submitting an inquiry or sending an email does not place an order. A submission reference means the email service accepted a notification, not that a person has read it or that a pilot is agreed.`],
         links: [{ label: 'Pilot scope, responsibilities and exclusions', href: '/cleaning/pilot' }],
       },
       {

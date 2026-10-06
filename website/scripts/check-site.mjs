@@ -33,7 +33,6 @@ const approvedBrand = 'Naveliqo';
 const approvedOrigin = 'https://naveliqo.com';
 const approvedContact = 'hello@naveliqo.com';
 const approvedPrice = `US${String.fromCharCode(36)}${[149, 199].join('–')}`;
-const pilotSubject = 'Residential cleaning pilot setup enquiry';
 const homeTitle = 'Lead Follow-Up Automation for US Cleaning Businesses';
 const approvedTagline = 'No coding. No AI hype. Just practical workflows that save time and money.';
 const hubRoutes = new Set([
@@ -84,7 +83,17 @@ for (const route of publicRoutes) {
   }
   if (route === '/' || route.startsWith('/cleaning') || route === '/contact') {
     expect(body.includes('Ask About the Pilot Setup'), `${route} is missing the approved secondary CTA`);
-    expect(body.includes(`href="mailto:${approvedContact}?subject=${encodeURIComponent(pilotSubject)}"`), `${route} has a wrong pilot enquiry destination`);
+    const pilotLinks = [...body.matchAll(/<a\b[^>]*href="([^"]+)"[^>]*>Ask About the Pilot Setup<\/a>/g)];
+    expect(pilotLinks.length > 0 && pilotLinks.every(link => link[1] === '/cleaning/pilot'), `${route} must send every pilot CTA to the web inquiry page`);
+  }
+  if (route === '/cleaning/pilot') {
+    for (const field of ['name', 'businessName', 'email', 'website', 'leadSource', 'monthlyInquiries', 'notes', 'fax']) expect(body.includes(`name="${field}"`), `Pilot form is missing ${field}`);
+    expect(body.includes('Send pilot inquiry') && body.includes('id="inquiry"'), 'Pilot form must have a submit action and anchor');
+    expect(body.includes('/privacy-policy'), 'Pilot form needs a privacy link');
+  }
+  if (route === '/privacy-policy') {
+    expect(body.includes('Information you submit') && body.includes('Cloudflare Worker'), 'Privacy notice must explain web inquiries');
+    expect(!body.includes('no submitted contact form'), 'Privacy notice still denies the web form');
   }
   if (['/', '/cleaning', '/cleaning/pilot', '/terms'].includes(route)) expect(body.includes(approvedPrice), `${route} is missing the approved setup range`);
   if (['/', '/cleaning', '/cleaning/pilot', '/contact'].includes(route)) {

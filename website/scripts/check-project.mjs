@@ -289,7 +289,7 @@ expect(pageContentSource.includes("'editorial-policy':"), 'Missing public editor
 expect(pageContentSource.includes("articleCollection: 'all'"), 'Hub content does not expose centralized published-article collections');
 expect(pageContentSource.includes('siteConfig.editorialByline'), 'About page does not explain the centralized organisational byline');
 expect(!/PRIVACY POLICY — PRE-LAUNCH DRAFT|TERMS OF USE — PRE-LAUNCH DRAFT/.test(pageContentSource), 'Trust pages still expose pre-launch draft headings');
-expect(pageContentSource.includes('Last updated 23 September 2026'), 'Privacy and terms pages are missing the contact/offer review date');
+expect((pageContentSource.match(/Last updated 7 October 2026/g) ?? []).length === 2, 'Privacy and terms pages are missing the inquiry-processing review date');
 
 const workflowSpec = readFileSync(join(projectRoot, '05_內容', 'research', 'ARTICLE_01_WORKFLOW_BUILD_SPEC.md'), 'utf8');
 expect(workflowSpec.includes('NOT BUILT / NOT TESTED / OAUTH NOT GRANTED'), 'Article 1 workflow spec must retain its untested/OAuth hold state');

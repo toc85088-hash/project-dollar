@@ -121,7 +121,7 @@ export default function Home() {
           <h2>Start with your cleaning inquiry process.</h2>
           <p>Review the pilot scope and prepare a short brief about your current tools. No customer records are needed.</p>
           <Link className="button button-secondary" href={cleaningOffer.secondaryCta.href}>{cleaningOffer.secondaryCta.label}</Link>
-          <p className="trust-note">Opens your email app. Or write to <a className="text-link" href={siteConfig.contactHref}>{siteConfig.contactEmail}</a>.</p>
+          <p className="trust-note">Use the web inquiry form, or write to <a className="text-link" href={siteConfig.contactHref}>{siteConfig.contactEmail}</a>.</p>
           <p className="trust-note">{siteConfig.tagline}</p>
         </section>
       </main>

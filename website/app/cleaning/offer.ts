@@ -1,4 +1,3 @@
-import { siteConfig } from '../site-config';
 import { cleaningMvp } from '../industries';
 
 // Approved by the owner on 2026-09-23; this is our setup offer, not vendor pricing.
@@ -8,6 +7,6 @@ export const cleaningOffer = {
   primaryCta: { label: 'Get a Free 90-Second Demo', href: cleaningMvp.demoPath },
   secondaryCta: {
     label: 'Ask About the Pilot Setup',
-    href: `${siteConfig.contactHref}?subject=${encodeURIComponent('Residential cleaning pilot setup enquiry')}`,
+    href: cleaningMvp.pilotPath,
   },
 } as const;
