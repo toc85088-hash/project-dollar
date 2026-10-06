@@ -23,7 +23,12 @@ for (const [label, config] of [['source', source], ['built', built]]) {
   assert.equal(config.send_metrics, false, `${label}: do not send CLI usage telemetry`);
   assert.deepEqual(config.vars, envTemplate, `${label}: approved environment template drift`);
   assert.equal(config.account_id, undefined, `${label}: do not invent or expose an account ID`);
-  for (const binding of ['d1_databases', 'r2_buckets', 'kv_namespaces', 'services', 'send_email', 'workflows', 'analytics_engine_datasets']) {
+  // Approved notification capability: Cloudflare's verified-destination mode.
+  // The only application recipient will come from the server-only Worker secret,
+  // never a client request, public variable, or committed destination address.
+  assert.deepEqual(config.send_email, [{ name: 'PILOT_EMAIL' }], `${label}: only the approved verified-destination email binding is allowed`);
+  assert.equal(config.vars.PILOT_RECIPIENT, undefined, `${label}: recipient must be a Worker secret, not a public variable`);
+  for (const binding of ['d1_databases', 'r2_buckets', 'kv_namespaces', 'services', 'workflows', 'analytics_engine_datasets']) {
     assert.equal((config[binding] ?? []).length, 0, `${label}: ${binding} must remain disconnected`);
   }
   assert.equal((config.triggers?.crons ?? []).length, 0, `${label}: no schedules`);
@@ -37,4 +42,4 @@ assert.equal(built.assets.directory, '../client');
 for (const asset of ['../dist/server/index.js', '../dist/client/og.png', '../dist/client/favicon.svg']) {
   assert.ok(existsSync(new URL(asset, import.meta.url)), `Missing release asset: ${fileURLToPath(new URL(asset, import.meta.url))}`);
 }
-console.log('Worker configuration passed: approved vars, matching source/build, pinned runtime, no public routes/preview URLs, no telemetry/persisted Worker logs, no remote resources, and release assets present. This does not deploy or verify a Cloudflare account.');
+console.log('Worker configuration passed: approved vars, matching source/build, pinned runtime, no public routes/preview URLs, no telemetry/persisted Worker logs, only PILOT_EMAIL allowed, no committed recipient, and release assets present. This does not deploy or verify email delivery or secret configuration.');

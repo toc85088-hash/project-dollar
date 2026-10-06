@@ -2,6 +2,18 @@
 
 Date: 2026-10-07 (Asia/Taipei). Scope: pilot CTA and real inquiry flow only; preserve current architecture and indexing protection.
 
+## Follow-up: approved binding prepared, recipient entry pending
+
+The owner subsequently authorised `PILOT_EMAIL` on Workers Free and requested server-only `PILOT_RECIPIENT`, with a stop for manual secret entry. This supersedes the earlier request below for the owner to configure the binding.
+
+- Prepared `send_email: [{ name: 'PILOT_EMAIL' }]` locally and narrowed the Worker guard to allow exactly that approved binding. No destination address is committed; all indexing gates remain closed.
+- `wrangler secret list --name naveliqo-cleaning-mvp` returned `[]`. The private recipient is not inferred from an account email or public alias. Manual secret-entry instructions are in `03_網站/PILOT_INQUIRY_SETUP.md`.
+- Production build (including placeholder/editorial and Worker checks), ESLint and `git diff --check` PASS after this configuration change.
+- Not deployed; no form implementation, email send, plan change, upgrade, purchase or Git push. Existing live behavior is unchanged. Local changes are committed before handing off the secret-entry step.
+- Resume after `PILOT_RECIPIENT` is set: implement and test the real form, update CTA destinations and trust copy, then deploy/test only the completed fix. Never claim inbox receipt solely from provider acceptance.
+
+The remaining sections record the initial inspection before this follow-up.
+
 ## Current state verified
 
 - Branch `master`, starting HEAD `f19e4a9`; starting worktree clean. No interrupted implementation changes were present.

@@ -9,6 +9,7 @@
   "routes": [],
   "send_metrics": false,
   "observability": { "enabled": false },
+  "send_email": [{ "name": "PILOT_EMAIL" }],
   "vars": {
     "NEXT_PUBLIC_SITE_NAME": "Naveliqo",
     "NEXT_PUBLIC_SITE_URL": "https://naveliqo.com",
