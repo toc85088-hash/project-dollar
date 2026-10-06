@@ -68,4 +68,6 @@ assert.match(route, /await bindings\.PILOT_EMAIL\.send\(new EmailMessage\(siteCo
 assert.doesNotMatch(route, /console\.|process\.env\.NEXT_PUBLIC/);
 const form = await readFile(new URL('../app/cleaning/pilot/inquiry-form.tsx', import.meta.url), 'utf8');
 assert.doesNotMatch(form, /PILOT_RECIPIENT|PILOT_EMAIL|cloudflare:email/);
+assert.match(form, /method="post" action="\/api\/pilot-inquiry"/);
+assert.match(form, /disabled=\{pending \|\| !ready\}/);
 console.log(`Inquiry checks passed: ${checks} validation/handler assertions; mock transport only, no email sent. Private destination stays server-side.`);

@@ -1,10 +1,15 @@
 'use client';
 
-import { useRef, useState, type FormEvent } from 'react';
+import { useRef, useState, useSyncExternalStore, type FormEvent } from 'react';
 import { SiteLink } from '../../components/site-link';
 import { inquiryLimits, inquiryVolumes, leadSources, validateInquiry, type InquiryErrors } from './inquiry-model';
 
+const subscribeToHydration = () => () => {};
+const clientReady = () => true;
+const serverReady = () => false;
+
 export function PilotInquiryForm({ contactEmail }: { contactEmail: string }) {
+  const ready = useSyncExternalStore(subscribeToHydration, clientReady, serverReady);
   const [errors, setErrors] = useState<InquiryErrors>({});
   const [pending, setPending] = useState(false);
   const [message, setMessage] = useState('');
@@ -59,12 +64,12 @@ export function PilotInquiryForm({ contactEmail }: { contactEmail: string }) {
   }
 
   const error = (key: keyof InquiryErrors) => errors[key] && <p className="field-error" id={`inquiry-${key}-error`}>{errors[key]}</p>;
-  return <form className="pilot-inquiry-form" onSubmit={submit} noValidate aria-label="Cleaning pilot inquiry">
+  return <form className="pilot-inquiry-form" method="post" action="/api/pilot-inquiry" onSubmit={submit} noValidate aria-label="Cleaning pilot inquiry">
     <div ref={status} tabIndex={-1} role="status" aria-live="polite" className="inquiry-status">
       {message && <p>{message}</p>}
       {reference && <p><strong>Reference: {reference}</strong> Keep this reference if you contact us; inbox receipt is not independently confirmed here.</p>}
     </div>
-    <fieldset disabled={pending}>
+    <fieldset disabled={pending || !ready}>
       <legend className="sr-only">Your pilot inquiry</legend>
       <div className="inquiry-fields">
         {([['name', 'Name', 'name'], ['businessName', 'Business name', 'organization'], ['email', 'Email', 'email'], ['website', 'Website (optional)', 'url']] as const).map(([key, label, autoComplete]) => <div className="form-field" key={key}>
@@ -78,7 +83,7 @@ export function PilotInquiryForm({ contactEmail }: { contactEmail: string }) {
       <div className="form-field"><label htmlFor="inquiry-notes">What would you like automated?</label><textarea id="inquiry-notes" name="notes" rows={5} required maxLength={inquiryLimits.notes} aria-invalid={Boolean(errors.notes)} aria-describedby={`notes-hint${errors.notes ? ' inquiry-notes-error' : ''}`} /><small id="notes-hint">Describe the handoff you need help with. Do not include customer records, credentials, access codes or payment details.</small>{error('notes')}</div>
       <div className="inquiry-honeypot" aria-hidden="true"><label htmlFor="inquiry-fax">Leave this field empty</label><input id="inquiry-fax" name="fax" type="text" tabIndex={-1} autoComplete="off" /></div>
       <p className="demo-note">Submitting sends these details to our operator’s inbox so we can respond to this inquiry. It does not sign you up for marketing or purchase a service. See our <SiteLink className="text-link" href="/privacy-policy">Privacy Policy</SiteLink>.</p>
-      <button className="button button-primary" type="submit">{pending ? 'Submitting…' : 'Send pilot inquiry'}</button>
+      <button className="button button-primary" type="submit">{!ready ? 'Loading form…' : pending ? 'Submitting…' : 'Send pilot inquiry'}</button>
     </fieldset>
     <p className="demo-note">Prefer email, or having trouble? <a className="text-link" href={`mailto:${contactEmail}`}>{contactEmail}</a>. No response-time guarantee.</p>
     <noscript><p>This form needs JavaScript. You can email the public address above instead.</p></noscript>

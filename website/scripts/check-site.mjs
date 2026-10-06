@@ -88,7 +88,8 @@ for (const route of publicRoutes) {
   }
   if (route === '/cleaning/pilot') {
     for (const field of ['name', 'businessName', 'email', 'website', 'leadSource', 'monthlyInquiries', 'notes', 'fax']) expect(body.includes(`name="${field}"`), `Pilot form is missing ${field}`);
-    expect(body.includes('Send pilot inquiry') && body.includes('id="inquiry"'), 'Pilot form must have a submit action and anchor');
+    expect(body.includes('Loading form…') && body.includes('id="inquiry"'), 'Pilot form must wait for hydration and have an anchor');
+    expect(/<form(?=[^>]*method="post")(?=[^>]*action="\/api\/pilot-inquiry")[^>]*>/.test(body) && /<fieldset disabled/.test(body), 'Unhydrated inquiry must never submit contact data in a URL');
     expect(body.includes('/privacy-policy'), 'Pilot form needs a privacy link');
   }
   if (route === '/privacy-policy') {
