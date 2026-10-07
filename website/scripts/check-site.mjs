@@ -4,6 +4,9 @@ const publicRoutes = [
   '/cleaning',
   '/cleaning/demo',
   '/cleaning/pilot',
+  '/cleaning/lead-follow-up',
+  '/cleaning/quote-follow-up',
+  '/cleaning/booking-automation',
   '/ai-automation',
   '/workflows',
   '/ai-tools',
@@ -47,6 +50,8 @@ const hubRoutes = new Set([
 const failures = [];
 const discoveredLinks = new Set();
 const fragmentLinks = new Set();
+const cleaningSeoTitles = new Set();
+const cleaningSeoRoutes = ['/cleaning', '/cleaning/lead-follow-up', '/cleaning/quote-follow-up', '/cleaning/booking-automation'];
 
 function expect(condition, message) {
   if (!condition) failures.push(message);
@@ -119,6 +124,22 @@ for (const route of publicRoutes) {
   if (route.startsWith('/cleaning')) {
     expect(!body.includes('application/ld+json'), `${route} must not output schema before MVP content approval`);
   }
+  if (cleaningSeoRoutes.includes(route)) {
+    const title = body.match(/<title>([^<]+)<\/title>/i)?.[1];
+    expect(!cleaningSeoTitles.has(title), `${route} must have a distinct search-intent title`);
+    cleaningSeoTitles.add(title);
+    expect(body.includes(`property="og:url" content="${approvedOrigin}${route}"`), `${route} needs its own approved Open Graph URL`);
+    expect(body.includes(`${approvedOrigin}/og.png`), `${route} must retain the approved social asset`);
+    expect(/name="twitter:card" content="summary_large_image"/.test(body), `${route} needs its social card metadata`);
+    if (route !== '/cleaning') {
+      expect(body.includes('id="acceptance-checks"') && body.includes('id="sources"'), `${route} needs a test plan and evidence boundary`);
+      expect(body.includes('Sources checked') && body.includes('2026-10-08'), `${route} needs its source check date`);
+      expect(body.includes('no account test') && body.includes('not results of a connected test'), `${route} must not imply unperformed tool tests`);
+      expect(body.includes('https://help.getjobber.com/'), `${route} must link the documentation supporting vendor claims`);
+      expect(body.includes('href="/editorial-policy"'), `${route} needs real organizational editorial attribution`);
+      expect(!/<form\b/.test(body), `${route} should link to, not duplicate, the protected inquiry form`);
+    }
+  }
   for (const match of body.matchAll(/href="(\/[^"#]*)#([^"?]+)"/g)) fragmentLinks.add(`${match[1]}#${match[2]}`);
 }
 
@@ -132,6 +153,8 @@ for (const route of ['/hvac', '/plumbing', '/landscaping', '/pest-control', '/ot
   const response = await fetch(new URL(route, baseUrl));
   expect(response.status === 404, `Future vertical ${route} must not expose an empty destination`);
 }
+const unknownCleaning = await fetch(new URL('/cleaning/unknown-workflow', baseUrl));
+expect(unknownCleaning.status === 404, 'Unregistered Cleaning resources must return 404');
 
 for (const route of unavailableArticleRoutes) {
   expect(!discoveredLinks.has(route), `Unpublished article ${route} is linked from a public page`);

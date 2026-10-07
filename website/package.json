@@ -13,7 +13,8 @@
     "check:placeholders": "node scripts/check-placeholders.mjs --production",
     "check:editorial-markers": "node scripts/check-editorial-markers.mjs --production",
     "check:worker": "node scripts/check-worker.mjs",
-    "test:project": "node scripts/check-project.mjs && node scripts/check-placeholders.mjs --production && node scripts/check-editorial-markers.mjs --production && node scripts/check-cleaning.mjs && node scripts/check-inquiry.mjs",
+    "test:project": "node scripts/check-project.mjs && node scripts/check-placeholders.mjs --production && node scripts/check-editorial-markers.mjs --production && node scripts/check-cleaning.mjs && node scripts/check-cleaning-seo.mjs && node scripts/check-inquiry.mjs",
+    "test:cleaning-seo": "node scripts/check-cleaning-seo.mjs",
     "test:inquiry": "node scripts/check-inquiry.mjs",
     "test:cleaning": "node scripts/check-cleaning.mjs",
     "test:site": "node scripts/check-site.mjs"

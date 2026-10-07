@@ -3,6 +3,7 @@ import { getPublishedArticles } from './content/articles';
 import { pageContent } from './page-content';
 import { isStandardRouteIndexable } from './route-indexing';
 import { siteConfig } from './site-config';
+import { getIndexableCleaningPages } from './cleaning/resources';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   if (!siteConfig.isLaunchReady) return [];
@@ -31,5 +32,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     ...standardRoutes,
     ...articleRoutes,
+    ...getIndexableCleaningPages(siteConfig.isLaunchReady).map(page => ({
+      url: `${siteConfig.url}${page.path}`,
+      lastModified: new Date(`${page.updatedAt}T00:00:00Z`),
+    })),
   ];
 }

@@ -1,18 +1,19 @@
 import { Breadcrumbs, Footer, Header } from '../components/site-shell';
 import { SiteLink as Link } from '../components/site-link';
-import { cleaningServiceMetadata } from './metadata';
+import { cleaningSeoMetadata } from './resource-metadata';
+import { cleaningLanding, cleaningResources } from './resources';
 import { cleaningOffer } from './offer';
 import { siteConfig } from '../site-config';
 
-export const metadata = cleaningServiceMetadata;
+export const metadata = cleaningSeoMetadata(cleaningLanding);
 
 export default function CleaningPage() {
   return <><Header /><main id="main-content" className="shell inner-page">
     <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Residential Cleaning' }]} />
     <header className="page-hero cleaning-page-hero">
       <p className="eyebrow">US RESIDENTIAL CLEANING · FIRST PILOT</p>
-      <h1>Keep the inquiry moving.<br /><span>Keep the decisions yours.</span></h1>
-      <p className="page-intro">A focused automation pilot for cleaning owners who want a clear follow-up queue, complete quote details, and a reliable handoff to booking.</p>
+      <h1>Cleaning business automation.<br /><span>Keep the decisions yours.</span></h1>
+      <p className="page-intro">For US residential cleaning owners: organize new lead follow-up, prepare quote details, and hand booking requests to the right person. Start with one source and one reviewed workflow, not an autonomous sales system.</p>
       <div className="button-row"><Link className="button button-primary" href={cleaningOffer.primaryCta.href}>{cleaningOffer.primaryCta.label}</Link><Link className="button button-secondary" href={cleaningOffer.secondaryCta.href}>{cleaningOffer.secondaryCta.label}</Link></div>
       <p className="trust-note">Pilot setup: {cleaningOffer.price}. <Link className="text-link" href="/cleaning/pilot">Included scope and exclusions</Link>. Questions: <a className="text-link" href={siteConfig.contactHref}>{siteConfig.contactEmail}</a>.</p>
     </header>
@@ -23,6 +24,7 @@ export default function CleaningPage() {
       <section><h2>Fit the workflow to your current tools.</h2><p>The pilot starts by mapping one existing form or inbox and one tracking destination. Existing native automations are reviewed first. Make or another connector is considered only when it fits the agreed account, permissions, plan, and failure handling.</p><p>AI can be considered for bounded drafting from an approved service FAQ. Required-field checks, service-area rules, pricing, and booking authority remain explicit. The interactive demo uses fixed templates in your browser; it does not call an AI model or prove a live integration.</p></section>
       <section><h2>Who the first pilot is for</h2><ul><li>A US residential cleaning business with an existing inquiry source.</li><li>An owner or office lead available to approve replies and review exceptions.</li><li>Defined service areas and a written description of offered cleans.</li><li>A willingness to test with fictional records before any live workflow.</li></ul><p>Emergency dispatch, hazardous cleanup, payment collection, cold SMS campaigns, and fully autonomous sales agents are outside this pilot.</p></section>
       <section><h2>What counts as useful evidence?</h2><p>During an agreed pilot, record eligible inquiries, missing details, drafts corrected, manual-review reasons, duplicate records, and the time the reviewer spends. Compare the actual process with its manual baseline. No booking increase, revenue result, or time saving is promised.</p><p>Each integration must pass normal, missing-field, duplicate, and failure tests. The manual process remains available when automation is paused.</p></section>
-    </div><aside className="related-panel"><p className="eyebrow">START WITH ONE WORKFLOW</p><h2>See it before discussing a pilot.</h2><Link href={cleaningOffer.primaryCta.href}><strong>{cleaningOffer.primaryCta.label}</strong><span>Fictional draft, review task, and status previews.</span></Link><Link href="/cleaning/pilot"><strong>Pilot scope and pricing</strong><span>Review the setup range and prepare a local brief.</span></Link><Link href="/editorial-policy"><strong>Read the evidence standard</strong><span>How demonstrations and verified results are distinguished.</span></Link></aside></div>
+      <section><h2>Choose the handoff you need to improve</h2><p>A new inquiry, an outstanding quote and a requested appointment need different rules. These practical guides help you decide what to automate, what a person should check and when to stop.</p><div className="guide-card-grid">{cleaningResources.map(resource => <Link className="guide-card" key={resource.slug} href={resource.path}><strong>{resource.label}</strong><span>{resource.intent}</span></Link>)}</div></section>
+    </div><aside className="related-panel"><p className="eyebrow">START WITH ONE WORKFLOW</p><h2>See it before discussing a pilot.</h2><Link href={cleaningOffer.primaryCta.href}><strong>{cleaningOffer.primaryCta.label}</strong><span>Fictional draft, review task, and status previews.</span></Link><Link href="/cleaning/pilot"><strong>Pilot scope and pricing</strong><span>Review the setup range and use the web inquiry form.</span></Link><Link href="/editorial-policy"><strong>Read the evidence standard</strong><span>How demonstrations and verified results are distinguished.</span></Link></aside></div>
   </main><Footer /></>;
 }
