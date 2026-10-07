@@ -1,4 +1,13 @@
-# Naveliqo — Production Fix Inspection / Notification Blocker
+# Naveliqo — Production Fix Status and Inspection History
+
+## Closed out — 2026-10-08 (Asia/Taipei)
+
+The pilot CTA/web inquiry fix is deployed and verified. The owner has manually confirmed successful production submission and actual email delivery. No recipient setup or delivery-confirmation blocker remains.
+
+- Release source: `80e52bf` (following `dd2e988`); active Worker version `e742b1ad-2213-4840-8394-94de017b6489`, 100% traffic at `https://naveliqo.com`.
+- Commercial pilot CTAs open `/cleaning/pilot`; demo CTAs remain `/cleaning/demo`. Notification uses `PILOT_EMAIL` and server-only `PILOT_RECIPIENT`, without a plan upgrade or arbitrary-recipient sending.
+- Mobile/keyboard and final live rejection checks PASS. Indexing stays disabled. No further application changes, rebuild, redeployment or test email were needed for this closeout.
+- See `07_Codex/PILOT_INQUIRY_DEPLOYMENT_REPORT.md` for evidence, limitations, rollback instructions and final status. The sections below are preserved historical records, not current blockers.
 
 Date: 2026-10-07 (Asia/Taipei). Scope: pilot CTA and real inquiry flow only; preserve current architecture and indexing protection.
 
